@@ -1,0 +1,1331 @@
+<?xml version="1.0" encoding="UTF-8"?><apiPackage id="org.as3collections.maps"><apiName>org.as3collections.maps</apiName><apiDetail/><apiClassifier id="org.as3collections.maps:TypedMap"><apiName>TypedMap</apiName><shortdesc>
+	 TypedMap works as a wrapper for a map.</shortdesc><prolog><author>Flávio Silva
+	 </author><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiAccess value="public"/><apiStatic/><apiBaseInterface>org.as3collections:IMap</apiBaseInterface><apiBaseClassifier>Object</apiBaseClassifier></apiClassifierDef><apiDesc>
+	 <codeph>TypedMap</codeph> works as a wrapper for a map.
+	 It stores the <codeph>wrapMap</codeph> constructor's argument in the <codeph>wrappedMap</codeph> variable.
+	 So every method call to this class is forwarded to the <codeph>wrappedMap</codeph> object.
+	 The methods that need to be checked for the type of the keys and values are previously validated with the <codeph>validateKeyType</codeph>, <codeph>validateValueType</codeph> or <codeph>validateMap</codeph> method before forward the call.
+	 If the type of a key or value requested to be inserted to this map is incompatible with the type of the map a <codeph>org.as3coreaddendum.errors.ClassCastError</codeph> is thrown.
+	 The calls that are forwarded to the <codeph>wrappedMap</codeph> returns the return of the <codeph>wrappedMap</codeph> call.
+	 <p><codeph>TypedMap</codeph> does not allow <codeph>null</codeph> keys or values.</p>
+	 
+	 </apiDesc><example>
+	 
+	 <codeblock rev="3.0">
+	 import org.as3collections.IMap;
+	 import org.as3collections.maps.ArrayListMap;
+	 import org.as3collections.maps.TypedMap;
+	 
+	 var map1:IMap = new ArrayListMap();
+	 
+	 map1.put("e", 1)            // null
+	 map1.put("d", 2)            // null
+	 map1.put("c", 3)            // null
+	 map1.put("b", 4)            // null
+	 map1.put("a", 5)            // null
+	 
+	 map1                        // {e=1,d=2,c=3,b=4,a=5}
+	 map1.size()                 // 5
+	 
+	 var map2:IMap = new TypedMap(map1, String, Number); // you can use this way
+	 
+	 //var map2:IMap = MapUtil.getTypedMap(map1, String, Number); // or you can use this way
+	 
+	 map2                        // {e=1,d=2,c=3,b=4,a=5}
+	 map2.size()                 // 5
+	 
+	 map2.equals(map1)           // false
+	 
+	 map2.put("f", 6)            // null
+	 map2                        // {e=1,d=2,c=3,b=4,a=5,f=6}
+	 map2.size()                 // 6
+	 
+	 map2.put("g", "h")          // ClassCastError: Invalid value type. value: h | type: String | expected value type: Number
+	 map2.put(7, 8)              // ClassCastError: Invalid key type. key: 7 | type: int | expected key type: String
+	 </codeblock>
+	 
+	 </example></apiClassifierDetail><related-links><link href="org.as3collections.utils.xml#MapUtil/getTypedMap()"><linktext>MapUtil.getTypedMap()</linktext></link></related-links><apiConstructor id="org.as3collections.maps:TypedMap:TypedMap"><apiName>TypedMap</apiName><shortdesc>
+		 Constructor, creates a new TypedMap object.</shortdesc><prolog/><apiConstructorDetail><apiConstructorDef><apiAccess value="public"/><apiException><apiDesc> 	if the <codeph>wrapMap</codeph> argument is <codeph>null</codeph>.
+		 </apiDesc><apiItemName>ArgumentError</apiItemName><apiOperationClassifier>ArgumentError</apiOperationClassifier></apiException><apiException><apiDesc> 	if the <codeph>typeKeys</codeph> argument is <codeph>null</codeph>.
+		 </apiDesc><apiItemName>ArgumentError</apiItemName><apiOperationClassifier>ArgumentError</apiOperationClassifier></apiException><apiException><apiDesc> 	if the <codeph>typeValues</codeph> argument is <codeph>null</codeph>.
+		 </apiDesc><apiItemName>ArgumentError</apiItemName><apiOperationClassifier>ArgumentError</apiOperationClassifier></apiException><apiException><apiDesc> 		if the types of one or more keys or values in the <codeph>wrapMap</codeph> argument are incompatible with the <codeph>typeKeys</codeph> or <codeph>typeValues</codeph> argument.
+		 </apiDesc><apiItemName>org.as3coreaddendum.errors:ClassCastError</apiItemName><apiOperationClassifier>org.as3coreaddendum.errors:ClassCastError</apiOperationClassifier></apiException><apiParam><apiItemName>wrapMap</apiItemName><apiOperationClassifier>org.as3collections:IMap</apiOperationClassifier><apiDesc>	the target map to wrap.
+		 </apiDesc></apiParam><apiParam><apiItemName>typeKeys</apiItemName><apiType value="any"/><apiDesc>the type of the keys allowed by this map.
+		 </apiDesc></apiParam><apiParam><apiItemName>typeValues</apiItemName><apiType value="any"/><apiDesc>the type of the values allowed by this map.
+		 </apiDesc></apiParam></apiConstructorDef><apiDesc>
+		 Constructor, creates a new <codeph>TypedMap</codeph> object.
+		 
+		 </apiDesc></apiConstructorDetail></apiConstructor><apiOperation id="org.as3collections.maps:TypedMap:clear"><apiName>clear</apiName><shortdesc>
+		 Forwards the call to wrappedMap.clear.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="void"/></apiReturn></apiOperationDef><apiDesc>
+		 Forwards the call to <codeph>wrappedMap.clear</codeph>.
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.maps:TypedMap:clone"><apiName>clone</apiName><shortdesc>
+		 Creates and return a new TypedMap object with the clone of the wrappedMap object.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiDesc>a new <codeph>TypedMap</codeph> object with the clone of the <codeph>wrappedMap</codeph> object.
+ 		 </apiDesc><apiType value="any"/></apiReturn></apiOperationDef><apiDesc>
+		 Creates and return a new <codeph>TypedMap</codeph> object with the clone of the <codeph>wrappedMap</codeph> object.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.maps:TypedMap:containsKey"><apiName>containsKey</apiName><shortdesc>
+		 Forwards the call to wrappedMap.containsKey.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiDesc>the return of the call <codeph>wrappedMap.containsKey</codeph>.
+		 </apiDesc><apiType value="Boolean"/></apiReturn><apiParam><apiItemName>key</apiItemName><apiType value="any"/><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Forwards the call to <codeph>wrappedMap.containsKey</codeph>.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.maps:TypedMap:containsValue"><apiName>containsValue</apiName><shortdesc>
+		 Forwards the call to wrappedMap.containsValue.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiDesc>the return of the call <codeph>wrappedMap.containsValue</codeph>.
+		 </apiDesc><apiType value="Boolean"/></apiReturn><apiParam><apiItemName>value</apiItemName><apiType value="any"/><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Forwards the call to <codeph>wrappedMap.containsValue</codeph>.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.maps:TypedMap:entryCollection"><apiName>entryCollection</apiName><shortdesc>
+		 Forwards the call to wrappedMap.entryCollection.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiDesc>
+ 		 </apiDesc><apiOperationClassifier>org.as3collections:ICollection</apiOperationClassifier></apiReturn></apiOperationDef><apiDesc>
+		 Forwards the call to <codeph>wrappedMap.entryCollection</codeph>.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.maps:TypedMap:equals"><apiName>equals</apiName><shortdesc>
+		 This method uses MapUtil.equalNotConsideringOrder or MapUtil.equalConsideringOrder method to perform equality, sending this map and other argument.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiDesc><codeph>true</codeph> if the arbitrary evaluation considers the objects equal.
+		 </apiDesc><apiType value="Boolean"/></apiReturn><apiParam><apiItemName>other</apiItemName><apiType value="any"/><apiDesc>	the object to be compared for equality.
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 This method uses <codeph>MapUtil.equalNotConsideringOrder</codeph> or <codeph>MapUtil.equalConsideringOrder</codeph> method to perform equality, sending this map and <codeph>other</codeph> argument.
+		 <p>If <codeph>wrappedMap</codeph> is of type <codeph>AbstractListMap</codeph> then <codeph>MapUtil.equalConsideringOrder</codeph> method is used.
+		 Otherwise <codeph>MapUtil.equalNotConsideringOrder</codeph> method is used.</p>
+		 
+		 </apiDesc></apiOperationDetail><related-links><link href="org.as3collections.utils.xml#MapUtil/equalConsideringOrder()"><linktext>MapUtil.equalConsideringOrder()</linktext></link><link href="org.as3collections.utils.xml#MapUtil/equalNotConsideringOrder()"><linktext>MapUtil.equalNotConsideringOrder()</linktext></link></related-links></apiOperation><apiOperation id="org.as3collections.maps:TypedMap:getKeys"><apiName>getKeys</apiName><shortdesc>
+		 Forwards the call to wrappedMap.getKeys.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiDesc>
+ 		 </apiDesc><apiOperationClassifier>org.as3collections:ICollection</apiOperationClassifier></apiReturn></apiOperationDef><apiDesc>
+		 Forwards the call to <codeph>wrappedMap.getKeys</codeph>.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.maps:TypedMap:getValue"><apiName>getValue</apiName><shortdesc>
+		 Forwards the call to wrappedMap.getValue.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="any"/></apiReturn><apiParam><apiItemName>key</apiItemName><apiType value="any"/><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Forwards the call to <codeph>wrappedMap.getValue</codeph>.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.maps:TypedMap:getValues"><apiName>getValues</apiName><shortdesc>
+		 Forwards the call to wrappedMap.getValues.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiDesc>
+ 		 </apiDesc><apiOperationClassifier>org.as3collections:ICollection</apiOperationClassifier></apiReturn></apiOperationDef><apiDesc>
+		 Forwards the call to <codeph>wrappedMap.getValues</codeph>.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.maps:TypedMap:isEmpty"><apiName>isEmpty</apiName><shortdesc>
+		 Forwards the call to wrappedMap.isEmpty.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiDesc>
+ 		 </apiDesc><apiType value="Boolean"/></apiReturn></apiOperationDef><apiDesc>
+		 Forwards the call to <codeph>wrappedMap.isEmpty</codeph>.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.maps:TypedMap:iterator"><apiName>iterator</apiName><shortdesc>
+		 Forwards the call to wrappedMap.iterator.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiDesc>
+ 		 </apiDesc><apiOperationClassifier>org.as3collections:IIterator</apiOperationClassifier></apiReturn></apiOperationDef><apiDesc>
+		 Forwards the call to <codeph>wrappedMap.iterator</codeph>.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.maps:TypedMap:putAllByObject"><apiName>putAllByObject</apiName><shortdesc>
+		 The objects is validated to be forwarded to wrappedMap.putAllByObject.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="void"/></apiReturn><apiParam><apiItemName>o</apiItemName><apiType value="Object"/><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 The objects is validated to be forwarded to <codeph>wrappedMap.putAllByObject</codeph>.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.maps:TypedMap:putAll"><apiName>putAll</apiName><shortdesc>
+		 The map is validated with the validateMap method to be forwarded to wrappedMap.putAll.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="void"/></apiReturn><apiParam><apiItemName>map</apiItemName><apiOperationClassifier>org.as3collections:IMap</apiOperationClassifier><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 The map is validated with the <codeph>validateMap</codeph> method to be forwarded to <codeph>wrappedMap.putAll</codeph>.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.maps:TypedMap:putEntry"><apiName>putEntry</apiName><shortdesc>
+		 The entry is validated with the validateKeyType and validateValueType methods to be forwarded to wrappedMap.putEntry.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="any"/></apiReturn><apiParam><apiItemName>entry</apiItemName><apiOperationClassifier>org.as3collections:IMapEntry</apiOperationClassifier><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 The entry is validated with the <codeph>validateKeyType</codeph> and <codeph>validateValueType</codeph> methods to be forwarded to <codeph>wrappedMap.putEntry</codeph>.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.maps:TypedMap:put"><apiName>put</apiName><shortdesc>
+		 The key and value are validated with the validateKeyType and validateValueType methods to be forwarded to wrappedMap.put.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiException><apiDesc> 		if the type of the specified key or value is incompatible with this map.
+		 </apiDesc><apiItemName>org.as3coreaddendum.errors:ClassCastError</apiItemName><apiOperationClassifier>org.as3coreaddendum.errors:ClassCastError</apiOperationClassifier></apiException><apiReturn><apiDesc>the return of the call <codeph>wrappedMap.put</codeph>.
+		 </apiDesc><apiType value="any"/></apiReturn><apiParam><apiItemName>key</apiItemName><apiType value="any"/><apiDesc>	key with which the specified value is to be associated.
+		 </apiDesc></apiParam><apiParam><apiItemName>value</apiItemName><apiType value="any"/><apiDesc>	value to be associated with the specified key.
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 The key and value are validated with the <codeph>validateKeyType</codeph> and <codeph>validateValueType</codeph> methods to be forwarded to <codeph>wrappedMap.put</codeph>.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.maps:TypedMap:removeAll"><apiName>removeAll</apiName><shortdesc>
+		 Forwards the call to wrappedMap.removeAll.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiDesc>
+		 </apiDesc><apiType value="Boolean"/></apiReturn><apiParam><apiItemName>keys</apiItemName><apiOperationClassifier>org.as3collections:ICollection</apiOperationClassifier><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Forwards the call to <codeph>wrappedMap.removeAll</codeph>.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.maps:TypedMap:remove"><apiName>remove</apiName><shortdesc>
+		 Forwards the call to wrappedMap.remove.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="any"/></apiReturn><apiParam><apiItemName>key</apiItemName><apiType value="any"/><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Forwards the call to <codeph>wrappedMap.remove</codeph>.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.maps:TypedMap:retainAll"><apiName>retainAll</apiName><shortdesc>
+		 Forwards the call to wrappedMap.retainAll.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiDesc>
+		 </apiDesc><apiType value="Boolean"/></apiReturn><apiParam><apiItemName>keys</apiItemName><apiOperationClassifier>org.as3collections:ICollection</apiOperationClassifier><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Forwards the call to <codeph>wrappedMap.retainAll</codeph>.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.maps:TypedMap:size"><apiName>size</apiName><shortdesc>
+		 Forwards the call to wrappedMap.size.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiDesc>
+ 		 </apiDesc><apiType value="int"/></apiReturn></apiOperationDef><apiDesc>
+		 Forwards the call to <codeph>wrappedMap.size</codeph>.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.maps:TypedMap:toString"><apiName>toString</apiName><shortdesc>
+		 Returns the string representation of this instance.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiDesc>the string representation of this instance.
+ 		 </apiDesc><apiType value="String"/></apiReturn></apiOperationDef><apiDesc>
+		 Returns the string representation of this instance.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiValue id="org.as3collections.maps:TypedMap:allKeysEquatable:get"><apiName>allKeysEquatable</apiName><shortdesc>
+		 
+		 Indicates whether all keys in this map implements org.as3coreaddendum.system.IEquatable interface.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="read"/><apiType value="Boolean"/></apiValueDef><apiDesc>
+		 
+		 Indicates whether all keys in this map implements <codeph>org.as3coreaddendum.system.IEquatable</codeph> interface.
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.as3collections.maps:TypedMap:allValuesEquatable:get"><apiName>allValuesEquatable</apiName><shortdesc>
+		 
+		 Indicates whether all values in this map implements org.as3coreaddendum.system.IEquatable interface.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="read"/><apiType value="Boolean"/></apiValueDef><apiDesc>
+		 
+		 Indicates whether all values in this map implements <codeph>org.as3coreaddendum.system.IEquatable</codeph> interface.
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.as3collections.maps:TypedMap:typeKeys:get"><apiName>typeKeys</apiName><shortdesc>
+		 Defines the acceptable type of the keys by this map.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="read"/><apiType value="any"/></apiValueDef><apiDesc>
+		 Defines the acceptable type of the keys by this map.
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.as3collections.maps:TypedMap:typeValues:get"><apiName>typeValues</apiName><shortdesc>
+		 Defines the acceptable type of the values by this map.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="read"/><apiType value="any"/></apiValueDef><apiDesc>
+		 Defines the acceptable type of the values by this map.
+		 </apiDesc></apiValueDetail></apiValue></apiClassifier><apiClassifier id="org.as3collections.maps:SortedArrayListMap"><apiName>SortedArrayListMap</apiName><shortdesc>
+	 A map that provides a total ordering on its mappings.</shortdesc><prolog><author>Flávio Silva
+	 </author><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiAccess value="public"/><apiStatic/><apiBaseInterface>org.as3collections:ISortedMap</apiBaseInterface><apiBaseClassifier>org.as3collections.maps:ArrayListMap</apiBaseClassifier></apiClassifierDef><apiDesc>
+	 A map that provides a <i>total ordering</i> on its mappings.
+	 The map is ordered according to the <i>natural ordering</i> of its keys or values, by a <i>IComparator</i> typically provided at sorted map creation time, or by the arguments provided to the <codeph>sort</codeph> or <codeph>sortOn</codeph> methods.
+	 <p>For each change that occurs the map is automatically ordered using the <codeph>comparator</codeph> and <codeph>options</codeph>.
+	 If none was provided the default behavior of the <codeph>sort</codeph> method is used.</p>
+	 The <codeph>sortBy</codeph> property defines whether the sorting will be made by <codeph>key</codeph> or <codeph>value</codeph>.
+	 <p>The user of this map may change their order at any time by calling the <codeph>sort</codeph> or <codeph>sortOn</codeph> method and imposing others arguments to change the sort behaviour.</p>
+	 <p>It's possible to create typed sorted maps.
+	 You just sends the <codeph>SortedArrayListMap</codeph> object to the wrapper <codeph>TypedSortedMap</codeph> or uses the <codeph>MapUtil.getTypedSortedMap</codeph>.</p>
+	 
+	 </apiDesc><example>
+	 
+	 <codeblock rev="3.0">
+	 import org.as3collections.ISortedMap;
+	 import org.as3collections.maps.SortedArrayListMap;
+	 
+	 var map1:ISortedMap = new SortedArrayListMap();
+	 
+	 map1.put("e", 1)            // null
+	 map1.put("d", 2)            // null
+	 map1.put("c", 3)            // null
+	 map1.put("b", 4)            // null
+	 map1.put("a", 5)            // null
+	 
+	 map1                        // {a=5,b=4,c=3,d=2,e=1}
+	 
+	 map1.firstKey()             // a
+	 map1.lastKey()              // e
+	 
+	 map1.sortBy = SortMapBy.VALUE;
+	 
+	 map1                        // {e=1,d=2,c=3,b=4,a=5}
+	 
+	 map1.firstKey()             // e
+	 map1.lastKey()              // a
+	 
+	 map1.sort(null, Array.NUMERIC);
+	 
+	 map1                        // {e=1,d=2,c=3,b=4,a=5}
+	 
+	 map1.sort(null, Array.NUMERIC | Array.DESCENDING);
+	 
+	 map1                        // {a=5,b=4,c=3,d=2,e=1}
+	 
+	 map1.sortBy = SortMapBy.KEY;
+	 
+	 map1                        // {a=5,b=4,c=3,d=2,e=1}
+	 
+	 map1.headMap("d")           // {a=5,b=4,c=3}
+	 map1.tailMap("b")           // {b=4,c=3,d=2,e=1}
+	 map1.subMap("b", "d")       // {b=4,c=3}
+	 </codeblock>
+	 
+	 </example></apiClassifierDetail><related-links><link href="org.as3collections.utils.xml#MapUtil/getTypedSortedMap()"><linktext>MapUtil.getTypedSortedMap()</linktext></link></related-links><apiConstructor id="org.as3collections.maps:SortedArrayListMap:SortedArrayListMap"><apiName>SortedArrayListMap</apiName><shortdesc>
+		 Constructor, creates a new SortedArrayListMap object.</shortdesc><prolog/><apiConstructorDetail><apiConstructorDef><apiAccess value="public"/><apiParam><apiItemName>source</apiItemName><apiOperationClassifier>org.as3collections:IMap</apiOperationClassifier><apiData>null</apiData><apiDesc>		a map with wich fill this map.
+		 </apiDesc></apiParam><apiParam><apiItemName>comparator</apiItemName><apiType value="org.as3coreaddendum.system:IComparator"/><apiData>null</apiData><apiDesc>	the comparator object to be used internally to sort.
+		 </apiDesc></apiParam><apiParam><apiItemName>options</apiItemName><apiType value="uint"/><apiData>0</apiData><apiDesc>	the options to be used internally to sort.
+		 </apiDesc></apiParam></apiConstructorDef><apiDesc>
+		 Constructor, creates a new <codeph>SortedArrayListMap</codeph> object.
+		 
+		 </apiDesc></apiConstructorDetail></apiConstructor><apiOperation id="org.as3collections.maps:SortedArrayListMap:clone"><apiName>clone</apiName><shortdesc>
+		 Creates and return a new SortedArrayListMap object containing all elements in this map (in the same order).</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiReturn><apiDesc>a new <codeph>SortedArrayListMap</codeph> object containing all elements in this map (in the same order).
+ 		 </apiDesc><apiType value="any"/></apiReturn></apiOperationDef><apiDesc>
+		 Creates and return a new <codeph>SortedArrayListMap</codeph> object containing all elements in this map (in the same order).
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.maps:SortedArrayListMap:equals"><apiName>equals</apiName><shortdesc>
+		 Performs an arbitrary, specific evaluation of equality between this object and the other object.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiReturn><apiDesc><codeph>true</codeph> if the arbitrary evaluation considers the objects equal.
+		 </apiDesc><apiType value="Boolean"/></apiReturn><apiParam><apiItemName>other</apiItemName><apiType value="any"/><apiDesc>	the object to be compared for equality.
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Performs an arbitrary, specific evaluation of equality between this object and the <codeph>other</codeph> object.
+		 <p>This implementation considers two differente objects equal if:</p>
+		 <p>
+		 <ul><li>object A and object B are instances of the same class (i.e. if they have <b>exactly</b> the same type)</li>
+		 <li>object A contains all mappings of object B</li>
+		 <li>object B contains all mappings of object A</li>
+		 <li>mappings have exactly the same order</li>
+		 <li>object A and object B has the same type of comparator</li>
+		 <li>object A and object B has the same options</li>
+		 <li>object A and object B has the same sortBy</li>
+		 </ul></p>
+		 <p>This implementation takes care of the order of the mappings in the map.
+		 So, for two maps are equal the order of mappings returned by the iterator must be equal.</p>
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.maps:SortedArrayListMap:putAt"><apiName>putAt</apiName><shortdesc>
+		 
+		 Associates the specified value with the specified key at the specified position in this map (optional operation).</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiReturn><apiType value="void"/></apiReturn><apiParam><apiItemName>index</apiItemName><apiType value="int"/><apiDesc>	index at which the specified entry is to be inserted.
+		 </apiDesc></apiParam><apiParam><apiItemName>key</apiItemName><apiType value="any"/><apiDesc>	key with which the specified value is to be associated.
+		 </apiDesc></apiParam><apiParam><apiItemName>value</apiItemName><apiType value="any"/><apiDesc>	value to be associated with the specified key.
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 
+		 Associates the specified value with the specified key at the specified position in this map (optional operation).
+		 Shifts the entry currently at that position (if any) and any subsequent entries to the right (adds one to their indices).
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.maps:SortedArrayListMap:put"><apiName>put</apiName><shortdesc>
+		 
+		 Associates the specified value with the specified key in this map (optional operation).</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiReturn><apiDesc>the previous value associated with key, or <codeph>null</codeph> if there was no mapping for key. (A <codeph>null</codeph> return can also indicate that the map previously associated <codeph>null</codeph> with key, if the implementation supports <codeph>null</codeph> values.)
+		 </apiDesc><apiType value="any"/></apiReturn><apiParam><apiItemName>key</apiItemName><apiType value="any"/><apiDesc>	key with which the specified value is to be associated.
+		 </apiDesc></apiParam><apiParam><apiItemName>value</apiItemName><apiType value="any"/><apiDesc>	value to be associated with the specified key.
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 
+		 Associates the specified value with the specified key in this map (optional operation).
+		 If the map previously contained a mapping for the key, the old value is replaced by the specified value. (A map <codeph>m</codeph> is said to contain a mapping for a key <codeph>k</codeph> if and only if <codeph>m.containsKey(k)</codeph> would return <codeph>true</codeph>.) 
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.maps:SortedArrayListMap:setKeyAt"><apiName>setKeyAt</apiName><shortdesc>
+		 
+		 Replaces the key at the specified position in this map with the specified key (optional operation).</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiReturn><apiDesc>the key previously at the specified position.
+		 </apiDesc><apiType value="any"/></apiReturn><apiParam><apiItemName>index</apiItemName><apiType value="int"/><apiDesc>	index of the key to replace.
+		 </apiDesc></apiParam><apiParam><apiItemName>key</apiItemName><apiType value="any"/><apiDesc>	key to be stored at the specified position.
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 
+		 Replaces the key at the specified position in this map with the specified key (optional operation).
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.maps:SortedArrayListMap:setValueAt"><apiName>setValueAt</apiName><shortdesc>
+		 
+		 Replaces the value at the specified position in this map with the specified value (optional operation).</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiReturn><apiDesc>the value previously at the specified position.
+		 </apiDesc><apiType value="any"/></apiReturn><apiParam><apiItemName>index</apiItemName><apiType value="int"/><apiDesc>	index of the value to replace.
+		 </apiDesc></apiParam><apiParam><apiItemName>value</apiItemName><apiType value="any"/><apiDesc>	value to be stored at the specified position.
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 
+		 Replaces the value at the specified position in this map with the specified value (optional operation).
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.maps:SortedArrayListMap:sortOn"><apiName>sortOn</apiName><shortdesc>
+		 
+		 Sorts the elements in an array according to one or more fields in the array.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiDesc>
+		 </apiDesc><apiType value="Array"/></apiReturn><apiParam><apiItemName>fieldName</apiItemName><apiType value="any"/><apiDesc>	 </apiDesc></apiParam><apiParam><apiItemName>options</apiItemName><apiType value="any"/><apiData>null</apiData><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 
+		 Sorts the elements in an array according to one or more fields in the array.
+		 <p>Consult <codeph>Array.sortOn</codeph> in the ActionScript 3.0 Language Reference in the link below for more info.</p>
+		 
+		 </apiDesc></apiOperationDetail><related-links><link href="http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/Array.html#sortOn()"><linktext>http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/Array.html#sortOn()</linktext></link></related-links></apiOperation><apiOperation id="org.as3collections.maps:SortedArrayListMap:sort"><apiName>sort</apiName><shortdesc>
+		 Sorts the objects within this class.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiDesc>
+		 </apiDesc><apiType value="Array"/></apiReturn><apiParam><apiItemName>compare</apiItemName><apiType value="Function"/><apiData>null</apiData><apiDesc>	 </apiDesc></apiParam><apiParam><apiItemName>options</apiItemName><apiType value="uint"/><apiData>0</apiData><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Sorts the objects within this class.
+		 <p>For more info see <codeph>org.as3coreaddendum.system.ISortable.sort()</codeph> in the link below.</p>
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.maps:SortedArrayListMap:subMap"><apiName>subMap</apiName><shortdesc>
+		 inheritDoc 
+		 
+		 </shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiException><apiDesc> 	if the <codeph>subMap</codeph> operation is not supported by this map.
+		 </apiDesc><apiItemName>org.as3coreaddendum.errors:UnsupportedOperationError</apiItemName><apiOperationClassifier>org.as3coreaddendum.errors:UnsupportedOperationError</apiOperationClassifier></apiException><apiException><apiDesc>		if <codeph>fromIndex</codeph> or <codeph>toIndex</codeph> is out of range <codeph>(index &lt; 0 || index &gt; size())</codeph>.
+		 </apiDesc><apiItemName>IndexOutOfBoundsError</apiItemName><apiOperationClassifier>org.as3collections.errors:IndexOutOfBoundsError</apiOperationClassifier></apiException><apiReturn><apiDesc>a new list that is a view of the specified range within this list.
+		 </apiDesc><apiOperationClassifier>org.as3collections:IListMap</apiOperationClassifier></apiReturn><apiParam><apiItemName>fromIndex</apiItemName><apiType value="int"/><apiDesc>	the index to start retrieving mappings (inclusive).
+		 </apiDesc></apiParam><apiParam><apiItemName>toIndex</apiItemName><apiType value="int"/><apiDesc>	the index to stop retrieving mappings (exclusive).
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 inheritDoc 
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiValue id="org.as3collections.maps:SortedArrayListMap:comparator:get"><apiName>comparator</apiName><shortdesc>
+		 Defines the comparator object to be used automatically to sort.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="org.as3coreaddendum.system:IComparator"/></apiValueDef><apiDesc>
+		 Defines the comparator object to be used automatically to sort.
+		 <p>If this value change the map is automatically reordered with the new value.</p>
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.as3collections.maps:SortedArrayListMap:options:get"><apiName>options</apiName><shortdesc>
+		 Defines the options to be used automatically to sort.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="uint"/></apiValueDef><apiDesc>
+		 Defines the options to be used automatically to sort.
+		 <p>If this value change the list is automatically reordered with the new value.</p>
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.as3collections.maps:SortedArrayListMap:sortBy:get"><apiName>sortBy</apiName><shortdesc>
+		 Defines whether the map should be sorted by its keys or values.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiValueClassifier>org.as3collections:SortMapBy</apiValueClassifier><apiException><apiDesc> 	 if try to set a <codeph>null</codeph> value.
+		 </apiDesc><apiItemName>ArgumentError</apiItemName><apiOperationClassifier>ArgumentError</apiOperationClassifier></apiException></apiValueDef><apiDesc>
+		 Defines whether the map should be sorted by its keys or values. The default is <codeph>SortMapBy.KEY</codeph>.
+		 <p>If this value change the map is automatically reordered with the new value.</p>
+		 
+		 </apiDesc></apiValueDetail></apiValue></apiClassifier><apiClassifier id="org.as3collections.maps:HashMap"><apiName>HashMap</apiName><shortdesc>
+	 Hash table based implementation of the IMap interface.</shortdesc><prolog><author>Flávio Silva
+	 </author><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiAccess value="public"/><apiStatic/><apiBaseClassifier>org.as3collections:AbstractHashMap</apiBaseClassifier></apiClassifierDef><apiDesc>
+	 Hash table based implementation of the <codeph>IMap</codeph> interface.
+	 This implementation provides all of the optional map operations, and permits <codeph>null</codeph> values and the <codeph>null</codeph> key.
+	 <p>This class makes no guarantees as to the order of the map.
+	 In particular, it does not guarantee that the order will remain constant over time.</p>
+	 <p>It's possible to create typed maps.
+	 You just sends the <codeph>HashMap</codeph> object to the wrapper <codeph>TypedMap</codeph> or uses the <codeph>MapUtil.getTypedMap</codeph>.</p>
+	 
+	 </apiDesc><example>
+	 
+	 <codeblock rev="3.0">
+	 import org.as3collections.IMap;
+	 import org.as3collections.IList;
+	 import org.as3collections.maps.HashMap;
+	 import org.as3collections.maps.MapEntry;
+	 
+	 var map1:IMap = new HashMap();
+	 var tf1:TextField = new TextField();
+	 var tf2:TextField = new TextField();
+	 
+	 map1                            // {}
+	 map1.containsKey("a")           // false
+	 map1.containsKey(tf2)           // false
+	 map1.containsValue(2)           // false
+	 map1.containsValue(tf1)         // false
+	 map1.isEmpty()                  // true
+	 map1.size()                     // 0
+	 
+	 map1.put("a", 1)                // null
+	 map1                            // {a=1}
+	 map1.isEmpty()                  // false
+	 map1.size()                     // 1
+	 map1.containsKey("a")           // true
+	 map1.containsKey(tf2)           // false
+	 map1.containsValue(2)           // false
+	 map1.containsValue(tf1)         // false
+	 
+	 map1.put("b", 2)                // null
+	 map1                            // {b=2,a=1}
+	 map1.isEmpty()                  // false
+	 map1.size()                     // 2
+	 map1.containsKey("a")           // true
+	 map1.containsKey("b")           // true
+	 map1.containsKey(tf2)           // false
+	 map1.containsValue(2)           // true
+	 
+	 map1.put("c", 3)                // null
+	 map1                            // {b=2,a=1,c=3}
+	 map1.size()                     // 3
+	 
+	 map1.put("tf1", tf1)            // null
+	 map1                            // {b=2,a=1,c=3,tf1=[object TextField]}
+	 map1.size()                     // 4
+	 map1.containsValue(tf1)         // true
+	 
+	 map1.put(tf2, "tf2")            // null
+	 map1                            // {b=2,[object TextField]=tf2,a=1,c=3,tf1=[object TextField]}
+	 map1.size()                     // 5
+	 map1.containsKey(tf2)           // true
+	 
+	 map1.put("a", 1.1)              // 1
+	 map1                            // {b=2,[object TextField]=tf2,a=1.1,c=3,tf1=[object TextField]}
+	 map1.size()                     // 5
+	 
+	 map1.put("tf1", String)         // [object TextField]
+	 map1                            // {b=2,[object TextField]=tf2,a=1.1,c=3,tf1=[class String]}
+	 map1.size()                     // 5
+	 
+	 map1.put(tf2, "tf2.1")          // tf2
+	 map1                            // {b=2,[object TextField]=tf2.1,a=1.1,c=3,tf1=[class String]}
+	 map1.size()                     // 5
+	 
+	 map1.put(Number, 999)           // null
+	 map1                            // {b=2,[object TextField]=tf2.1,[class Number]=999,a=1.1,c=3,tf1=[class String]}
+	 map1.size(): 6
+	 
+	 map1.getValue("b")              // 2
+	 
+	 map1.getValue(tf2)              // tf2.1
+	 
+	 map1.putAllByObject({fa:"fb",ga:"gb",ha:"hb"});
+	 
+	 map1                            // {b=2,[object TextField]=tf2.1,fa=fb,[class Number]=999,c=3,ha=hb,a=1.1,tf1=[class String],ga=gb}
+	 
+	 map1.size()                     // 9
+	 
+	 map1.getValue("fa")             // fb
+	 
+	 map1.remove("ga")               // gb
+	 map1                            // {b=2,[object TextField]=tf2.1,fa=fb,[class Number]=999,c=3,ha=hb,a=1.1,tf1=[class String]}
+	 map1.size()                     // 8
+	 
+	 map1.remove("fa")               // fb
+	 map1                            // {b=2,[object TextField]=tf2.1,[class Number]=999,c=3,ha=hb,a=1.1,tf1=[class String]}
+	 map1.size()                     // 7
+	 
+	 map1.remove(tf2)                // tf2.1
+	 map1                            // {b=2,[class Number]=999,c=3,ha=hb,a=1.1,tf1=[class String]}
+	 map1.size()                     // 6
+	 
+	 map1.getValue("fa")             // null
+	 map1.getValue(tf2)              // null
+	 
+	 var map2:IMap = map1.clone();
+	 
+	 map2                            // {b=2,a=1.1,[class Number]=999,c=3,tf1=[class String],ha=hb}
+	 map2.size()                     // 6
+	 map2.isEmpty()                  // false
+	 
+	 map1.equals(map2)               // true
+	 map2.equals(map1)               // true
+	 map2.equals(map2)               // true
+	 
+	 map2.remove("b")                // 2
+	 map2                            // {a=1.1,[class Number]=999,c=3,tf1=[class String],ha=hb}
+	 map2.equals(map2)               // true
+	 map2.size()                     // 5
+	 
+	 map1.equals(map2)               // false
+	 map2.equals(map1)               // false
+	 
+	 map2.getValues()                // [1.1,999,3,[class String],hb]
+	 
+	 var keysMap2:IList = map2.getKeys();
+	 
+	 keysMap2                        // [a,[class Number],c,tf1,ha]
+	 
+	 keysMap2.remove("c")            // true
+	 keysMap2                        // [a,[class Number],tf1,ha]
+	 map2                            // {a=1.1,[class Number]=999,c=3,tf1=[class String],ha=hb}
+	 map2.size()                     // 5
+	 
+	 map2.removeAll(keysMap2)        // true
+	 map2                            // {c=3}
+	 map2.size()                     // 1
+	 map2.isEmpty()                  // false
+	 
+	 map2.clear();
+	 
+	 map2                            // {}
+	 map2.size()                     // 0
+	 map2.isEmpty()                  // true
+	 
+	 var entry:IMapEntry = new MapEntry("c", 3);
+	 
+	 entry                           // c=3
+	 map2.putEntry(entry)            // null
+	 map2                            // {c=3}
+	 map2.size()                     // 1
+	 
+	 map1                            // {b=2,[class Number]=999,c=3,ha=hb,a=1.1,tf1=[class String]}
+	 map1.retainAll(map2)            // true
+	 map1                            // {c=3}
+	 map1.size()                     // 1
+	 map1.isEmpty()                  // false
+	 
+	 map1.put("d", 4)                // null
+	 map1.put("e", 5)                // null
+	 map1.put("f", 6)                // null
+	 
+	 map1                            // {c=3,d=4,f=6,e=5}
+	 map1.size()                     // 4
+	 
+	 var it:IIterator = map1.iterator();
+	 
+	 var e:*;
+	 
+	 while (it.hasNext())
+	 {
+	 
+	     e = it.next();
+	     trace(it.pointer() + "=" + e)    // c=3
+	 
+	     e = it.next();
+	     trace(it.pointer() + "=" + e)    // d=4
+	 
+	     if (e == 4)
+	     {
+	         it.remove();
+	     }
+	 
+	     e = it.next();
+	     trace(it.pointer() + "=" + e)    // f=6
+	 
+	     e = it.next();
+	     trace(it.pointer() + "=" + e)    // e=5
+	 }
+	 
+	 map1                            // {c=3,f=6,e=5}
+	 map1.size()                     // 3
+	 </codeblock>
+	 
+	 </example></apiClassifierDetail><related-links><link href="org.as3collections.utils.xml#MapUtil/getTypedMap()"><linktext>MapUtil.getTypedMap()</linktext></link></related-links><apiConstructor id="org.as3collections.maps:HashMap:HashMap"><apiName>HashMap</apiName><shortdesc>
+		 Constructor, creates a new HashMap object.</shortdesc><prolog/><apiConstructorDetail><apiConstructorDef><apiAccess value="public"/><apiParam><apiItemName>source</apiItemName><apiOperationClassifier>org.as3collections:IMap</apiOperationClassifier><apiData>null</apiData><apiDesc>		a map with wich fill this map.
+		 </apiDesc></apiParam><apiParam><apiItemName>weakKeys</apiItemName><apiType value="Boolean"/><apiData>false</apiData><apiDesc>	instructs the backed <codeph>Dictionary</codeph> object to use "weak" references on object keys. If the only reference to an object is in the specified <codeph>Dictionary</codeph> object, the key is eligible for garbage collection and is removed from the table when the object is collected.
+		 </apiDesc></apiParam></apiConstructorDef><apiDesc>
+		 Constructor, creates a new <codeph>HashMap</codeph> object.
+		 
+		 </apiDesc></apiConstructorDetail></apiConstructor><apiOperation id="org.as3collections.maps:HashMap:clear"><apiName>clear</apiName><shortdesc>
+		 Removes all of the mappings from this map.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiReturn><apiType value="void"/></apiReturn></apiOperationDef><apiDesc>
+		 Removes all of the mappings from this map.
+		 The map will be empty after this call returns.
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.maps:HashMap:clone"><apiName>clone</apiName><shortdesc>
+		 Creates and return a new HashMap object containing all mappings in this map.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiReturn><apiDesc>a new <codeph>HashMap</codeph> object containing all mappings in this map.
+ 		 </apiDesc><apiType value="any"/></apiReturn></apiOperationDef><apiDesc>
+		 Creates and return a new <codeph>HashMap</codeph> object containing all mappings in this map.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.maps:HashMap:iterator"><apiName>iterator</apiName><shortdesc>
+		 Returns an iterator over a set of mappings.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiReturn><apiDesc>an iterator over a set of values.
+		 </apiDesc><apiOperationClassifier>org.as3collections:IIterator</apiOperationClassifier></apiReturn></apiOperationDef><apiDesc>
+		 Returns an iterator over a set of mappings.
+		 <p>This implementation returns a <codeph>MapIterator</codeph> object.</p>
+		 
+		 </apiDesc></apiOperationDetail><related-links><link href="org.as3collections.iterators.xml#MapIterator"><linktext>MapIterator</linktext></link></related-links></apiOperation><apiOperation id="org.as3collections.maps:HashMap:put"><apiName>put</apiName><shortdesc>
+		 Associates the specified value with the specified key in this map.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiReturn><apiDesc>the previous value associated with key, or <codeph>null</codeph> if there was no mapping for key. (A <codeph>null</codeph> return can also indicate that the map previously associated <codeph>null</codeph> with key, because this implementation supports <codeph>null</codeph> values.)
+		 </apiDesc><apiType value="any"/></apiReturn><apiParam><apiItemName>key</apiItemName><apiType value="any"/><apiDesc>	key with which the specified value is to be associated.
+		 </apiDesc></apiParam><apiParam><apiItemName>value</apiItemName><apiType value="any"/><apiDesc>	value to be associated with the specified key.
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Associates the specified value with the specified key in this map.
+		 If the map previously contained a mapping for the key, the old value is replaced by the specified value. (A map <codeph>m</codeph> is said to contain a mapping for a key <codeph>k</codeph> if and only if <codeph>m.containsKey(k)</codeph> would return <codeph>true</codeph>.) 
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.maps:HashMap:remove"><apiName>remove</apiName><shortdesc>
+		 Removes the mapping for a key from this map if it is present.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiReturn><apiDesc>the previous value associated with key, or <codeph>null</codeph> if there was no mapping for <codeph>key</codeph>.
+		 </apiDesc><apiType value="any"/></apiReturn><apiParam><apiItemName>key</apiItemName><apiType value="any"/><apiDesc>	the key whose mapping is to be removed from the map.
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Removes the mapping for a key from this map if it is present.
+		 <p>Returns the value to which this map previously associated the key, or <codeph>null</codeph> if the map contained no mapping for the key.
+		 A return value of <codeph>null</codeph> does not <i>necessarily</i> indicate that the map contained no mapping for the key.
+		 It's possible that the map explicitly mapped the key to <codeph>null</codeph>.</p>
+		 <p>The map will not contain a mapping for the specified key once the call returns.</p>
+		 
+		 </apiDesc></apiOperationDetail></apiOperation></apiClassifier><apiClassifier id="org.as3collections.maps:ArrayListMap"><apiName>ArrayListMap</apiName><shortdesc>
+	 Array based implementation of the IMap interface.</shortdesc><prolog><author>Flávio Silva
+	 </author><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiAccess value="public"/><apiStatic/><apiBaseClassifier>org.as3collections:AbstractListMap</apiBaseClassifier></apiClassifierDef><apiDesc>
+	 Array based implementation of the <codeph>IMap</codeph> interface.
+	 This implementation provides all of the optional map operations, and permits <codeph>null</codeph> values and the <codeph>null</codeph> key.
+	 <p>This class makes guarantees as to the order of the map.
+	 The order in which elements are stored is the order in which they were inserted.</p>
+	 <p>This class has great similarity to <codeph>ArrayList</codeph> class.
+	 In a way this class can be thought of as an <codeph>ArrayList</codeph> of mappings.</p>
+	 <p>It's possible to create typed list maps.
+	 You just sends the <codeph>ArrayListMap</codeph> object to the wrapper <codeph>TypedListMap</codeph> or uses the <codeph>MapUtil.getTypedListMap</codeph>.</p>
+	 
+	 </apiDesc><example>
+	 
+	 <codeblock rev="3.0">
+	 import org.as3collections.IMap;
+	 import org.as3collections.IList;
+	 import org.as3collections.maps.ArrayListMap;
+	 import org.as3collections.maps.MapEntry;
+	 
+	 var map1:IMap = new ArrayListMap();
+	 var tf1:TextField = new TextField();
+	 var tf2:TextField = new TextField();
+	 
+	 map1                            // {}
+	 map1.containsKey("a")           // false
+	 map1.containsKey(tf2)           // false
+	 map1.containsValue(2)           // false
+	 map1.containsValue(tf1)         // false
+	 map1.isEmpty()                  // true
+	 map1.size()                     // 0
+	 
+	 map1.put("a", 1)                // null
+	 map1                            // {a=1}
+	 map1.isEmpty()                  // false
+	 map1.size()                     // 1
+	 map1.containsKey("a")           // true
+	 map1.containsKey(tf2)           // false
+	 map1.containsValue(2)           // false
+	 map1.containsValue(tf1)         // false
+	 
+	 map1.put("b", 2)                // null
+	 map1                            // {a=1,b=2}
+	 map1.isEmpty()                  // false
+	 map1.size()                     // 2
+	 map1.containsKey("a")           // true
+	 map1.containsKey("b")           // true
+	 map1.containsKey(tf2)           // false
+	 map1.containsValue(2)           // true
+	 
+	 map1.put("c", 3)                // null
+	 map1                            // {a=1,b=2,c=3}
+	 map1.size()                     // 3
+	 
+	 map1.put("tf1", tf1)            // null
+	 map1                            // {a=1,b=2,c=3,tf1=[object TextField]}
+	 map1.size()                     // 4
+	 map1.containsValue(tf1)         // true
+	 
+	 map1.put(tf2, "tf2")            // null
+	 map1                            // {a=1,b=2,c=3,tf1=[object TextField],[object TextField]=tf2}
+	 map1.size()                     // 5
+	 map1.containsKey(tf2)           // true
+	 
+	 map1.put("a", 1.1)              // 1
+	 map1                            // {a=1.1,b=2,c=3,tf1=[object TextField],[object TextField]=tf2}
+	 map1.size()                     // 5
+	 
+	 map1.put("tf1", String)         // [object TextField]
+	 map1                            // {a=1.1,b=2,c=3,tf1=[class String],[object TextField]=tf2}
+	 map1.size()                     // 5
+	 
+	 map1.put(tf2, "tf2.1")          // tf2
+	 map1                            // {a=1.1,b=2,c=3,tf1=[class String],[object TextField]=tf2.1}
+	 map1.size()                     // 5
+	 
+	 map1.put(Number, 999)           // null
+	 map1                            // {a=1.1,b=2,c=3,tf1=[class String],[object TextField]=tf2.1,[class Number]=999}
+	 map1.size()                     // 6
+	 
+	 map1.getValue("b")              // 2
+	 
+	 map1.getValue(tf2)              // tf2.1
+	 
+	 map1.putAllByObject({fa:"fb",ga:"gb",ha:"hb"});
+	 
+	 map1                            // {a=1.1,b=2,c=3,tf1=[class String],[object TextField]=tf2.1,[class Number]=999,ha=hb,ga=gb,fa=fb}
+	 
+	 map1.size()                     // 9
+	 
+	 map1.getValue("fa")             // fb
+	 
+	 map1.remove("ga")               // gb
+	 map1                            // {a=1.1,b=2,c=3,tf1=[class String],[object TextField]=tf2.1,[class Number]=999,ha=hb,fa=fb}
+	 map1.size()                     // 8
+	 
+	 map1.remove("fa")               // fb
+	 map1                            // {a=1.1,b=2,c=3,tf1=[class String],[object TextField]=tf2.1,[class Number]=999,ha=hb}
+	 map1.size()                     // 7
+	 
+	 map1.remove(tf2)                // tf2.1
+	 map1                            // {a=1.1,b=2,c=3,tf1=[class String],[class Number]=999,ha=hb}
+	 map1.size()                     // 6
+	 
+	 map1.getValue("fa")             // null
+	 map1.getValue(tf2)              // null
+	 
+	 var map2:IMap = map1.clone();
+	 
+	 map2                            // {a=1.1,b=2,c=3,tf1=[class String],[class Number]=999,ha=hb}
+	 map2.size()                     // 6
+	 map2.isEmpty()                  // false
+	 
+	 map1.equals(map2)               // true
+	 map2.equals(map1)               // true
+	 map2.equals(map2)               // true
+	 
+	 map2.remove("b")                // 2
+	 map2                            // {a=1.1,c=3,tf1=[class String],[class Number]=999,ha=hb}
+	 map2.equals(map2)               // true
+	 map2.size()                     // 5
+	 
+	 map1.equals(map2)               // false
+	 map2.equals(map1)               // false
+	 
+	 map2.getValues()                // [1.1,3,[class String],999,hb]
+	 
+	 var keysMap2:IList = map2.getKeys();
+	 
+	 keysMap2                        // [a,c,tf1,[class Number],ha]
+	 
+	 keysMap2.remove("c")            // true
+	 keysMap2                        // [a,tf1,[class Number],ha]
+	 map2                            // {a=1.1,c=3,tf1=[class String],[class Number]=999,ha=hb}
+	 map2.size()                     // 5
+	 
+	 map2.removeAll(keysMap2)        // true
+	 map2                            // {c=3}
+	 map2.size()                     // 1
+	 map2.isEmpty()                  // false
+	 
+	 map2.clear();
+	 
+	 map2                            // {}
+	 map2.size()                     // 0
+	 map2.isEmpty()                  // true
+	 
+	 var entry:IMapEntry = new MapEntry("c", 3);
+	 
+	 entry                           // c=3
+	 map2.putEntry(entry)            // null
+	 map2                            // {c=3}
+	 map2.size()                     // 1
+	 
+	 map1                            // {a=1.1,b=2,c=3,tf1=[class String],[class Number]=999,ha=hb}
+	 map1.retainAll(map2)            // true
+	 map1                            // {c=3}
+	 map1.size()                     // 1
+	 map1.isEmpty()                  // false
+	 
+	 map1.put("d", 4)                // null
+	 map1.put("e", 5)                // null
+	 map1.put("f", 6)                // null
+	 map1                            // {c=3,d=4,e=5,f=6}
+	 map1.size()                     // 4
+	 
+	 var it:IIterator = map1.iterator();
+	 
+	 var e:*;
+	 
+	 while (it.hasNext())
+	 {
+	 
+	     e = it.next();
+	     trace(it.pointer() + "=" + e)    // c=3
+	 
+	     e = it.next();
+	     trace(it.pointer() + "=" + e)    // d=4
+	 
+	     if (e == 4)
+	     {
+	         it.remove();
+	     }
+	 
+	     e = it.next();
+	     trace(it.pointer() + "=" + e)    // e=5
+	 
+	     e = it.next();
+	     trace(it.pointer() + "=" + e)    // f=6
+	 }
+	 
+	 map1                            // {c=3,e=5,f=6}
+	 map1.size()                     // 3
+	 </codeblock>
+	 
+	 </example></apiClassifierDetail><related-links><link href="org.as3collections.xml#AbstractListMap"><linktext>AbstractListMap</linktext></link><link href="org.as3collections.maps.xml#TypedListMap"><linktext>TypedListMap</linktext></link><link href="org.as3collections.maps.xml#SortedArrayListMap"><linktext>SortedArrayListMap</linktext></link><link href="org.as3collections.utils.xml#MapUtil/getTypedListMap()"><linktext>MapUtil.getTypedListMap()</linktext></link></related-links><apiConstructor id="org.as3collections.maps:ArrayListMap:ArrayListMap"><apiName>ArrayListMap</apiName><shortdesc>
+		 Constructor, creates a new ArrayListMap object.</shortdesc><prolog/><apiConstructorDetail><apiConstructorDef><apiAccess value="public"/><apiParam><apiItemName>source</apiItemName><apiOperationClassifier>org.as3collections:IMap</apiOperationClassifier><apiData>null</apiData><apiDesc>		a map with wich fill this map.
+		 </apiDesc></apiParam></apiConstructorDef><apiDesc>
+		 Constructor, creates a new <codeph>ArrayListMap</codeph> object.
+		 
+		 </apiDesc></apiConstructorDetail></apiConstructor><apiOperation id="org.as3collections.maps:ArrayListMap:clear"><apiName>clear</apiName><shortdesc>
+		 Removes all of the mappings from this map.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiReturn><apiType value="void"/></apiReturn></apiOperationDef><apiDesc>
+		 Removes all of the mappings from this map.
+		 The map will be empty after this call returns.
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.maps:ArrayListMap:clone"><apiName>clone</apiName><shortdesc>
+		 Creates and return a new ArrayListMap object containing all mappings in this map (in the same order).</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiReturn><apiDesc>a new <codeph>ArrayListMap</codeph> object containing all mappings in this map.
+ 		 </apiDesc><apiType value="any"/></apiReturn></apiOperationDef><apiDesc>
+		 Creates and return a new <codeph>ArrayListMap</codeph> object containing all mappings in this map (in the same order).
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.maps:ArrayListMap:iterator"><apiName>iterator</apiName><shortdesc>
+		 Returns an iterator over a set of mappings.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiReturn><apiDesc>an iterator over a set of values.
+		 </apiDesc><apiOperationClassifier>org.as3collections:IIterator</apiOperationClassifier></apiReturn></apiOperationDef><apiDesc>
+		 Returns an iterator over a set of mappings.
+		 <p>This implementation returns a <codeph>MapIterator</codeph> object.</p>
+		 
+		 </apiDesc></apiOperationDetail><related-links><link href="org.as3collections.iterators.xml#MapIterator"><linktext>MapIterator</linktext></link></related-links></apiOperation><apiOperation id="org.as3collections.maps:ArrayListMap:listMapIterator"><apiName>listMapIterator</apiName><shortdesc>
+		 Returns a IListMapIterator object to iterate over the mappings in this map (in proper sequence), starting at the specified position in this map.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiReturn><apiDesc>a <codeph>ListMapIterator</codeph> object to iterate over the mappings in this map (in proper sequence), starting at the specified position in this map.
+		 </apiDesc><apiOperationClassifier>org.as3collections:IListMapIterator</apiOperationClassifier></apiReturn><apiParam><apiItemName>index</apiItemName><apiType value="int"/><apiData>0</apiData><apiDesc>	index of first value to be returned from the iterator (by a call to the <codeph>next</codeph> method) 
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Returns a <codeph>IListMapIterator</codeph> object to iterate over the mappings in this map (in proper sequence), starting at the specified position in this map.
+		 <p>This implementation returns a <codeph>ListMapIterator</codeph> object.</p>
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.maps:ArrayListMap:putAt"><apiName>putAt</apiName><shortdesc>
+		 Associates the specified value with the specified key at the specified position in this map.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiException><apiDesc> 											if this map already contains the specified key.
+		 </apiDesc><apiItemName>ArgumentError</apiItemName><apiOperationClassifier>ArgumentError</apiOperationClassifier></apiException><apiException><apiDesc>		if the index is out of range <codeph>(index &lt; 0 || index &gt; size())</codeph>. 
+		 </apiDesc><apiItemName>IndexOutOfBoundsError</apiItemName><apiOperationClassifier>org.as3collections.errors:IndexOutOfBoundsError</apiOperationClassifier></apiException><apiReturn><apiType value="void"/></apiReturn><apiParam><apiItemName>index</apiItemName><apiType value="int"/><apiDesc>	index at which the specified entry is to be inserted.
+		 </apiDesc></apiParam><apiParam><apiItemName>key</apiItemName><apiType value="any"/><apiDesc>	key with which the specified value is to be associated.
+		 </apiDesc></apiParam><apiParam><apiItemName>value</apiItemName><apiType value="any"/><apiDesc>	value to be associated with the specified key.
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Associates the specified value with the specified key at the specified position in this map.
+		 Shifts the entry currently at that position (if any) and any subsequent entries to the right (adds one to their indices).
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.maps:ArrayListMap:put"><apiName>put</apiName><shortdesc>
+		 Associates the specified value with the specified key in this map.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiReturn><apiDesc>the previous value associated with key, or <codeph>null</codeph> if there was no mapping for key. (A <codeph>null</codeph> return can also indicate that the map previously associated <codeph>null</codeph> with key, because this implementation supports <codeph>null</codeph> values.)
+		 </apiDesc><apiType value="any"/></apiReturn><apiParam><apiItemName>key</apiItemName><apiType value="any"/><apiDesc>	key with which the specified value is to be associated.
+		 </apiDesc></apiParam><apiParam><apiItemName>value</apiItemName><apiType value="any"/><apiDesc>	value to be associated with the specified key.
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Associates the specified value with the specified key in this map.
+		 If the map previously contained a mapping for the key, the old value is replaced by the specified value, and the order of the key is not affected.
+		 (A map <codeph>m</codeph> is said to contain a mapping for a key <codeph>k</codeph> if and only if <codeph>m.containsKey(k)</codeph> would return <codeph>true</codeph>.) 
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.maps:ArrayListMap:removeAt"><apiName>removeAt</apiName><shortdesc>
+		 Removes the mapping at the specified position in this map (optional operation).</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiException><apiDesc> 	if the <codeph>removeAt</codeph> operation is not supported by this map.
+		 </apiDesc><apiItemName>org.as3coreaddendum.errors:UnsupportedOperationError</apiItemName><apiOperationClassifier>org.as3coreaddendum.errors:UnsupportedOperationError</apiOperationClassifier></apiException><apiException><apiDesc>		if the index is out of range <codeph>(index &lt; 0 || index &gt;= size())</codeph>.
+		 </apiDesc><apiItemName>IndexOutOfBoundsError</apiItemName><apiOperationClassifier>org.as3collections.errors:IndexOutOfBoundsError</apiOperationClassifier></apiException><apiReturn><apiDesc>an <codeph>IMapEntry</codeph> object containing the mapping (key/value) that was removed from the map.
+		 </apiDesc><apiOperationClassifier>org.as3collections:IMapEntry</apiOperationClassifier></apiReturn><apiParam><apiItemName>index</apiItemName><apiType value="int"/><apiDesc>	the index of the mapping to be removed.
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Removes the mapping at the specified position in this map (optional operation).
+		 Shifts any subsequent mappings to the left (subtracts one from their indices).
+		 Returns an <codeph>IMapEntry</codeph> object containing the mapping (key/value) that was removed from the map.
+		 <p>This implementation always throws an <codeph>UnsupportedOperationError</codeph>.</p> 
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.maps:ArrayListMap:removeRange"><apiName>removeRange</apiName><shortdesc>
+		 Removes all of the mappings whose index is between fromIndex, inclusive, and toIndex, exclusive (optional operation).</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiException><apiDesc> 	if the <codeph>removeRange</codeph> operation is not supported by this map.
+		 </apiDesc><apiItemName>org.as3coreaddendum.errors:UnsupportedOperationError</apiItemName><apiOperationClassifier>org.as3coreaddendum.errors:UnsupportedOperationError</apiOperationClassifier></apiException><apiException><apiDesc>		if <codeph>fromIndex</codeph> or <codeph>toIndex</codeph> is out of range <codeph>(index &lt; 0 || index &gt; size())</codeph>.
+		 </apiDesc><apiItemName>IndexOutOfBoundsError</apiItemName><apiOperationClassifier>org.as3collections.errors:IndexOutOfBoundsError</apiOperationClassifier></apiException><apiReturn><apiDesc>a new map containing all the removed mappings.
+		 </apiDesc><apiOperationClassifier>org.as3collections:IListMap</apiOperationClassifier></apiReturn><apiParam><apiItemName>fromIndex</apiItemName><apiType value="int"/><apiDesc>	the index to start removing mappings (inclusive).
+		 </apiDesc></apiParam><apiParam><apiItemName>toIndex</apiItemName><apiType value="int"/><apiDesc>	the index to stop removing mappings (exclusive).
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Removes all of the mappings whose index is between <codeph>fromIndex</codeph>, inclusive, and <codeph>toIndex</codeph>, exclusive (optional operation).
+		 Shifts any subsequent mappings to the left (subtracts their indices).
+		 <p>If <codeph>toIndex == fromIndex</codeph>, this operation has no effect.</p>
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.maps:ArrayListMap:remove"><apiName>remove</apiName><shortdesc>
+		 Removes the mapping for a key from this map if it is present.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiReturn><apiDesc>the previous value associated with key, or <codeph>null</codeph> if there was no mapping for <codeph>key</codeph>.
+		 </apiDesc><apiType value="any"/></apiReturn><apiParam><apiItemName>key</apiItemName><apiType value="any"/><apiDesc>	the key whose mapping is to be removed from the map.
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Removes the mapping for a key from this map if it is present.
+		 <p>Returns the value to which this map previously associated the key, or <codeph>null</codeph> if the map contained no mapping for the key.
+		 A return value of <codeph>null</codeph> does not <i>necessarily</i> indicate that the map contained no mapping for the key.
+		 It's possible that the map explicitly mapped the key to <codeph>null</codeph>.</p>
+		 <p>The map will not contain a mapping for the specified key once the call returns.</p>
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.maps:ArrayListMap:setKeyAt"><apiName>setKeyAt</apiName><shortdesc>
+		 Replaces the key at the specified position in this map with the specified key (optional operation).</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiException><apiDesc> 	if the <codeph>setKeyAt</codeph> operation is not supported by this map.
+		 </apiDesc><apiItemName>org.as3coreaddendum.errors:UnsupportedOperationError</apiItemName><apiOperationClassifier>org.as3coreaddendum.errors:UnsupportedOperationError</apiOperationClassifier></apiException><apiException><apiDesc> 				if the class of the specified key prevents it from being added to this map.
+		 </apiDesc><apiItemName>org.as3coreaddendum.errors:ClassCastError</apiItemName><apiOperationClassifier>org.as3coreaddendum.errors:ClassCastError</apiOperationClassifier></apiException><apiException><apiDesc> 	 										if the specified key is <codeph>null</codeph> and this map does not permit <codeph>null</codeph> keys.
+		 </apiDesc><apiItemName>ArgumentError</apiItemName><apiOperationClassifier>ArgumentError</apiOperationClassifier></apiException><apiException><apiDesc> 											if this map already contains the specified key.
+		 </apiDesc><apiItemName>ArgumentError</apiItemName><apiOperationClassifier>ArgumentError</apiOperationClassifier></apiException><apiException><apiDesc>		if the index is out of range <codeph>(index &lt; 0 || index &gt;= size())</codeph>.
+		 </apiDesc><apiItemName>IndexOutOfBoundsError</apiItemName><apiOperationClassifier>org.as3collections.errors:IndexOutOfBoundsError</apiOperationClassifier></apiException><apiReturn><apiDesc>the key previously at the specified position.
+		 </apiDesc><apiType value="any"/></apiReturn><apiParam><apiItemName>index</apiItemName><apiType value="int"/><apiDesc>	index of the key to replace.
+		 </apiDesc></apiParam><apiParam><apiItemName>key</apiItemName><apiType value="any"/><apiDesc>	key to be stored at the specified position.
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Replaces the key at the specified position in this map with the specified key (optional operation).
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.maps:ArrayListMap:setValueAt"><apiName>setValueAt</apiName><shortdesc>
+		 Replaces the value at the specified position in this map with the specified value (optional operation).</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiException><apiDesc> 	if the <codeph>setValueAt</codeph> operation is not supported by this map.
+		 </apiDesc><apiItemName>org.as3coreaddendum.errors:UnsupportedOperationError</apiItemName><apiOperationClassifier>org.as3coreaddendum.errors:UnsupportedOperationError</apiOperationClassifier></apiException><apiException><apiDesc> 				if the class of the specified value prevents it from being added to this map.
+		 </apiDesc><apiItemName>org.as3coreaddendum.errors:ClassCastError</apiItemName><apiOperationClassifier>org.as3coreaddendum.errors:ClassCastError</apiOperationClassifier></apiException><apiException><apiDesc> 	 										if the specified value is <codeph>null</codeph> and this map does not permit <codeph>null</codeph> values.
+		 </apiDesc><apiItemName>ArgumentError</apiItemName><apiOperationClassifier>ArgumentError</apiOperationClassifier></apiException><apiException><apiDesc>		if the index is out of range <codeph>(index &lt; 0 || index &gt;= size())</codeph>.
+		 </apiDesc><apiItemName>IndexOutOfBoundsError</apiItemName><apiOperationClassifier>org.as3collections.errors:IndexOutOfBoundsError</apiOperationClassifier></apiException><apiReturn><apiDesc>the value previously at the specified position.
+		 </apiDesc><apiType value="any"/></apiReturn><apiParam><apiItemName>index</apiItemName><apiType value="int"/><apiDesc>	index of the value to replace.
+		 </apiDesc></apiParam><apiParam><apiItemName>value</apiItemName><apiType value="any"/><apiDesc>	value to be stored at the specified position.
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Replaces the value at the specified position in this map with the specified value (optional operation).
+		 <p>This implementation always throws an <codeph>UnsupportedOperationError</codeph>.</p>
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.maps:ArrayListMap:subMap"><apiName>subMap</apiName><shortdesc>
+		 Returns a new map that is a view of the portion of this map between the specified fromIndex, inclusive, and toIndex, exclusive.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiException><apiDesc> 	if the <codeph>subMap</codeph> operation is not supported by this map.
+		 </apiDesc><apiItemName>org.as3coreaddendum.errors:UnsupportedOperationError</apiItemName><apiOperationClassifier>org.as3coreaddendum.errors:UnsupportedOperationError</apiOperationClassifier></apiException><apiException><apiDesc>		if <codeph>fromIndex</codeph> or <codeph>toIndex</codeph> is out of range <codeph>(index &lt; 0 || index &gt; size())</codeph>.
+		 </apiDesc><apiItemName>IndexOutOfBoundsError</apiItemName><apiOperationClassifier>org.as3collections.errors:IndexOutOfBoundsError</apiOperationClassifier></apiException><apiReturn><apiDesc>a new list that is a view of the specified range within this list.
+		 </apiDesc><apiOperationClassifier>org.as3collections:IListMap</apiOperationClassifier></apiReturn><apiParam><apiItemName>fromIndex</apiItemName><apiType value="int"/><apiDesc>	the index to start retrieving mappings (inclusive).
+		 </apiDesc></apiParam><apiParam><apiItemName>toIndex</apiItemName><apiType value="int"/><apiDesc>	the index to stop retrieving mappings (exclusive).
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Returns a new map that is a view of the portion of this map between the specified <codeph>fromIndex</codeph>, inclusive, and <codeph>toIndex</codeph>, exclusive.
+		 <p>The returned map supports all of the optional map operations supported by this map.</p>
+		 
+		 </apiDesc></apiOperationDetail></apiOperation></apiClassifier><apiClassifier id="org.as3collections.maps:ReadOnlyArrayListMap"><apiName>ReadOnlyArrayListMap</apiName><shortdesc>
+	 An ArrayListMap that doesn't allow modifications.</shortdesc><prolog><author>Flávio Silva
+	 </author><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiAccess value="public"/><apiStatic/><apiBaseClassifier>org.as3collections:AbstractListMap</apiBaseClassifier></apiClassifierDef><apiDesc>
+	 An <codeph>ArrayListMap</codeph> that doesn't allow modifications.
+	 It receives all the mappings by its constructor and can no longer be changed.
+	 All methods that change the map will throw an <codeph>UnsupportedOperationError</codeph>.
+	 
+	 </apiDesc><example>
+	 
+	 <codeblock rev="3.0">
+	 import org.as3collections.IMap;
+	 import org.as3collections.maps.ArrayListMap;
+	 import org.as3collections.maps.ReadOnlyArrayListMap;
+	 
+	 var map1:IMap = new ArrayListMap();
+	 
+	 map1.put("fa", "fb"):     // null
+	 map1.put("ga", "gb"):     // null
+	 map1.put("ha", "hb"):     // null
+	 
+	 map1                      // {fa=fb,ga=gb,ha=hb}
+	 map1.size()               // 3
+	 
+	 var map2:IMap = new ReadOnlyArrayListMap(map1);
+	 
+	 map2                      // {fa=fb,ga=gb,ha=hb}
+	 map2.size()               // 3
+	 
+	 map2.put(1, 2)            // UnsupportedOperationError: ReadOnlyArrayListMap is a read-only map and doesn't allow modifications.
+	 
+	 map2.remove(1)            // UnsupportedOperationError: ReadOnlyArrayListMap is a read-only map and doesn't allow modifications.
+	 </codeblock>
+	 
+	 </example></apiClassifierDetail><apiConstructor id="org.as3collections.maps:ReadOnlyArrayListMap:ReadOnlyArrayListMap"><apiName>ReadOnlyArrayListMap</apiName><shortdesc>
+		 Constructor, creates a new ReadOnlyArrayListMap object.</shortdesc><prolog/><apiConstructorDetail><apiConstructorDef><apiAccess value="public"/><apiException><apiDesc> 	if the <codeph>source</codeph> argument is <codeph>null</codeph>.
+		 </apiDesc><apiItemName>ArgumentError</apiItemName><apiOperationClassifier>ArgumentError</apiOperationClassifier></apiException><apiParam><apiItemName>source</apiItemName><apiOperationClassifier>org.as3collections:IMap</apiOperationClassifier><apiDesc>	an map to fill the list.
+		 </apiDesc></apiParam></apiConstructorDef><apiDesc>
+		 Constructor, creates a new <codeph>ReadOnlyArrayListMap</codeph> object.
+		 
+		 </apiDesc></apiConstructorDetail></apiConstructor><apiOperation id="org.as3collections.maps:ReadOnlyArrayListMap:clear"><apiName>clear</apiName><shortdesc>
+		 This implementation always throws an UnsupportedOperationError.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiException><apiDesc> 	<codeph>ReadOnlyArrayListMap</codeph> is a read-only map and doesn't allow modifications.
+		 </apiDesc><apiItemName>org.as3coreaddendum.errors:UnsupportedOperationError</apiItemName><apiOperationClassifier>org.as3coreaddendum.errors:UnsupportedOperationError</apiOperationClassifier></apiException><apiReturn><apiType value="void"/></apiReturn></apiOperationDef><apiDesc>
+		 This implementation always throws an <codeph>UnsupportedOperationError</codeph>.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.maps:ReadOnlyArrayListMap:clone"><apiName>clone</apiName><shortdesc>
+		 Creates and return a new ReadOnlyArrayListMap object containing all mappings in this map (in the same order).</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiReturn><apiDesc>a new <codeph>ReadOnlyArrayListMap</codeph> object containing all mappings in this map (in the same order).
+ 		 </apiDesc><apiType value="any"/></apiReturn></apiOperationDef><apiDesc>
+		 Creates and return a new <codeph>ReadOnlyArrayListMap</codeph> object containing all mappings in this map (in the same order).
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.maps:ReadOnlyArrayListMap:iterator"><apiName>iterator</apiName><shortdesc>
+		 Returns an iterator over a set of mappings.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiReturn><apiDesc>an iterator over a set of values.
+		 </apiDesc><apiOperationClassifier>org.as3collections:IIterator</apiOperationClassifier></apiReturn></apiOperationDef><apiDesc>
+		 Returns an iterator over a set of mappings.
+		 <p>This implementation returns a <codeph>ReadOnlyMapIterator</codeph> object.</p>
+		 
+		 </apiDesc></apiOperationDetail><related-links><link href="org.as3collections.iterators.xml#ReadOnlyMapIterator"><linktext>ReadOnlyMapIterator</linktext></link></related-links></apiOperation><apiOperation id="org.as3collections.maps:ReadOnlyArrayListMap:putAllByObject"><apiName>putAllByObject</apiName><shortdesc>
+		 This implementation always throws an UnsupportedOperationError.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiException><apiDesc> 	<codeph>ReadOnlyArrayListMap</codeph> is a read-only map and doesn't allow modifications.
+		 </apiDesc><apiItemName>org.as3coreaddendum.errors:UnsupportedOperationError</apiItemName><apiOperationClassifier>org.as3coreaddendum.errors:UnsupportedOperationError</apiOperationClassifier></apiException><apiReturn><apiType value="void"/></apiReturn><apiParam><apiItemName>o</apiItemName><apiType value="Object"/><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 This implementation always throws an <codeph>UnsupportedOperationError</codeph>.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.maps:ReadOnlyArrayListMap:putAll"><apiName>putAll</apiName><shortdesc>
+		 This implementation always throws an UnsupportedOperationError.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiException><apiDesc> 	<codeph>ReadOnlyArrayListMap</codeph> is a read-only map and doesn't allow modifications.
+		 </apiDesc><apiItemName>org.as3coreaddendum.errors:UnsupportedOperationError</apiItemName><apiOperationClassifier>org.as3coreaddendum.errors:UnsupportedOperationError</apiOperationClassifier></apiException><apiReturn><apiType value="void"/></apiReturn><apiParam><apiItemName>map</apiItemName><apiOperationClassifier>org.as3collections:IMap</apiOperationClassifier><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 This implementation always throws an <codeph>UnsupportedOperationError</codeph>.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.maps:ReadOnlyArrayListMap:putEntry"><apiName>putEntry</apiName><shortdesc>
+		 This implementation always throws an UnsupportedOperationError.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiException><apiDesc> 	<codeph>ReadOnlyArrayListMap</codeph> is a read-only map and doesn't allow modifications.
+		 </apiDesc><apiItemName>org.as3coreaddendum.errors:UnsupportedOperationError</apiItemName><apiOperationClassifier>org.as3coreaddendum.errors:UnsupportedOperationError</apiOperationClassifier></apiException><apiReturn><apiDesc>
+		 </apiDesc><apiType value="any"/></apiReturn><apiParam><apiItemName>entry</apiItemName><apiOperationClassifier>org.as3collections:IMapEntry</apiOperationClassifier><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 This implementation always throws an <codeph>UnsupportedOperationError</codeph>.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.maps:ReadOnlyArrayListMap:put"><apiName>put</apiName><shortdesc>
+		 This implementation always throws an UnsupportedOperationError.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiException><apiDesc> 	<codeph>ReadOnlyArrayListMap</codeph> is a read-only map and doesn't allow modifications.
+		 </apiDesc><apiItemName>org.as3coreaddendum.errors:UnsupportedOperationError</apiItemName><apiOperationClassifier>org.as3coreaddendum.errors:UnsupportedOperationError</apiOperationClassifier></apiException><apiReturn><apiDesc>
+		 </apiDesc><apiType value="any"/></apiReturn><apiParam><apiItemName>key</apiItemName><apiType value="any"/><apiDesc>	 </apiDesc></apiParam><apiParam><apiItemName>value</apiItemName><apiType value="any"/><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 This implementation always throws an <codeph>UnsupportedOperationError</codeph>.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.maps:ReadOnlyArrayListMap:removeAll"><apiName>removeAll</apiName><shortdesc>
+		 This implementation always throws an UnsupportedOperationError.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiException><apiDesc> 	<codeph>ReadOnlyArrayListMap</codeph> is a read-only map and doesn't allow modifications.
+		 </apiDesc><apiItemName>org.as3coreaddendum.errors:UnsupportedOperationError</apiItemName><apiOperationClassifier>org.as3coreaddendum.errors:UnsupportedOperationError</apiOperationClassifier></apiException><apiReturn><apiDesc>
+		 </apiDesc><apiType value="Boolean"/></apiReturn><apiParam><apiItemName>keys</apiItemName><apiOperationClassifier>org.as3collections:ICollection</apiOperationClassifier><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 This implementation always throws an <codeph>UnsupportedOperationError</codeph>.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.maps:ReadOnlyArrayListMap:remove"><apiName>remove</apiName><shortdesc>
+		 This implementation always throws an UnsupportedOperationError.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiException><apiDesc> 	<codeph>ReadOnlyArrayListMap</codeph> is a read-only map and doesn't allow modifications.
+		 </apiDesc><apiItemName>org.as3coreaddendum.errors:UnsupportedOperationError</apiItemName><apiOperationClassifier>org.as3coreaddendum.errors:UnsupportedOperationError</apiOperationClassifier></apiException><apiReturn><apiDesc>
+		 </apiDesc><apiType value="any"/></apiReturn><apiParam><apiItemName>key</apiItemName><apiType value="any"/><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 This implementation always throws an <codeph>UnsupportedOperationError</codeph>.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.maps:ReadOnlyArrayListMap:retainAll"><apiName>retainAll</apiName><shortdesc>
+		 This implementation always throws an UnsupportedOperationError.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiException><apiDesc> 	<codeph>ReadOnlyArrayListMap</codeph> is a read-only map and doesn't allow modifications.
+		 </apiDesc><apiItemName>org.as3coreaddendum.errors:UnsupportedOperationError</apiItemName><apiOperationClassifier>org.as3coreaddendum.errors:UnsupportedOperationError</apiOperationClassifier></apiException><apiReturn><apiDesc>
+		 </apiDesc><apiType value="Boolean"/></apiReturn><apiParam><apiItemName>keys</apiItemName><apiOperationClassifier>org.as3collections:ICollection</apiOperationClassifier><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 This implementation always throws an <codeph>UnsupportedOperationError</codeph>.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation></apiClassifier><apiClassifier id="org.as3collections.maps:TypedSortedMap"><apiName>TypedSortedMap</apiName><shortdesc>
+	 TypedSortedMap works as a wrapper for a map.</shortdesc><prolog><author>Flávio Silva
+	 </author><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiAccess value="public"/><apiStatic/><apiBaseInterface>org.as3collections:ISortedMap</apiBaseInterface><apiBaseClassifier>org.as3collections.maps:TypedListMap</apiBaseClassifier></apiClassifierDef><apiDesc>
+	 <codeph>TypedSortedMap</codeph> works as a wrapper for a map.
+	 It stores the <codeph>wrapMap</codeph> constructor's argument in the <codeph>wrappedMap</codeph> variable.
+	 So every method call to this class is forwarded to the <codeph>wrappedMap</codeph> object.
+	 The methods that need to be checked for the type of the keys and values are previously validated with the <codeph>validateKeyType</codeph>, <codeph>validateValueType</codeph> or <codeph>validateMap</codeph> method before forward the call.
+	 If the type of a key or value requested to be inserted to this map is incompatible with the type of the map a <codeph>org.as3coreaddendum.errors.ClassCastError</codeph> is thrown.
+	 The calls that are forwarded to the <codeph>wrappedMap</codeph> returns the return of the <codeph>wrappedMap</codeph> call.
+	 <p><codeph>TypedSortedMap</codeph> does not allow <codeph>null</codeph> keys or values.</p>
+	 
+	 </apiDesc><example>
+	 
+	 <codeblock rev="3.0">
+	 import org.as3collections.ISortedMap;
+	 import org.as3collections.maps.SortedArrayListMap;
+	 import org.as3collections.maps.TypedSortedMap;
+	 
+	 var map1:ISortedMap = new SortedArrayListMap();
+	 
+	 map1.put("e", 1)            // null
+	 map1.put("d", 2)            // null
+	 map1.put("c", 3)            // null
+	 map1.put("b", 4)            // null
+	 map1.put("a", 5)            // null
+	 
+	 map1                        // {a=5,b=4,c=3,d=2,e=1}
+	 map1.size()                 // 5
+	 
+	 var map2:ISortedMap = new TypedSortedMap(map1, String, Number); // you can use this way
+	 
+	 //var map2:ISortedMap = MapUtil.getTypedSortedMap(map1, String, Number); // or you can use this way
+	 
+	 map2                        // {a=5,b=4,c=3,d=2,e=1}
+	 map2.size()                 // 5
+	 
+	 map2.equals(map1)           // false
+	 
+	 map2.put("f", 6)            // null
+	 map2                        // {a=5,b=4,c=3,d=2,e=1,f=6}
+	 map2.size()                 // 6
+	 
+	 map2.put("g", "h")          // ClassCastError: Invalid value type. value: h | type: String | expected value type: Number
+	 map2.put(7, 8)              // ClassCastError: Invalid key type. key: 7 | type: int | expected key type: String
+	 </codeblock>
+	 
+	 </example></apiClassifierDetail><related-links><link href="org.as3collections.utils.xml#MapUtil/getTypedSortedMap()"><linktext>MapUtil.getTypedSortedMap()</linktext></link></related-links><apiConstructor id="org.as3collections.maps:TypedSortedMap:TypedSortedMap"><apiName>TypedSortedMap</apiName><shortdesc>
+		 Constructor, creates a new TypedSortedMap object.</shortdesc><prolog/><apiConstructorDetail><apiConstructorDef><apiAccess value="public"/><apiException><apiDesc> 	if the <codeph>wrapMap</codeph> argument is <codeph>null</codeph>.
+		 </apiDesc><apiItemName>ArgumentError</apiItemName><apiOperationClassifier>ArgumentError</apiOperationClassifier></apiException><apiException><apiDesc> 	if the <codeph>typeKeys</codeph> argument is <codeph>null</codeph>.
+		 </apiDesc><apiItemName>ArgumentError</apiItemName><apiOperationClassifier>ArgumentError</apiOperationClassifier></apiException><apiException><apiDesc> 	if the <codeph>typeValues</codeph> argument is <codeph>null</codeph>.
+		 </apiDesc><apiItemName>ArgumentError</apiItemName><apiOperationClassifier>ArgumentError</apiOperationClassifier></apiException><apiException><apiDesc> 		if the types of one or more keys or values in the <codeph>wrapMap</codeph> argument are incompatible with the <codeph>typeKeys</codeph> or <codeph>typeValues</codeph> argument.
+		 </apiDesc><apiItemName>org.as3coreaddendum.errors:ClassCastError</apiItemName><apiOperationClassifier>org.as3coreaddendum.errors:ClassCastError</apiOperationClassifier></apiException><apiParam><apiItemName>wrapMap</apiItemName><apiOperationClassifier>org.as3collections:ISortedMap</apiOperationClassifier><apiDesc>	the target map to wrap.
+		 </apiDesc></apiParam><apiParam><apiItemName>typeKeys</apiItemName><apiType value="any"/><apiDesc>the type of the keys allowed by this map.
+		 </apiDesc></apiParam><apiParam><apiItemName>typeValues</apiItemName><apiType value="any"/><apiDesc>the type of the values allowed by this map.
+		 </apiDesc></apiParam></apiConstructorDef><apiDesc>
+		 Constructor, creates a new <codeph>TypedSortedMap</codeph> object.
+		 
+		 </apiDesc></apiConstructorDetail></apiConstructor><apiOperation id="org.as3collections.maps:TypedSortedMap:clone"><apiName>clone</apiName><shortdesc>
+		 Creates and return a new TypedSortedMap object with the clone of the wrappedMap object.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiReturn><apiDesc>a new <codeph>TypedSortedMap</codeph> object with the clone of the <codeph>wrappedMap</codeph> object.
+ 		 </apiDesc><apiType value="any"/></apiReturn></apiOperationDef><apiDesc>
+		 Creates and return a new <codeph>TypedSortedMap</codeph> object with the clone of the <codeph>wrappedMap</codeph> object.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.maps:TypedSortedMap:equals"><apiName>equals</apiName><shortdesc>
+		 Performs an arbitrary, specific evaluation of equality between this object and the other object.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiReturn><apiDesc><codeph>true</codeph> if the arbitrary evaluation considers the objects equal.
+		 </apiDesc><apiType value="Boolean"/></apiReturn><apiParam><apiItemName>other</apiItemName><apiType value="any"/><apiDesc>	the object to be compared for equality.
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Performs an arbitrary, specific evaluation of equality between this object and the <codeph>other</codeph> object.
+		 <p>This implementation considers two differente objects equal if:</p>
+		 <p>
+		 <ul><li>object A and object B are instances of the same class (i.e. if they have <b>exactly</b> the same type)</li>
+		 <li>object A contains all mappings of object B</li>
+		 <li>object B contains all mappings of object A</li>
+		 <li>mappings have exactly the same order</li>
+		 <li>object A and object B has the same type of comparator</li>
+		 <li>object A and object B has the same options</li>
+		 <li>object A and object B has the same sortBy</li>
+		 </ul></p>
+		 <p>This implementation takes care of the order of the mappings in the map.
+		 So, for two maps are equal the order of mappings returned by the iterator must be equal.</p>
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.maps:TypedSortedMap:headMap"><apiName>headMap</apiName><shortdesc>
+		 Forwards the call to wrappedMap.headMap.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiReturn><apiDesc>
+		 </apiDesc><apiOperationClassifier>org.as3collections:IListMap</apiOperationClassifier></apiReturn><apiParam><apiItemName>toKey</apiItemName><apiType value="any"/><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Forwards the call to <codeph>wrappedMap.headMap</codeph>.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.maps:TypedSortedMap:sortOn"><apiName>sortOn</apiName><shortdesc>
+		 Forwards the call to wrappedMap.sortOn.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiDesc>
+		 </apiDesc><apiType value="Array"/></apiReturn><apiParam><apiItemName>fieldName</apiItemName><apiType value="any"/><apiDesc>	 </apiDesc></apiParam><apiParam><apiItemName>options</apiItemName><apiType value="any"/><apiData>null</apiData><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Forwards the call to <codeph>wrappedMap.sortOn</codeph>.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.maps:TypedSortedMap:sort"><apiName>sort</apiName><shortdesc>
+		 Forwards the call to wrappedMap.sort.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiDesc>
+		 </apiDesc><apiType value="Array"/></apiReturn><apiParam><apiItemName>compare</apiItemName><apiType value="Function"/><apiData>null</apiData><apiDesc>	 </apiDesc></apiParam><apiParam><apiItemName>options</apiItemName><apiType value="uint"/><apiData>0</apiData><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Forwards the call to <codeph>wrappedMap.sort</codeph>.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.maps:TypedSortedMap:subMap"><apiName>subMap</apiName><shortdesc>
+		 Forwards the call to wrappedMap.subMap.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiReturn><apiDesc>
+		 </apiDesc><apiOperationClassifier>org.as3collections:IListMap</apiOperationClassifier></apiReturn><apiParam><apiItemName>fromIndex</apiItemName><apiType value="int"/><apiDesc>	 </apiDesc></apiParam><apiParam><apiItemName>toIndex</apiItemName><apiType value="int"/><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Forwards the call to <codeph>wrappedMap.subMap</codeph>.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.maps:TypedSortedMap:tailMap"><apiName>tailMap</apiName><shortdesc>
+		 Forwards the call to wrappedMap.tailMap.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiReturn><apiDesc>
+		 </apiDesc><apiOperationClassifier>org.as3collections:IListMap</apiOperationClassifier></apiReturn><apiParam><apiItemName>fromKey</apiItemName><apiType value="any"/><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Forwards the call to <codeph>wrappedMap.tailMap</codeph>.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiValue id="org.as3collections.maps:TypedSortedMap:comparator:get"><apiName>comparator</apiName><shortdesc>
+		 Defines the wrappedMap comparator object to be used automatically to sort.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="org.as3coreaddendum.system:IComparator"/></apiValueDef><apiDesc>
+		 Defines the <codeph>wrappedMap</codeph> comparator object to be used automatically to sort.
+		 <p>If this value change the <codeph>wrappedMap</codeph> is automatically reordered with the new value.</p>
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.as3collections.maps:TypedSortedMap:options:get"><apiName>options</apiName><shortdesc>
+		 Defines the wrappedMap options to be used automatically to sort.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="uint"/></apiValueDef><apiDesc>
+		 Defines the <codeph>wrappedMap</codeph> options to be used automatically to sort.
+		 <p>If this value change the map is automatically reordered with the new value.</p>
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.as3collections.maps:TypedSortedMap:sortBy:get"><apiName>sortBy</apiName><shortdesc>
+		 Defines whether the wrappedMap should be sorted by its keys or values.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiValueClassifier>org.as3collections:SortMapBy</apiValueClassifier></apiValueDef><apiDesc>
+		 Defines whether the <codeph>wrappedMap</codeph> should be sorted by its keys or values. The default is <codeph>SortMapBy.KEY</codeph>.
+		 <p>If this value change the <codeph>wrappedMap</codeph> is automatically reordered with the new value.</p>
+		 </apiDesc></apiValueDetail></apiValue></apiClassifier><apiClassifier id="org.as3collections.maps:TypedListMap"><apiName>TypedListMap</apiName><shortdesc>
+	 TypedSortedMap works as a wrapper for a map.</shortdesc><prolog><author>Flávio Silva
+	 </author><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiAccess value="public"/><apiStatic/><apiBaseInterface>org.as3collections:IListMap</apiBaseInterface><apiBaseClassifier>org.as3collections.maps:TypedMap</apiBaseClassifier></apiClassifierDef><apiDesc>
+	 <codeph>TypedSortedMap</codeph> works as a wrapper for a map.
+	 It stores the <codeph>wrapMap</codeph> constructor's argument in the <codeph>wrappedMap</codeph> variable.
+	 So every method call to this class is forwarded to the <codeph>wrappedMap</codeph> object.
+	 The methods that need to be checked for the type of the keys and values are previously validated with the <codeph>validateKeyType</codeph>, <codeph>validateValueType</codeph> or <codeph>validateMap</codeph> method before forward the call.
+	 If the type of a key or value requested to be inserted to this map is incompatible with the type of the map a <codeph>org.as3coreaddendum.errors.ClassCastError</codeph> is thrown.
+	 The calls that are forwarded to the <codeph>wrappedMap</codeph> returns the return of the <codeph>wrappedMap</codeph> call.
+	 <p><codeph>TypedSortedMap</codeph> does not allow <codeph>null</codeph> keys or values.</p>
+	 
+	 </apiDesc><example>
+	 
+	 <codeblock rev="3.0">
+	 import org.as3collections.ISortedMap;
+	 import org.as3collections.maps.SortedArrayListMap;
+	 import org.as3collections.maps.TypedSortedMap;
+	 
+	 var map1:ISortedMap = new SortedArrayListMap();
+	 
+	 map1.put("e", 1)            // null
+	 map1.put("d", 2)            // null
+	 map1.put("c", 3)            // null
+	 map1.put("b", 4)            // null
+	 map1.put("a", 5)            // null
+	 
+	 map1                        // {a=5,b=4,c=3,d=2,e=1}
+	 map1.size()                 // 5
+	 
+	 var map2:ISortedMap = new TypedSortedMap(map1, String, Number); // you can use this way
+	 
+	 //var map2:ISortedMap = MapUtil.getTypedSortedMap(map1, String, Number); // or you can use this way
+	 
+	 map2                        // {a=5,b=4,c=3,d=2,e=1}
+	 map2.size()                 // 5
+	 
+	 map2.equals(map1)           // false
+	 
+	 map2.put("f", 6)            // null
+	 map2                        // {a=5,b=4,c=3,d=2,e=1,f=6}
+	 map2.size()                 // 6
+	 
+	 map2.put("g", "h")          // ClassCastError: Invalid value type. value: h | type: String | expected value type: Number
+	 map2.put(7, 8)              // ClassCastError: Invalid key type. key: 7 | type: int | expected key type: String
+	 </codeblock>
+	 
+	 </example></apiClassifierDetail><related-links><link href="org.as3collections.utils.xml#MapUtil/getTypedSortedMap()"><linktext>MapUtil.getTypedSortedMap()</linktext></link></related-links><apiConstructor id="org.as3collections.maps:TypedListMap:TypedListMap"><apiName>TypedListMap</apiName><shortdesc>
+		 Constructor, creates a new TypedSortedMap object.</shortdesc><prolog/><apiConstructorDetail><apiConstructorDef><apiAccess value="public"/><apiException><apiDesc> 	if the <codeph>wrapMap</codeph> argument is <codeph>null</codeph>.
+		 </apiDesc><apiItemName>ArgumentError</apiItemName><apiOperationClassifier>ArgumentError</apiOperationClassifier></apiException><apiException><apiDesc> 	if the <codeph>typeKeys</codeph> argument is <codeph>null</codeph>.
+		 </apiDesc><apiItemName>ArgumentError</apiItemName><apiOperationClassifier>ArgumentError</apiOperationClassifier></apiException><apiException><apiDesc> 	if the <codeph>typeValues</codeph> argument is <codeph>null</codeph>.
+		 </apiDesc><apiItemName>ArgumentError</apiItemName><apiOperationClassifier>ArgumentError</apiOperationClassifier></apiException><apiException><apiDesc> 		if the types of one or more keys or values in the <codeph>wrapMap</codeph> argument are incompatible with the <codeph>typeKeys</codeph> or <codeph>typeValues</codeph> argument.
+		 </apiDesc><apiItemName>org.as3coreaddendum.errors:ClassCastError</apiItemName><apiOperationClassifier>org.as3coreaddendum.errors:ClassCastError</apiOperationClassifier></apiException><apiParam><apiItemName>wrapMap</apiItemName><apiOperationClassifier>org.as3collections:IListMap</apiOperationClassifier><apiDesc>	the target map to wrap.
+		 </apiDesc></apiParam><apiParam><apiItemName>typeKeys</apiItemName><apiType value="any"/><apiDesc>the type of the keys allowed by this map.
+		 </apiDesc></apiParam><apiParam><apiItemName>typeValues</apiItemName><apiType value="any"/><apiDesc>the type of the values allowed by this map.
+		 </apiDesc></apiParam></apiConstructorDef><apiDesc>
+		 Constructor, creates a new <codeph>TypedSortedMap</codeph> object.
+		 
+		 </apiDesc></apiConstructorDetail></apiConstructor><apiOperation id="org.as3collections.maps:TypedListMap:clone"><apiName>clone</apiName><shortdesc>
+		 Creates and return a new TypedListMap object with the clone of the wrappedMap object.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiReturn><apiDesc>a new <codeph>TypedListMap</codeph> object with the clone of the <codeph>wrappedMap</codeph> object.
+ 		 </apiDesc><apiType value="any"/></apiReturn></apiOperationDef><apiDesc>
+		 Creates and return a new <codeph>TypedListMap</codeph> object with the clone of the <codeph>wrappedMap</codeph> object.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.maps:TypedListMap:getKeyAt"><apiName>getKeyAt</apiName><shortdesc>
+		 Forwards the call to wrappedMap.getKeyAt.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiDesc>
+		 </apiDesc><apiType value="any"/></apiReturn><apiParam><apiItemName>index</apiItemName><apiType value="int"/><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Forwards the call to <codeph>wrappedMap.getKeyAt</codeph>.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.maps:TypedListMap:getValueAt"><apiName>getValueAt</apiName><shortdesc>
+		 Forwards the call to wrappedMap.getValueAt.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiDesc>
+		 </apiDesc><apiType value="any"/></apiReturn><apiParam><apiItemName>index</apiItemName><apiType value="int"/><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Forwards the call to <codeph>wrappedMap.getValueAt</codeph>.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.maps:TypedListMap:headMap"><apiName>headMap</apiName><shortdesc>
+		 Forwards the call to wrappedMap.headMap.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiDesc>
+		 </apiDesc><apiOperationClassifier>org.as3collections:IListMap</apiOperationClassifier></apiReturn><apiParam><apiItemName>toKey</apiItemName><apiType value="any"/><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Forwards the call to <codeph>wrappedMap.headMap</codeph>.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.maps:TypedListMap:indexOfKey"><apiName>indexOfKey</apiName><shortdesc>
+		 Forwards the call to wrappedMap.indexOfKey.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiDesc>
+		 </apiDesc><apiType value="int"/></apiReturn><apiParam><apiItemName>key</apiItemName><apiType value="any"/><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Forwards the call to <codeph>wrappedMap.indexOfKey</codeph>.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.maps:TypedListMap:indexOfValue"><apiName>indexOfValue</apiName><shortdesc>
+		 Forwards the call to wrappedMap.indexOfValue.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiDesc>
+		 </apiDesc><apiType value="int"/></apiReturn><apiParam><apiItemName>value</apiItemName><apiType value="any"/><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Forwards the call to <codeph>wrappedMap.indexOfValue</codeph>.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.maps:TypedListMap:listMapIterator"><apiName>listMapIterator</apiName><shortdesc>
+		 Returns a IListMapIterator object to iterate over the mappings in this map (in proper sequence), starting at the specified position in this map.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiDesc>a <codeph>IListMapIterator</codeph> object to iterate over the mappings in this map (in proper sequence), starting at the specified position in this map.
+		 </apiDesc><apiOperationClassifier>org.as3collections:IListMapIterator</apiOperationClassifier></apiReturn><apiParam><apiItemName>index</apiItemName><apiType value="int"/><apiData>0</apiData><apiDesc>	index of first value to be returned from the iterator (by a call to the <codeph>next</codeph> method) 
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Returns a <codeph>IListMapIterator</codeph> object to iterate over the mappings in this map (in proper sequence), starting at the specified position in this map.
+		 The specified index indicates the first value that would be returned by an initial call to <codeph>next</codeph>.
+		 An initial call to <codeph>previous</codeph> would return the value with the specified index minus one.
+		 <p>This implementation always throws an <codeph>UnsupportedOperationError</codeph>.</p>
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.maps:TypedListMap:putAllAt"><apiName>putAllAt</apiName><shortdesc>
+		 The map is validated to be forwarded to wrappedMap.putAllAt.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="void"/></apiReturn><apiParam><apiItemName>index</apiItemName><apiType value="int"/><apiDesc>	 </apiDesc></apiParam><apiParam><apiItemName>map</apiItemName><apiOperationClassifier>org.as3collections:IMap</apiOperationClassifier><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 The map is validated to be forwarded to <codeph>wrappedMap.putAllAt</codeph>.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.maps:TypedListMap:putAt"><apiName>putAt</apiName><shortdesc>
+		 The key and value are validated to be forwarded to wrappedMap.putAt.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiException><apiDesc> 		if the type of the specified key or value is incompatible with this map.
+		 </apiDesc><apiItemName>org.as3coreaddendum.errors:ClassCastError</apiItemName><apiOperationClassifier>org.as3coreaddendum.errors:ClassCastError</apiOperationClassifier></apiException><apiReturn><apiDesc>the return of the call <codeph>wrappedMap.put</codeph>.
+		 </apiDesc><apiType value="void"/></apiReturn><apiParam><apiItemName>index</apiItemName><apiType value="int"/><apiDesc>	index at which the specified mapping is to be inserted.
+		 </apiDesc></apiParam><apiParam><apiItemName>key</apiItemName><apiType value="any"/><apiDesc>	key with which the specified value is to be associated.
+		 </apiDesc></apiParam><apiParam><apiItemName>value</apiItemName><apiType value="any"/><apiDesc>	value to be associated with the specified key.
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 The key and value are validated to be forwarded to <codeph>wrappedMap.putAt</codeph>.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.maps:TypedListMap:removeAt"><apiName>removeAt</apiName><shortdesc>
+		 Forwards the call to wrappedMap.removeAt.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiOperationClassifier>org.as3collections:IMapEntry</apiOperationClassifier></apiReturn><apiParam><apiItemName>index</apiItemName><apiType value="int"/><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Forwards the call to <codeph>wrappedMap.removeAt</codeph>.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.maps:TypedListMap:removeRange"><apiName>removeRange</apiName><shortdesc>
+		 Forwards the call to wrappedMap.removeRange.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiDesc>the return of the call <codeph>wrappedMap.removeRange</codeph>.
+		 </apiDesc><apiOperationClassifier>org.as3collections:IListMap</apiOperationClassifier></apiReturn><apiParam><apiItemName>fromIndex</apiItemName><apiType value="int"/><apiDesc>	 </apiDesc></apiParam><apiParam><apiItemName>toIndex</apiItemName><apiType value="int"/><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Forwards the call to <codeph>wrappedMap.removeRange</codeph>.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.maps:TypedListMap:reverse"><apiName>reverse</apiName><shortdesc>
+		 Forwards the call to wrappedMap.reverse.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="void"/></apiReturn></apiOperationDef><apiDesc>
+		 Forwards the call to <codeph>wrappedMap.reverse</codeph>.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.maps:TypedListMap:setKeyAt"><apiName>setKeyAt</apiName><shortdesc>
+		 The key is validated to be forwarded to wrappedMap.setKeyAt.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiException><apiDesc> 		if the type of the specified key or value is incompatible with this map.
+		 </apiDesc><apiItemName>org.as3coreaddendum.errors:ClassCastError</apiItemName><apiOperationClassifier>org.as3coreaddendum.errors:ClassCastError</apiOperationClassifier></apiException><apiReturn><apiDesc>the return of the call <codeph>wrappedMap.setKeyAt</codeph>.
+		 </apiDesc><apiType value="any"/></apiReturn><apiParam><apiItemName>index</apiItemName><apiType value="int"/><apiDesc>	 </apiDesc></apiParam><apiParam><apiItemName>key</apiItemName><apiType value="any"/><apiDesc>	the key to forward to <codeph>wrappedMap.setKeyAt</codeph>.
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 The key is validated to be forwarded to <codeph>wrappedMap.setKeyAt</codeph>.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.maps:TypedListMap:setValueAt"><apiName>setValueAt</apiName><shortdesc>
+		 The value is validated to be forwarded to wrappedMap.setValueAt.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiException><apiDesc> 		if the type of the specified key or value is incompatible with this map.
+		 </apiDesc><apiItemName>org.as3coreaddendum.errors:ClassCastError</apiItemName><apiOperationClassifier>org.as3coreaddendum.errors:ClassCastError</apiOperationClassifier></apiException><apiReturn><apiDesc>the return of the call <codeph>wrappedMap.setValueAt</codeph>.
+		 </apiDesc><apiType value="any"/></apiReturn><apiParam><apiItemName>index</apiItemName><apiType value="int"/><apiDesc>	 </apiDesc></apiParam><apiParam><apiItemName>value</apiItemName><apiType value="any"/><apiDesc>	the key to forward to <codeph>wrappedMap.setValueAt</codeph>.
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 The value is validated to be forwarded to <codeph>wrappedMap.setValueAt</codeph>.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.maps:TypedListMap:subMap"><apiName>subMap</apiName><shortdesc>
+		 Forwards the call to wrappedMap.subMap.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiDesc>
+		 </apiDesc><apiOperationClassifier>org.as3collections:IListMap</apiOperationClassifier></apiReturn><apiParam><apiItemName>fromIndex</apiItemName><apiType value="int"/><apiDesc>	 </apiDesc></apiParam><apiParam><apiItemName>toIndex</apiItemName><apiType value="int"/><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Forwards the call to <codeph>wrappedMap.subMap</codeph>.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.maps:TypedListMap:tailMap"><apiName>tailMap</apiName><shortdesc>
+		 Forwards the call to wrappedMap.tailMap.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiDesc>
+		 </apiDesc><apiOperationClassifier>org.as3collections:IListMap</apiOperationClassifier></apiReturn><apiParam><apiItemName>fromKey</apiItemName><apiType value="any"/><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Forwards the call to <codeph>wrappedMap.tailMap</codeph>.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiValue id="org.as3collections.maps:TypedListMap:modCount:get"><apiName>modCount</apiName><shortdesc>
+		 Returns the return of the call wrapMap.modCount.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="read"/><apiType value="int"/></apiValueDef><apiDesc>
+		 Returns the return of the call <codeph>wrapMap.modCount</codeph>.
+		 </apiDesc></apiValueDetail></apiValue></apiClassifier><apiClassifier id="org.as3collections.maps:ReadOnlyHashMap"><apiName>ReadOnlyHashMap</apiName><shortdesc>
+	 A HashMap that doesn't allow modifications.</shortdesc><prolog><author>Flávio Silva
+	 </author><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiAccess value="public"/><apiStatic/><apiBaseClassifier>org.as3collections:AbstractHashMap</apiBaseClassifier></apiClassifierDef><apiDesc>
+	 A <codeph>HashMap</codeph> that doesn't allow modifications.
+	 It receives all the mappings by its constructor and can no longer be changed.
+	 All methods that change the map will throw an <codeph>UnsupportedOperationError</codeph>.
+	 
+	 </apiDesc><example>
+	 
+	 <codeblock rev="3.0">
+	 import org.as3collections.IMap;
+	 import org.as3collections.maps.HashMap;
+	 import org.as3collections.maps.ReadOnlyHashMap;
+	 
+	 var obj:Object = {fa:"fb",ga:"gb",ha:"hb"}
+	 
+	 var map1:IMap = new HashMap();
+	 
+	 map1.putAllByObject(obj);
+	 
+	 map1                  // {ha=hb,ga=gb,fa=fb}
+	 map1.size()           // 3
+	 
+	 var map2:IMap = new ReadOnlyHashMap(map1);
+	 
+	 map2                  // {ha=hb,ga=gb,fa=fb}
+	 map2.size()           // 3
+	 
+	 map2.put(1, 2)        // UnsupportedOperationError: ReadOnlyHashMap is a read-only map and doesn't allow modifications.
+	 
+	 map2.remove(1)        // UnsupportedOperationError: ReadOnlyHashMap is a read-only map and doesn't allow modifications.
+	 </codeblock>
+	 
+	 </example></apiClassifierDetail><apiConstructor id="org.as3collections.maps:ReadOnlyHashMap:ReadOnlyHashMap"><apiName>ReadOnlyHashMap</apiName><shortdesc>
+		 Constructor, creates a new ReadOnlyHashMap object.</shortdesc><prolog/><apiConstructorDetail><apiConstructorDef><apiAccess value="public"/><apiException><apiDesc> 	if the <codeph>source</codeph> argument is <codeph>null</codeph>.
+		 </apiDesc><apiItemName>ArgumentError</apiItemName><apiOperationClassifier>ArgumentError</apiOperationClassifier></apiException><apiParam><apiItemName>source</apiItemName><apiOperationClassifier>org.as3collections:IMap</apiOperationClassifier><apiDesc>	an map to fill the list.
+		 </apiDesc></apiParam></apiConstructorDef><apiDesc>
+		 Constructor, creates a new <codeph>ReadOnlyHashMap</codeph> object.
+		 
+		 </apiDesc></apiConstructorDetail></apiConstructor><apiOperation id="org.as3collections.maps:ReadOnlyHashMap:clear"><apiName>clear</apiName><shortdesc>
+		 This implementation always throws an UnsupportedOperationError.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiException><apiDesc> 	<codeph>ReadOnlyHashMap</codeph> is a read-only map and doesn't allow modifications.
+		 </apiDesc><apiItemName>org.as3coreaddendum.errors:UnsupportedOperationError</apiItemName><apiOperationClassifier>org.as3coreaddendum.errors:UnsupportedOperationError</apiOperationClassifier></apiException><apiReturn><apiType value="void"/></apiReturn></apiOperationDef><apiDesc>
+		 This implementation always throws an <codeph>UnsupportedOperationError</codeph>.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.maps:ReadOnlyHashMap:clone"><apiName>clone</apiName><shortdesc>
+		 Creates and return a new ReadOnlyHashMap object containing all mappings in this map.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiReturn><apiDesc>a new <codeph>ReadOnlyHashMap</codeph> object containing all mappings in this map.
+ 		 </apiDesc><apiType value="any"/></apiReturn></apiOperationDef><apiDesc>
+		 Creates and return a new <codeph>ReadOnlyHashMap</codeph> object containing all mappings in this map.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.maps:ReadOnlyHashMap:iterator"><apiName>iterator</apiName><shortdesc>
+		 Returns an iterator over a set of mappings.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiReturn><apiDesc>an iterator over a set of values.
+		 </apiDesc><apiOperationClassifier>org.as3collections:IIterator</apiOperationClassifier></apiReturn></apiOperationDef><apiDesc>
+		 Returns an iterator over a set of mappings.
+		 <p>This implementation returns a <codeph>ReadOnlyMapIterator</codeph> object.</p>
+		 
+		 </apiDesc></apiOperationDetail><related-links><link href="org.as3collections.iterators.xml#ReadOnlyMapIterator"><linktext>ReadOnlyMapIterator</linktext></link></related-links></apiOperation><apiOperation id="org.as3collections.maps:ReadOnlyHashMap:putAllByObject"><apiName>putAllByObject</apiName><shortdesc>
+		 This implementation always throws an UnsupportedOperationError.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiException><apiDesc> 	<codeph>ReadOnlyHashMap</codeph> is a read-only map and doesn't allow modifications.
+		 </apiDesc><apiItemName>org.as3coreaddendum.errors:UnsupportedOperationError</apiItemName><apiOperationClassifier>org.as3coreaddendum.errors:UnsupportedOperationError</apiOperationClassifier></apiException><apiReturn><apiType value="void"/></apiReturn><apiParam><apiItemName>o</apiItemName><apiType value="Object"/><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 This implementation always throws an <codeph>UnsupportedOperationError</codeph>.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.maps:ReadOnlyHashMap:putAll"><apiName>putAll</apiName><shortdesc>
+		 This implementation always throws an UnsupportedOperationError.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiException><apiDesc> 	<codeph>ReadOnlyHashMap</codeph> is a read-only map and doesn't allow modifications.
+		 </apiDesc><apiItemName>org.as3coreaddendum.errors:UnsupportedOperationError</apiItemName><apiOperationClassifier>org.as3coreaddendum.errors:UnsupportedOperationError</apiOperationClassifier></apiException><apiReturn><apiType value="void"/></apiReturn><apiParam><apiItemName>map</apiItemName><apiOperationClassifier>org.as3collections:IMap</apiOperationClassifier><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 This implementation always throws an <codeph>UnsupportedOperationError</codeph>.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.maps:ReadOnlyHashMap:putEntry"><apiName>putEntry</apiName><shortdesc>
+		 This implementation always throws an UnsupportedOperationError.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiException><apiDesc> 	<codeph>ReadOnlyHashMap</codeph> is a read-only map and doesn't allow modifications.
+		 </apiDesc><apiItemName>org.as3coreaddendum.errors:UnsupportedOperationError</apiItemName><apiOperationClassifier>org.as3coreaddendum.errors:UnsupportedOperationError</apiOperationClassifier></apiException><apiReturn><apiDesc>
+		 </apiDesc><apiType value="any"/></apiReturn><apiParam><apiItemName>entry</apiItemName><apiOperationClassifier>org.as3collections:IMapEntry</apiOperationClassifier><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 This implementation always throws an <codeph>UnsupportedOperationError</codeph>.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.maps:ReadOnlyHashMap:put"><apiName>put</apiName><shortdesc>
+		 This implementation always throws an UnsupportedOperationError.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiException><apiDesc> 	<codeph>ReadOnlyHashMap</codeph> is a read-only map and doesn't allow modifications.
+		 </apiDesc><apiItemName>org.as3coreaddendum.errors:UnsupportedOperationError</apiItemName><apiOperationClassifier>org.as3coreaddendum.errors:UnsupportedOperationError</apiOperationClassifier></apiException><apiReturn><apiDesc>
+		 </apiDesc><apiType value="any"/></apiReturn><apiParam><apiItemName>key</apiItemName><apiType value="any"/><apiDesc>	 </apiDesc></apiParam><apiParam><apiItemName>value</apiItemName><apiType value="any"/><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 This implementation always throws an <codeph>UnsupportedOperationError</codeph>.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.maps:ReadOnlyHashMap:removeAll"><apiName>removeAll</apiName><shortdesc>
+		 This implementation always throws an UnsupportedOperationError.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiException><apiDesc> 	<codeph>ReadOnlyHashMap</codeph> is a read-only map and doesn't allow modifications.
+		 </apiDesc><apiItemName>org.as3coreaddendum.errors:UnsupportedOperationError</apiItemName><apiOperationClassifier>org.as3coreaddendum.errors:UnsupportedOperationError</apiOperationClassifier></apiException><apiReturn><apiDesc>
+		 </apiDesc><apiType value="Boolean"/></apiReturn><apiParam><apiItemName>keys</apiItemName><apiOperationClassifier>org.as3collections:ICollection</apiOperationClassifier><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 This implementation always throws an <codeph>UnsupportedOperationError</codeph>.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.maps:ReadOnlyHashMap:remove"><apiName>remove</apiName><shortdesc>
+		 This implementation always throws an UnsupportedOperationError.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiException><apiDesc> 	<codeph>ReadOnlyHashMap</codeph> is a read-only map and doesn't allow modifications.
+		 </apiDesc><apiItemName>org.as3coreaddendum.errors:UnsupportedOperationError</apiItemName><apiOperationClassifier>org.as3coreaddendum.errors:UnsupportedOperationError</apiOperationClassifier></apiException><apiReturn><apiDesc>
+		 </apiDesc><apiType value="any"/></apiReturn><apiParam><apiItemName>key</apiItemName><apiType value="any"/><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 This implementation always throws an <codeph>UnsupportedOperationError</codeph>.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.maps:ReadOnlyHashMap:retainAll"><apiName>retainAll</apiName><shortdesc>
+		 This implementation always throws an UnsupportedOperationError.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiException><apiDesc> 	<codeph>ReadOnlyHashMap</codeph> is a read-only map and doesn't allow modifications.
+		 </apiDesc><apiItemName>org.as3coreaddendum.errors:UnsupportedOperationError</apiItemName><apiOperationClassifier>org.as3coreaddendum.errors:UnsupportedOperationError</apiOperationClassifier></apiException><apiReturn><apiDesc>
+		 </apiDesc><apiType value="Boolean"/></apiReturn><apiParam><apiItemName>keys</apiItemName><apiOperationClassifier>org.as3collections:ICollection</apiOperationClassifier><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 This implementation always throws an <codeph>UnsupportedOperationError</codeph>.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation></apiClassifier></apiPackage>

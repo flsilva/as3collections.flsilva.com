@@ -1,0 +1,8 @@
+tocTab[tocTab.length] = new Array("1.1.2.2:1", "", "errors", "EARoot/EA1/EA1/EA2/EA2/EA74.htm", "175.png", "38", "0", "", "Logical diagram0","{3959623B-7411-45f9-82D3-5443E126EE20}");
+tocTab[tocTab.length] = new Array("1.1.2.2:2", "", "ClassCastError", "EARoot/EA1/EA1/EA2/EA2/EA76.htm", "5.png", "324", "0", "", "Class0","{65FD00C5-2DD9-449f-8108-4598A5DBB35B}");
+tocTab[tocTab.length] = new Array("1.1.2.2:3", "", "CloneNotSupportedError", "EARoot/EA1/EA1/EA2/EA2/EA77.htm", "5.png", "326", "0", "", "Class0","{E2DDA5AC-8F79-405a-A5E4-CC4A6105FDEE}");
+tocTab[tocTab.length] = new Array("1.1.2.2:4", "", "IllegalStateError", "EARoot/EA1/EA1/EA2/EA2/EA78.htm", "5.png", "320", "0", "", "Class0","{13CD3466-F7BB-4c65-A5BD-765DA3091700}");
+tocTab[tocTab.length] = new Array("1.1.2.2:5", "", "InvalidEnumArgumentError", "EARoot/EA1/EA1/EA2/EA2/EA79.htm", "5.png", "322", "0", "", "Class0","{36165361-EF4D-4fd1-A4F7-4E7891401C86}");
+tocTab[tocTab.length] = new Array("1.1.2.2:6", "", "NullPointerError", "EARoot/EA1/EA1/EA2/EA2/EA80.htm", "5.png", "325", "0", "", "Class0","{C3B222A5-8204-4066-9982-7C5A7668558D}");
+tocTab[tocTab.length] = new Array("1.1.2.2:7", "", "ObjectDisposedError", "EARoot/EA1/EA1/EA2/EA2/EA81.htm", "5.png", "321", "0", "", "Class0","{2EE59917-3A20-46e9-BFE8-390E7F624DBC}");
+tocTab[tocTab.length] = new Array("1.1.2.2:8", "", "UnsupportedOperationError", "EARoot/EA1/EA1/EA2/EA2/EA82.htm", "5.png", "323", "0", "", "Class0","{5174E5ED-2443-48e8-8CFD-33187E40081C}");

@@ -1,0 +1,1428 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<allClasses>
+   <apiPackage id="org.as3collections.errors">
+      <apiName>org.as3collections.errors</apiName>
+      <apiClassifier id="org.as3collections.errors:IndexOutOfBoundsError">
+         <apiName>IndexOutOfBoundsError</apiName>
+         <shortdesc>
+	 The error that is thrown to indicate that an index of some sort (such as to an array) is out of range.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>Error</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 The error that is thrown to indicate that an index of some sort (such as to an array) is out of range.
+	 
+	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.as3collections.errors:ConcurrentModificationError">
+         <apiName>ConcurrentModificationError</apiName>
+         <shortdesc>
+	 The error that is thrown by methods that have detected concurrent modification of an object when such modification is not permissible.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>Error</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 The error that is thrown by methods that have detected concurrent modification of an object when such modification is not permissible.
+	 
+	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.as3collections.errors:NoSuchElementError">
+         <apiName>NoSuchElementError</apiName>
+         <shortdesc>
+	 The error that is thrown to indicate that there are no more elements in the iteration.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>Error</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 The error that is thrown to indicate that there are no more elements in the iteration.
+	 
+	 </apiDesc>
+      </apiClassifier>
+   </apiPackage>
+   <apiPackage id="org.as3collections.iterators">
+      <apiName>org.as3collections.iterators</apiName>
+      <apiClassifier id="org.as3collections.iterators:ReadOnlyListIterator">
+         <apiName>ReadOnlyListIterator</apiName>
+         <shortdesc>
+	 An iterator to iterate over lists.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>org.as3collections.iterators:ListIterator</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 An iterator to iterate over lists.
+	 This implementation doesn't allow modifications in the list.
+	 All methods that change the list will throw an <codeph>UnsupportedOperationError</codeph>.
+	 
+	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.as3collections.iterators:ReadOnlyArrayIterator">
+         <apiName>ReadOnlyArrayIterator</apiName>
+         <shortdesc>
+	 An iterator to iterate over an Array object.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>org.as3collections.iterators:ArrayIterator</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 An iterator to iterate over an <codeph>Array</codeph> object.
+	 This implementation doesn't allow modifications in the collection.
+	 All methods that change the collection will throw an <codeph>UnsupportedOperationError</codeph>.
+	 
+	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.as3collections.iterators:ListIterator">
+         <apiName>ListIterator</apiName>
+         <shortdesc>
+	 An iterator to iterate over lists (implementations of the IList interface).</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.as3collections:IListIterator</apiBaseInterface>
+               <apiBaseClassifier>Object</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 An iterator to iterate over lists (implementations of the <codeph>IList</codeph> interface).
+	 <codeph>ListIterator</codeph> allows to traverse the list in either direction.
+	 <p>
+               <b>IMPORTANT:</b>
+            </p>
+	           <p>A <codeph>ListIterator</codeph> has no current element; its cursor position always lies between the element that would be returned by a call to <codeph>previous()</codeph> and the element that would be returned by a call to <codeph>next()</codeph>.
+	 An iterator for a list of length <codeph>n</codeph> has <codeph>n+1</codeph> possible cursor positions, as illustrated by the carets (^) below:</p>
+	           <p>                                
+	 Element(0)       
+	 Element(1)       
+	 Element(2)       
+	 ... Element(n-1)</p>
+	           <p>cursor positions:
+	    
+	 ^                    
+	 ^                     
+	 ^                    
+	 ^                            
+	 ^</p>
+	           <p>Note that the <codeph>remove()</codeph> and <codeph>set()</codeph> methods are <i>not</i> defined in terms of the cursor position; they are defined to operate on the last element returned by a call to <codeph>next()</codeph> or <codeph>previous()</codeph>.</p>
+	           <p>For further information do not hesitate to see the examples at the end of the page.</p>
+	           <p>This documentation is partially based in the <i>Java Collections Framework</i> JavaDoc documentation.
+	 For further information see <xref href="http://download.oracle.com/javase/6/docs/technotes/guides/collections/index.html"
+                     scope="external">Java Collections Framework</xref>
+            </p>
+	 
+	        </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.as3collections.iterators:MapIterator">
+         <apiName>MapIterator</apiName>
+         <shortdesc>
+	 An iterator to iterate over maps (implementations of the IMap interface).</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.as3collections:IIterator</apiBaseInterface>
+               <apiBaseClassifier>Object</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 An iterator to iterate over maps (implementations of the <codeph>IMap</codeph> interface).
+	 
+	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.as3collections.iterators:ArrayIterator">
+         <apiName>ArrayIterator</apiName>
+         <shortdesc>
+	 An iterator to iterate over an Array object.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.as3collections:IIterator</apiBaseInterface>
+               <apiBaseClassifier>Object</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 An iterator to iterate over an <codeph>Array</codeph> object.
+	 
+	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.as3collections.iterators:ListMapIterator">
+         <apiName>ListMapIterator</apiName>
+         <shortdesc>
+	 An iterator to iterate over implementations of IListMap interface.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.as3collections:IListMapIterator</apiBaseInterface>
+               <apiBaseClassifier>Object</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 An iterator to iterate over implementations of <codeph>IListMap</codeph> interface.
+	 <codeph>ListMapIterator</codeph> allows to traverse the map in either direction.
+	 <p>
+               <b>IMPORTANT:</b>
+            </p>
+	           <p>A <codeph>ListMapIterator</codeph> has no current mapping; its cursor position always lies between the mapping that would be returned by a call to <codeph>previous()</codeph> and the mapping that would be returned by a call to <codeph>next()</codeph>.
+	 An iterator for a map of length <codeph>n</codeph> has <codeph>n+1</codeph> possible cursor positions, as illustrated by the carets (^) below:</p>
+	           <p>                                
+	 Element(0)       
+	 Element(1)       
+	 Element(2)       
+	 ... Element(n-1)</p>
+	           <p>cursor positions:
+	    
+	 ^                    
+	 ^                     
+	 ^                    
+	 ^                            
+	 ^</p>
+	           <p>Note that the <codeph>remove()</codeph> and <codeph>set()</codeph> methods are <i>not</i> defined in terms of the cursor position; they are defined to operate on the last mapping returned by a call to <codeph>next()</codeph> or <codeph>previous()</codeph>.</p>
+	           <p>For further information do not hesitate to see the examples at the end of the page.</p>
+	           <p>This documentation is partially based in the <i>Java Collections Framework</i> JavaDoc documentation.
+	 For further information see <xref href="http://download.oracle.com/javase/6/docs/technotes/guides/collections/index.html"
+                     scope="external">Java Collections Framework</xref>
+            </p>
+	 
+	        </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.as3collections.iterators:ReadOnlyMapIterator">
+         <apiName>ReadOnlyMapIterator</apiName>
+         <shortdesc>
+	 An iterator to iterate over maps (implementations of the IMap interface).</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>org.as3collections.iterators:MapIterator</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 An iterator to iterate over maps (implementations of the <codeph>IMap</codeph> interface).
+	 This implementation doesn't allow modifications in the map.
+	 All methods that change the map will throw an <codeph>UnsupportedOperationError</codeph>.
+	 
+	 </apiDesc>
+      </apiClassifier>
+   </apiPackage>
+   <apiPackage id="org.as3collections.lists">
+      <apiName>org.as3collections.lists</apiName>
+      <apiClassifier id="org.as3collections.lists:UniqueList">
+         <apiName>UniqueList</apiName>
+         <shortdesc>
+	 UniqueList works as a wrapper for a IList object.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.as3collections:IList</apiBaseInterface>
+               <apiBaseClassifier>org.as3collections:UniqueCollection</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	           <codeph>UniqueList</codeph> works as a wrapper for a <codeph>IList</codeph> object.
+	 It does not allow duplicated elements in the collection.
+	 It stores the <codeph>wrapList</codeph> constructor's argument in the <codeph>wrappedList</codeph> variable.
+	 So every method call to this class is forwarded to the <codeph>wrappedList</codeph> object.
+	 The methods that need to be checked for duplication are previously validated before forward the call.
+	 No error is thrown by the validation of duplication.
+	 The calls that are forwarded to the <codeph>wrappedList</codeph> returns the return of the <codeph>wrappedList</codeph> call.
+	 <p>You can also create unique and typed lists. See below the link "ListUtil.getUniqueTypedList()".</p>
+	 
+	        </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.as3collections.lists:TypedList">
+         <apiName>TypedList</apiName>
+         <shortdesc>
+	 TypedList works as a wrapper for a IList object.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.as3collections:IList</apiBaseInterface>
+               <apiBaseClassifier>org.as3collections:TypedCollection</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	           <codeph>TypedList</codeph> works as a wrapper for a <codeph>IList</codeph> object.
+	 Since ActionScript 3.0 does not support typed arrays, <codeph>TypedList</codeph> is a way to create typed lists.
+	 It stores the <codeph>wrapList</codeph> constructor's argument internaly.
+	 So every method call to this class is forwarded to the <codeph>wrappedList</codeph> object.
+	 The methods that need to be checked for the type of the elements are previously validated before forward the call.
+	 If the type of an element requested to be added to this list is incompatible with the type of the list a <codeph>org.as3coreaddendum.errors.ClassCastError</codeph> is thrown.
+	 The calls that are forwarded to the <codeph>wrappedList</codeph> returns the return of the <codeph>wrappedList</codeph> call.
+	 <p>
+               <codeph>TypedList</codeph> does not allow <codeph>null</codeph> elements.</p>
+	           <p>You can also create unique and typed lists. See below the link "ListUtil.getUniqueTypedList()".</p>
+	 
+	        </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.as3collections.lists:ReadOnlyArrayList">
+         <apiName>ReadOnlyArrayList</apiName>
+         <shortdesc>
+	 A list that does not allow modifications.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>org.as3collections:AbstractList</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 A list that does not allow modifications.
+	 It receives all the elements by its constructor and can no longer be changed.
+	 All methods that change this list will throw an <codeph>org.as3coreaddendum.errors.UnsupportedOperationError</codeph>.
+	 
+	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.as3collections.lists:UniqueSortedList">
+         <apiName>UniqueSortedList</apiName>
+         <shortdesc>
+	 UniqueSortedList works as a wrapper for a ISortedList object.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.as3collections:ISortedList</apiBaseInterface>
+               <apiBaseClassifier>org.as3collections.lists:UniqueList</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	           <codeph>UniqueSortedList</codeph> works as a wrapper for a <codeph>ISortedList</codeph> object.
+	 It does not allow duplicated elements in the collection.
+	 It stores the <codeph>wrapList</codeph> constructor's argument in the <codeph>wrappedList</codeph> variable.
+	 So every method call to this class is forwarded to the <codeph>wrappedList</codeph> object.
+	 The methods that need to be checked for duplication are previously validated before forward the call.
+	 No error is thrown by the validation of duplication.
+	 The calls that are forwarded to the <codeph>wrappedList</codeph> returns the return of the <codeph>wrappedList</codeph> call.
+	 <p>You can also create unique and typed sorted lists.
+	 See below the link "ListUtil.getUniqueTypedSortedList()".</p>
+	 
+	        </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.as3collections.lists:ArrayList">
+         <apiName>ArrayList</apiName>
+         <shortdesc>
+	 Resizable-array implementation of the IList interface.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>org.as3collections:AbstractList</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 Resizable-array implementation of the <codeph>IList</codeph> interface.
+	 Implements all optional list operations, and permits all elements, including <codeph>null</codeph>.
+	 <p>Each <codeph>ArrayList</codeph> instance has a capacity.
+	 The capacity is the size of the array used to store the elements in the list.
+	 It is always at least as large as the list size.
+	 As elements are added to an <codeph>ArrayList</codeph> object, its capacity grows automatically.</p>
+	           <p>In addition to implementing the <codeph>IList</codeph> interface, this class provides the <codeph>ensureCapacity</codeph> method to arbitrarily manipulate the size of the array (this usage is not common) that is used internally to store the elements.
+	 Check the examples at the bottom of the page for further information about usage.</p>
+	           <p>It's possible to create unique lists, typed lists and even unique typed lists.
+	 You just send the <codeph>ArrayList</codeph> object to the wrappers <codeph>UniqueList</codeph> or <codeph>TypedList</codeph> or uses the <codeph>ListUtil.getUniqueList</codeph>, <codeph>ListUtil.getTypedList</codeph> or <codeph>ListUtil.getUniqueTypedList</codeph>.</p>
+	           <p>This documentation is partially based in the <i>Java Collections Framework</i> JavaDoc documentation.
+	 For further information see <xref href="http://download.oracle.com/javase/6/docs/technotes/guides/collections/index.html"
+                     scope="external">Java Collections Framework</xref>
+            </p>
+	 
+	        </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.as3collections.lists:TypedSortedList">
+         <apiName>TypedSortedList</apiName>
+         <shortdesc>
+	 TypedSortedList works as a wrapper for a ISortedList object.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.as3collections:ISortedList</apiBaseInterface>
+               <apiBaseClassifier>org.as3collections.lists:TypedList</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	           <codeph>TypedSortedList</codeph> works as a wrapper for a <codeph>ISortedList</codeph> object.
+	 Since ActionScript 3.0 does not support typed arrays, <codeph>TypedSortedList</codeph> is a way to create typed lists.
+	 It stores the <codeph>wrapList</codeph> constructor's argument internaly.
+	 So every method call to this class is forwarded to the <codeph>wrappedList</codeph> object.
+	 The methods that need to be checked for the type of the elements are previously validated before forward the call.
+	 If the type of an element requested to be added to this list is incompatible with the type of the list a <codeph>org.as3coreaddendum.errors.ClassCastError</codeph> is thrown.
+	 The calls that are forwarded to the <codeph>wrappedList</codeph> returns the return of the <codeph>wrappedList</codeph> call.
+	 <p>
+               <codeph>TypedSortedList</codeph> does not allow <codeph>null</codeph> elements.</p>
+	           <p>You can also create unique and typed sorted lists.
+	 See below the link "ListUtil.getUniqueTypedSortedList()".</p>
+	 
+	        </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.as3collections.lists:SortedArrayList">
+         <apiName>SortedArrayList</apiName>
+         <shortdesc>
+	 A list that provides a total ordering on its elements.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.as3collections:ISortedList</apiBaseInterface>
+               <apiBaseClassifier>org.as3collections.lists:ArrayList</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 A list that provides a <i>total ordering</i> on its elements.
+	 The list is ordered according to the <i>natural ordering</i> of its elements, by a <i>IComparator</i> typically provided at sorted list creation time, or by the arguments provided to the <codeph>sort</codeph> or <codeph>sortOn</codeph> methods.
+	 <p>For each change that occurs the list is automatically reordered using <codeph>comparator</codeph> and <codeph>options</codeph>.
+	 If none was provided the default behavior of <codeph>sort</codeph> method is used.</p>
+	           <p>The user of this list may change their order at any time using the setters <codeph>comparator</codeph> and <codeph>options</codeph>, or by calling <codeph>sort</codeph> or <codeph>sortOn</codeph> methods and imposing other arguments to change the sort behaviour.</p>
+	           <p>It's possible to create unique sorted lists, typed sorted lists and even unique typed sorted lists.
+	 You just sends the <codeph>SortedArrayList</codeph> object to the wrappers <codeph>UniqueSortedList</codeph> or <codeph>TypedSortedList</codeph> or uses the <codeph>ListUtil.getUniqueSortedList</codeph>, <codeph>ListUtil.getTypedSortedList</codeph> or <codeph>ListUtil.getUniqueTypedSortedList</codeph>.</p>
+	           <p>This documentation is partially based in the <i>Java Collections Framework</i> JavaDoc documentation.
+	 For further information see <xref href="http://download.oracle.com/javase/6/docs/technotes/guides/collections/index.html"
+                     scope="external">Java Collections Framework</xref>
+            </p>
+	 
+	        </apiDesc>
+      </apiClassifier>
+   </apiPackage>
+   <apiPackage id="org.as3collections.maps">
+      <apiName>org.as3collections.maps</apiName>
+      <apiClassifier id="org.as3collections.maps:TypedMap">
+         <apiName>TypedMap</apiName>
+         <shortdesc>
+	 TypedMap works as a wrapper for a map.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.as3collections:IMap</apiBaseInterface>
+               <apiBaseClassifier>Object</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	           <codeph>TypedMap</codeph> works as a wrapper for a map.
+	 It stores the <codeph>wrapMap</codeph> constructor's argument in the <codeph>wrappedMap</codeph> variable.
+	 So every method call to this class is forwarded to the <codeph>wrappedMap</codeph> object.
+	 The methods that need to be checked for the type of the keys and values are previously validated with the <codeph>validateKeyType</codeph>, <codeph>validateValueType</codeph> or <codeph>validateMap</codeph> method before forward the call.
+	 If the type of a key or value requested to be inserted to this map is incompatible with the type of the map a <codeph>org.as3coreaddendum.errors.ClassCastError</codeph> is thrown.
+	 The calls that are forwarded to the <codeph>wrappedMap</codeph> returns the return of the <codeph>wrappedMap</codeph> call.
+	 <p>
+               <codeph>TypedMap</codeph> does not allow <codeph>null</codeph> keys or values.</p>
+	 
+	        </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.as3collections.maps:SortedArrayListMap">
+         <apiName>SortedArrayListMap</apiName>
+         <shortdesc>
+	 A map that provides a total ordering on its mappings.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.as3collections:ISortedMap</apiBaseInterface>
+               <apiBaseClassifier>org.as3collections.maps:ArrayListMap</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 A map that provides a <i>total ordering</i> on its mappings.
+	 The map is ordered according to the <i>natural ordering</i> of its keys or values, by a <i>IComparator</i> typically provided at sorted map creation time, or by the arguments provided to the <codeph>sort</codeph> or <codeph>sortOn</codeph> methods.
+	 <p>For each change that occurs the map is automatically ordered using the <codeph>comparator</codeph> and <codeph>options</codeph>.
+	 If none was provided the default behavior of the <codeph>sort</codeph> method is used.</p>
+	 The <codeph>sortBy</codeph> property defines whether the sorting will be made by <codeph>key</codeph> or <codeph>value</codeph>.
+	 <p>The user of this map may change their order at any time by calling the <codeph>sort</codeph> or <codeph>sortOn</codeph> method and imposing others arguments to change the sort behaviour.</p>
+	           <p>It's possible to create typed sorted maps.
+	 You just sends the <codeph>SortedArrayListMap</codeph> object to the wrapper <codeph>TypedSortedMap</codeph> or uses the <codeph>MapUtil.getTypedSortedMap</codeph>.</p>
+	 
+	        </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.as3collections.maps:HashMap">
+         <apiName>HashMap</apiName>
+         <shortdesc>
+	 Hash table based implementation of the IMap interface.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>org.as3collections:AbstractHashMap</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 Hash table based implementation of the <codeph>IMap</codeph> interface.
+	 This implementation provides all of the optional map operations, and permits <codeph>null</codeph> values and the <codeph>null</codeph> key.
+	 <p>This class makes no guarantees as to the order of the map.
+	 In particular, it does not guarantee that the order will remain constant over time.</p>
+	           <p>It's possible to create typed maps.
+	 You just sends the <codeph>HashMap</codeph> object to the wrapper <codeph>TypedMap</codeph> or uses the <codeph>MapUtil.getTypedMap</codeph>.</p>
+	 
+	        </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.as3collections.maps:ArrayListMap">
+         <apiName>ArrayListMap</apiName>
+         <shortdesc>
+	 Array based implementation of the IMap interface.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>org.as3collections:AbstractListMap</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 Array based implementation of the <codeph>IMap</codeph> interface.
+	 This implementation provides all of the optional map operations, and permits <codeph>null</codeph> values and the <codeph>null</codeph> key.
+	 <p>This class makes guarantees as to the order of the map.
+	 The order in which elements are stored is the order in which they were inserted.</p>
+	           <p>This class has great similarity to <codeph>ArrayList</codeph> class.
+	 In a way this class can be thought of as an <codeph>ArrayList</codeph> of mappings.</p>
+	           <p>It's possible to create typed list maps.
+	 You just sends the <codeph>ArrayListMap</codeph> object to the wrapper <codeph>TypedListMap</codeph> or uses the <codeph>MapUtil.getTypedListMap</codeph>.</p>
+	 
+	        </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.as3collections.maps:ReadOnlyArrayListMap">
+         <apiName>ReadOnlyArrayListMap</apiName>
+         <shortdesc>
+	 An ArrayListMap that doesn't allow modifications.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>org.as3collections:AbstractListMap</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 An <codeph>ArrayListMap</codeph> that doesn't allow modifications.
+	 It receives all the mappings by its constructor and can no longer be changed.
+	 All methods that change the map will throw an <codeph>UnsupportedOperationError</codeph>.
+	 
+	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.as3collections.maps:TypedSortedMap">
+         <apiName>TypedSortedMap</apiName>
+         <shortdesc>
+	 TypedSortedMap works as a wrapper for a map.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.as3collections:ISortedMap</apiBaseInterface>
+               <apiBaseClassifier>org.as3collections.maps:TypedListMap</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	           <codeph>TypedSortedMap</codeph> works as a wrapper for a map.
+	 It stores the <codeph>wrapMap</codeph> constructor's argument in the <codeph>wrappedMap</codeph> variable.
+	 So every method call to this class is forwarded to the <codeph>wrappedMap</codeph> object.
+	 The methods that need to be checked for the type of the keys and values are previously validated with the <codeph>validateKeyType</codeph>, <codeph>validateValueType</codeph> or <codeph>validateMap</codeph> method before forward the call.
+	 If the type of a key or value requested to be inserted to this map is incompatible with the type of the map a <codeph>org.as3coreaddendum.errors.ClassCastError</codeph> is thrown.
+	 The calls that are forwarded to the <codeph>wrappedMap</codeph> returns the return of the <codeph>wrappedMap</codeph> call.
+	 <p>
+               <codeph>TypedSortedMap</codeph> does not allow <codeph>null</codeph> keys or values.</p>
+	 
+	        </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.as3collections.maps:TypedListMap">
+         <apiName>TypedListMap</apiName>
+         <shortdesc>
+	 TypedSortedMap works as a wrapper for a map.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.as3collections:IListMap</apiBaseInterface>
+               <apiBaseClassifier>org.as3collections.maps:TypedMap</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	           <codeph>TypedSortedMap</codeph> works as a wrapper for a map.
+	 It stores the <codeph>wrapMap</codeph> constructor's argument in the <codeph>wrappedMap</codeph> variable.
+	 So every method call to this class is forwarded to the <codeph>wrappedMap</codeph> object.
+	 The methods that need to be checked for the type of the keys and values are previously validated with the <codeph>validateKeyType</codeph>, <codeph>validateValueType</codeph> or <codeph>validateMap</codeph> method before forward the call.
+	 If the type of a key or value requested to be inserted to this map is incompatible with the type of the map a <codeph>org.as3coreaddendum.errors.ClassCastError</codeph> is thrown.
+	 The calls that are forwarded to the <codeph>wrappedMap</codeph> returns the return of the <codeph>wrappedMap</codeph> call.
+	 <p>
+               <codeph>TypedSortedMap</codeph> does not allow <codeph>null</codeph> keys or values.</p>
+	 
+	        </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.as3collections.maps:ReadOnlyHashMap">
+         <apiName>ReadOnlyHashMap</apiName>
+         <shortdesc>
+	 A HashMap that doesn't allow modifications.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>org.as3collections:AbstractHashMap</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 A <codeph>HashMap</codeph> that doesn't allow modifications.
+	 It receives all the mappings by its constructor and can no longer be changed.
+	 All methods that change the map will throw an <codeph>UnsupportedOperationError</codeph>.
+	 
+	 </apiDesc>
+      </apiClassifier>
+   </apiPackage>
+   <apiPackage id="org.as3collections.queues">
+      <apiName>org.as3collections.queues</apiName>
+      <apiClassifier id="org.as3collections.queues:TypedQueue">
+         <apiName>TypedQueue</apiName>
+         <shortdesc>
+	 TypedQueue works as a wrapper for a queue.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.as3collections:IQueue</apiBaseInterface>
+               <apiBaseClassifier>org.as3collections:TypedCollection</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	           <codeph>TypedQueue</codeph> works as a wrapper for a queue.
+	 Since ActionScript 3.0 does not support typed arrays, <codeph>TypedQueue</codeph> is a way to create typed queues.
+	 It stores the <codeph>wrapQueue</codeph> constructor's argument in the <codeph>wrappedQueue</codeph> variable.
+	 So every method call to this class is forwarded to the <codeph>wrappedQueue</codeph> object.
+	 The methods that need to be checked for the type of the elements are previously validated with the <codeph>validateType</codeph> or <codeph>validateCollection</codeph> method before forward the call.
+	 If the type of an element requested to be added to this list is incompatible with the type of the list, the method <codeph>offer</codeph> returns <codeph>false</codeph> and the method <codeph>add</codeph> throws <codeph>org.as3coreaddendum.errors.ClassCastError</codeph>.
+	 The calls that are forwarded to the <codeph>wrappedQueue</codeph> returns the return of the <codeph>wrappedQueue</codeph> call.
+	 <p>
+               <codeph>TypedQueue</codeph> does not allow <codeph>null</codeph> elements.</p>
+	           <p>You can also create unique and typed queues. See below the link "QueueUtil.getUniqueTypedQueue()".</p>
+	 
+	        </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.as3collections.queues:UniqueQueue">
+         <apiName>UniqueQueue</apiName>
+         <shortdesc>
+	 UniqueQueue works as a wrapper for a queue.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.as3collections:IQueue</apiBaseInterface>
+               <apiBaseClassifier>org.as3collections:UniqueCollection</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	           <codeph>UniqueQueue</codeph> works as a wrapper for a queue.
+	 It does not allow duplicated elements in the queue.
+	 It stores the <codeph>wrapQueue</codeph> constructor's argument in the <codeph>wrappedQueue</codeph> variable.
+	 So every method call to this class is forwarded to the <codeph>wrappedQueue</codeph> object.
+	 The methods that need to be checked for duplication are previously validated before forward the call.
+	 The calls that are forwarded to the <codeph>wrappedQueue</codeph> returns the return of the <codeph>wrappedQueue</codeph> call.
+	 <p>You can also create unique and typed queues. See below the link "QueueUtil.getUniqueTypedQueue()".</p>
+	 
+	        </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.as3collections.queues:PriorityQueue">
+         <apiName>PriorityQueue</apiName>
+         <shortdesc>
+	 This queue uses a org.as3coreaddendum.system.comparators.PriorityComparator object to sort the elements.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>org.as3collections.queues:SortedQueue</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 This queue uses a <codeph>org.as3coreaddendum.system.comparators.PriorityComparator</codeph> object to sort the elements.
+	 All elements must implement the <codeph>org.as3coreaddendum.system.IPriority</codeph> interface, otherwise a <codeph>org.as3coreaddendum.errors.ClassCastError</codeph> is thrown.
+	 <p>This queue also adds an event listener on elements to <codeph>org.as3coreaddendum.events.PriorityEvent</codeph> (if elements implement <codeph>flash.events.IEventDispatcher</codeph>).
+	 Thus this queue keeps itself automatically sorted if its elements dispatch a <codeph>org.as3coreaddendum.events.PriorityEvent</codeph> when its priority changes.</p>
+	 
+	        </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.as3collections.queues:LinearQueue">
+         <apiName>LinearQueue</apiName>
+         <shortdesc>
+	 LinearQueue orders elements in a FIFO (first-in-first-out) manner.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>org.as3collections:AbstractQueue</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	           <codeph>LinearQueue</codeph> orders elements in a FIFO (first-in-first-out) manner.
+	 <p>
+               <codeph>LinearQueue</codeph> does not allow <codeph>null</codeph> elements.</p>
+	 
+	        </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.as3collections.queues:IndexQueue">
+         <apiName>IndexQueue</apiName>
+         <shortdesc>
+	 This queue uses a org.as3coreaddendum.system.comparators.IndexComparator object to sort the elements.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>org.as3collections.queues:SortedQueue</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 This queue uses a <codeph>org.as3coreaddendum.system.comparators.IndexComparator</codeph> object to sort the elements.
+	 All elements must implement the <codeph>org.as3coreaddendum.system.IIndexable</codeph> interface, otherwise a <codeph>org.as3coreaddendum.errors.ClassCastError</codeph> is thrown.
+	 <p>This queue also adds an event listener on elements to <codeph>org.as3coreaddendum.events.IndexEvent</codeph> (if elements implement <codeph>flash.events.IEventDispatcher</codeph>).
+	 Thus this queue keeps itself automatically sorted if its elements dispatch a <codeph>org.as3coreaddendum.events.IndexEvent</codeph> when its index changes.</p>
+	 
+	        </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.as3collections.queues:PriorityIndexQueue">
+         <apiName>PriorityIndexQueue</apiName>
+         <shortdesc>
+	 This queue uses an org.as3coreaddendum.system.comparators.PriorityIndexComparator object to sort the elements.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>org.as3collections.queues:SortedQueue</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 This queue uses an <codeph>org.as3coreaddendum.system.comparators.PriorityIndexComparator</codeph> object to sort the elements.
+	 All elements must implement the <codeph>org.as3coreaddendum.system.IPriority</codeph> and <codeph>org.as3coreaddendum.system.IIndexable</codeph> interfaces, otherwise a <codeph>org.as3coreaddendum.errors.ClassCastError</codeph> is thrown.
+	 <p>This queue is useful when you want to sort the objects by priority, but if the priority of two objects are equal, the <codeph>index</codeph> property of the objects are compared to decide wich object comes before.</p>
+	           <p>This queue also adds an event listener on elements to <codeph>org.as3coreaddendum.events.PriorityEvent</codeph> and <codeph>org.as3coreaddendum.events.IndexEvent</codeph> (if elements implement <codeph>flash.events.IEventDispatcher</codeph>).
+	 Thus this queue keeps itself automatically sorted if its elements dispatch a <codeph>org.as3coreaddendum.events.PriorityEvent</codeph> or <codeph>org.as3coreaddendum.events.IndexEvent</codeph> when its priority or index changes.</p>
+	 
+	        </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.as3collections.queues:SortedQueue">
+         <apiName>SortedQueue</apiName>
+         <shortdesc>
+	 A queue that provides a total ordering on its elements.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.as3collections:ISortedQueue</apiBaseInterface>
+               <apiBaseClassifier>org.as3collections.queues:LinearQueue</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 A queue that provides a <i>total ordering</i> on its elements.
+	 The queue is ordered according to the <i>natural ordering</i> of its elements, by a <i>IComparator</i> typically provided at sorted queue creation time, or by the arguments provided to the <codeph>sort</codeph> or <codeph>sortOn</codeph> methods.
+	 <p>For each change that occurs the queue is automatically ordered using the <codeph>comparator</codeph> and <codeph>options</codeph>.
+	 If none was provided the default behavior of the <codeph>sort</codeph> method is used.</p>
+	           <p>The user of this queue may change their order at any time by calling the <codeph>sort</codeph> or <codeph>sortOn</codeph> method and imposing others arguments to change the sort behaviour.</p>
+	           <p>It's possible to create unique sorted queues, typed sorted queues and even unique typed sorted queues.
+	 You just sends the <codeph>SortedQueue</codeph> object to the wrappers <codeph>UniqueQueue</codeph> or <codeph>TypedQueue</codeph> or uses the <codeph>QueueUtil.getUniqueTypedQueue</codeph>.
+	 But there's a problem here: the return type will be <codeph>UniqueQueue</codeph> or <codeph>TypedQueue</codeph>.
+	 Thus you will can no longer use the <codeph>sort</codeph> and <codeph>sortOn</codeph> methods directly.
+	 The wrapped <codeph>SortedQueue</codeph> will be only automatically ordered, with the provided <codeph>comparator</codeph> and <codeph>options</codeph> constructor's arguments.
+	 Check the examples at the bottom of the page.</p>
+	 
+	        </apiDesc>
+      </apiClassifier>
+   </apiPackage>
+   <apiPackage id="org.as3collections.utils">
+      <apiName>org.as3collections.utils</apiName>
+      <apiClassifier id="org.as3collections.utils:ListUtil">
+         <apiName>ListUtil</apiName>
+         <shortdesc>
+	 A utility class to work with implementations of the IList interface.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>Object</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 A utility class to work with implementations of the <codeph>IList</codeph> interface.
+	 
+	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.as3collections.utils:QueueUtil">
+         <apiName>QueueUtil</apiName>
+         <shortdesc>
+	 A utility class to work with implementations of the IQueue interface.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>Object</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 A utility class to work with implementations of the <codeph>IQueue</codeph> interface.
+	 
+	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.as3collections.utils:MapUtil">
+         <apiName>MapUtil</apiName>
+         <shortdesc>
+	 A utility class to work with implementations of the IMap interface.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>Object</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 A utility class to work with implementations of the <codeph>IMap</codeph> interface.
+	 
+	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.as3collections.utils:CollectionUtil">
+         <apiName>CollectionUtil</apiName>
+         <shortdesc>
+	 A utility class to work with implementations of the ICollection interface.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>Object</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 A utility class to work with implementations of the <codeph>ICollection</codeph> interface.
+	 <p>
+               <codeph>CollectionUtil</codeph> handles <codeph>null</codeph> input collections quietly in almost all methods. When not, it's documented in the method.
+	 That is to say that a <codeph>null</codeph> input will not thrown an error in almost all methods.</p>
+	 
+	        </apiDesc>
+      </apiClassifier>
+   </apiPackage>
+   <apiPackage id="org.as3collections">
+      <apiName>org.as3collections</apiName>
+      <apiClassifier id="org.as3collections:AbstractList">
+         <apiName>AbstractList</apiName>
+         <shortdesc>
+	 This class provides a skeletal implementation of the IList interface, to minimize the effort required to implement this interface.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.as3collections:IList</apiBaseInterface>
+               <apiBaseClassifier>org.as3collections:AbstractArrayCollection</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 This class provides a skeletal implementation of the <codeph>IList</codeph> interface, to minimize the effort required to implement this interface.
+	 <p>This is an abstract class and shouldn't be instantiated directly.</p>
+	           <p>The documentation for each non-abstract method in this class describes its implementation in detail.
+	 Each of these methods may be overridden if the collection being implemented admits a more efficient implementation.</p>
+	           <p>This documentation is partially based in the <i>Java Collections Framework</i> JavaDoc documentation.
+	 For further information see <xref href="http://download.oracle.com/javase/6/docs/technotes/guides/collections/index.html"
+                     scope="external">Java Collections Framework</xref>
+            </p> 
+	 
+	        </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.as3collections:TypedCollection">
+         <apiName>TypedCollection</apiName>
+         <shortdesc>
+	 TypedCollection works as a wrapper for a collection.
+	 Since ActionScript 3.0 does not support typed arrays, TypedCollection is a way to create typed collections.
+	 It stores the wrapCollection constructor's argument internally.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.as3collections:ICollection</apiBaseInterface>
+               <apiBaseInterface>org.as3coreaddendum.system:ITypeable</apiBaseInterface>
+               <apiBaseClassifier>Object</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	           <p>
+               <codeph>TypedCollection</codeph> works as a wrapper for a collection.</p>
+	           <p>Since ActionScript 3.0 does not support typed arrays, <codeph>TypedCollection</codeph> is a way to create typed collections.</p>
+	           <p>It stores the <codeph>wrapCollection</codeph> constructor's argument internally.
+	 So every method call to this class is forwarded to the <codeph>wrappedCollection</codeph> object.
+	 The methods that need to be checked for the type of the elements are previously validated with the <codeph>validateType</codeph> or <codeph>validateCollection</codeph> method before forward the call.
+	 If the type of an element requested to be added to this collection is incompatible with the type of the collection a <codeph>org.as3coreaddendum.errors.ClassCastError</codeph> is thrown.
+	 The calls that are forwarded to the <codeph>wrappedCollection</codeph> returns the return of the <codeph>wrappedCollection</codeph> call.</p>
+	           <p>The <codeph>TypedCollection.type</codeph> setter is not supported and will thrown an <codeph>UnsupportedOperationError</codeph> if used.</p>
+	 
+	        </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.as3collections:IMapEntry">
+         <apiName>IMapEntry</apiName>
+         <shortdesc>
+	 A map entry (key-value pair).</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiInterface/>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.as3coreaddendum.system:ICloneable</apiBaseInterface>
+               <apiBaseInterface>org.as3coreaddendum.system:IEquatable</apiBaseInterface>
+               <apiBaseClassifier/>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 A map entry (key-value pair). The <codeph>IMap.entryList</codeph> method returns a collection-view of the map, whose elements type are of this class.
+	 
+	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.as3collections:MapEntry">
+         <apiName>MapEntry</apiName>
+         <shortdesc>
+	 An entry maintaining a key and a value.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.as3collections:IMapEntry</apiBaseInterface>
+               <apiBaseClassifier>Object</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 An entry maintaining a key and a value.
+	 
+	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.as3collections:IListIterator">
+         <apiName>IListIterator</apiName>
+         <shortdesc>
+	 An iterator for lists that allows the programmer to traverse the list in either direction, modify the list during iteration, and obtain the iterator's current position in the list.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiInterface/>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.as3collections:IIterator</apiBaseInterface>
+               <apiBaseClassifier/>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 An iterator for lists that allows the programmer to traverse the list in either direction, modify the list during iteration, and obtain the iterator's current position in the list.
+	 <p>Note that the <codeph>remove</codeph> and <codeph>set</codeph> methods are defined to operate on the last element returned by a call to <codeph>next</codeph> or <codeph>previous</codeph>.</p>
+	 
+	        </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.as3collections:ISortedMap">
+         <apiName>ISortedMap</apiName>
+         <shortdesc>
+	 A map that provides a total ordering on its mappings, sorting by keys or values.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiInterface/>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.as3coreaddendum.system:ISortable</apiBaseInterface>
+               <apiBaseInterface>org.as3collections:IListMap</apiBaseInterface>
+               <apiBaseClassifier/>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 A map that provides a <i>total ordering</i> on its mappings, sorting by keys or values.
+	 The map is ordered according to the <i>natural ordering</i> of its keys or values, by a <i>IComparator</i> typically provided at sorted map creation time, or by the arguments provided to the <codeph>sort</codeph> or <codeph>sortOn</codeph> methods.
+	 The <codeph>sortBy</codeph> property defines whether the sorting will be made by <codeph>key</codeph> or <codeph>value</codeph>.
+	 
+	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.as3collections:UniqueCollection">
+         <apiName>UniqueCollection</apiName>
+         <shortdesc>
+	 UniqueCollection works as a wrapper for a collection.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.as3collections:ICollection</apiBaseInterface>
+               <apiBaseClassifier>Object</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	           <codeph>UniqueCollection</codeph> works as a wrapper for a collection.
+	 <p>It does not allow duplicate elements in the collection.</p>
+	           <p>It stores the <codeph>wrapCollection</codeph> constructor's argument internally.
+	 So every method call to this class is forwarded to the <codeph>wrappedCollection</codeph> object.
+	 The methods that need to be checked for duplication are previously validated before forward the call.
+	 No error is thrown by the validation of duplication.
+	 The calls that are forwarded to the <codeph>wrappedCollection</codeph> returns the return of the <codeph>wrappedCollection</codeph> call.</p>
+	 
+	        </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.as3collections:ISortedQueue">
+         <apiName>ISortedQueue</apiName>
+         <shortdesc>
+	 A queue that provides a total ordering on its elements.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiInterface/>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.as3collections:IQueue</apiBaseInterface>
+               <apiBaseInterface>org.as3coreaddendum.system:ISortable</apiBaseInterface>
+               <apiBaseClassifier/>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 A queue that provides a <i>total ordering</i> on its elements.
+	 The queue is ordered according to the <i>natural ordering</i> of its elements, by a <i>IComparator</i> typically provided at sorted queue creation time, or by the arguments provided to the <codeph>sort</codeph> or <codeph>sortOn</codeph> methods.
+	 
+	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.as3collections:IMap">
+         <apiName>IMap</apiName>
+         <shortdesc>
+	 An object that maps keys to values.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiInterface/>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.as3collections:IIterable</apiBaseInterface>
+               <apiBaseInterface>org.as3coreaddendum.system:ICloneable</apiBaseInterface>
+               <apiBaseInterface>org.as3coreaddendum.system:IEquatable</apiBaseInterface>
+               <apiBaseClassifier/>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 An object that maps keys to values.
+	 A map cannot contain duplicate keys, each key can map to at most one value.
+	 <p>This interface provides three collection views, which allow a map's contents to be viewed as a list of keys, a list of values, or a list of key-value mappings (<codeph>IMapEntry</codeph>).
+	 Some map implementations, like the <codeph>ArrayListMap</codeph> class, make specific guarantees as to their order; others, like the <codeph>HashMap</codeph> class, do not.</p>
+	           <p>These views, plus <codeph>IMap.iterator()</codeph>, enable various forms of iteration over the keys and values of the map.
+	 To iterate over the keys/values the user can use <codeph>IMap.iterator()</codeph> or <codeph>IMap.entryList().iterator()</codeph>.
+	 To iterate over the keys the user can use <codeph>IMap.getKeys().iterator()</codeph>.
+	 To iterate over the values the user can use <codeph>IMap.getValues().iterator()</codeph>.</p>
+	           <p>Some map implementations have restrictions on the keys and values they may contain.
+	 For example, some implementations prohibit <codeph>null</codeph> keys and values, and some have restrictions on the types of their keys or values.</p>
+	           <p>The methods that modify the map are specified to throw <codeph>org.as3coreaddendum.errors.UnsupportedOperationError</codeph> if the map does not support the operation.
+	 These methods are documented as "optional operation".</p>
+	           <p>This documentation is partially based in the <i>Java Collections Framework</i> JavaDoc documentation.
+	 For further information see <xref href="http://download.oracle.com/javase/6/docs/technotes/guides/collections/index.html"
+                     scope="external">Java Collections Framework</xref>
+            </p>
+	 
+	        </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.as3collections:IIterator">
+         <apiName>IIterator</apiName>
+         <shortdesc>
+	 An iterator over a collection.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiInterface/>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier/>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 An iterator over a collection.
+	 
+	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.as3collections:IQueue">
+         <apiName>IQueue</apiName>
+         <shortdesc>
+	 A collection designed for holding elements prior to processing.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiInterface/>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.as3collections:ICollection</apiBaseInterface>
+               <apiBaseClassifier/>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 A collection designed for holding elements prior to processing.
+	 Besides basic <codeph>ICollection</codeph> operations, queues provide additional insertion, extraction, and inspection operations.
+	 Each of these methods exists in two forms: one throws an error if the operation fails, the other returns a special value (either <codeph>null</codeph> or <codeph>false</codeph>, depending on the operation).
+	 <p>
+	              <adobetable class="innertable">
+	 
+	 
+	 
+	 
+	                 <tgroup cols="3">
+                     <thead>
+                        <row>
+                           <entry/>
+                           <entry>
+                              <i>Throws error</i>
+                           </entry>
+                           <entry>
+                              <i>Returns special value</i>
+                           </entry>
+                        </row>
+                     </thead>
+                     <tbody>
+                        <row>
+	                          <entry>
+                              <b>Insert</b>
+                           </entry>
+	                          <entry>
+                              <codeph>add</codeph>
+                           </entry>
+	                          <entry>
+                              <codeph>offer</codeph>
+                           </entry>
+	                       </row>
+                        <row>
+	                          <entry>
+                              <b>Remove</b>
+                           </entry>
+	                          <entry>
+                              <codeph>dequeue</codeph>
+                           </entry>
+	                          <entry>
+                              <codeph>poll</codeph>
+                           </entry>
+	                       </row>
+                        <row>
+	                          <entry>
+                              <b>Examine</b>
+                           </entry>
+	                          <entry>
+                              <codeph>element</codeph>
+                           </entry>
+	                          <entry>
+                              <codeph>peek</codeph>
+                           </entry>
+	                       </row>
+                     </tbody>
+                  </tgroup>
+               </adobetable>
+	           </p>
+	           <p>Queues typically, but do not necessarily, order elements in a FIFO (first-in-first-out) manner.
+	 Among the exceptions are priority queues, which order elements according to a supplied comparator, or the elements' natural ordering, and LIFO queues (or stacks) which order the elements LIFO (last-in-first-out).
+	 Whatever the ordering used, the head of the queue is that element which would be removed by a call to <codeph>dequeue</codeph> or <codeph>poll</codeph>.
+	 In a FIFO queue, all new elements are inserted at the <i>tail</i> of the queue.
+	 Other kinds of queues may use different placement rules.
+	 Every <codeph>IQueue</codeph> implementation must specify its ordering properties.</p>
+	           <p>The <codeph>offer</codeph> method inserts an element if possible, otherwise returning <codeph>false</codeph>.
+	 This differs from the <codeph>add</codeph> method, which can fail to add an element only by throwing an error.
+	 The <codeph>offer</codeph> method is designed for use when failure is a normal, rather than exceptional occurrence.</p>
+	           <p>The <codeph>dequeue</codeph> and <codeph>poll</codeph> methods remove and return the head of the queue.
+	 Exactly which element is removed from the queue is a function of the queue's ordering policy, which differs from implementation to implementation.
+	 The <codeph>dequeue</codeph> and <codeph>poll</codeph> methods differ only in their behavior when the queue is empty: the <codeph>dequeue</codeph> method throws an error, while the <codeph>poll</codeph> method returns <codeph>null</codeph>.</p> 
+	           <p>The <codeph>element</codeph> and <codeph>peek</codeph> methods return, but do not remove, the head of the queue.
+	 The <codeph>element</codeph> and <codeph>peek</codeph> methods differ only in their behavior when the queue is empty: the <codeph>element</codeph> method throws an error, while the <codeph>peek</codeph> method returns null.</p>
+	           <p>
+               <codeph>IQueue</codeph> implementations generally do not allow insertion of <codeph>null</codeph> elements</p>
+	 
+	        </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.as3collections:AbstractArrayCollection">
+         <apiName>AbstractArrayCollection</apiName>
+         <shortdesc>
+	 This class provides a skeletal implementation of the ICollection interface, to minimize the effort required to implement this interface.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.as3collections:ICollection</apiBaseInterface>
+               <apiBaseClassifier>Object</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 This class provides a skeletal implementation of the <codeph>ICollection</codeph> interface, to minimize the effort required to implement this interface. 
+	 <p>This is an abstract class and shouldn't be instantiated directly.</p>
+	           <p>The documentation for each non-abstract method in this class describes its implementation in detail.
+	 Each of these methods may be overridden if the collection being implemented admits a more efficient implementation.</p>
+	           <p>This class maintains a native <codeph>Array</codeph> object as its source.</p>
+	           <p>
+               <b>IMPORTANT:</b>
+            </p>
+	           <p>This class implements equality through <codeph>org.as3coreaddendum.system.IEquatable</codeph> interface in the <codeph>equals</codeph> method and in all methods that compares the elements inside this collection (i.e. <codeph>contains</codeph>, <codeph>containsAll</codeph>, <codeph>remove</codeph>, <codeph>removeAll</codeph> and <codeph>retainAll</codeph>).</p>
+	           <p>In order to this collection uses the <codeph>equals</codeph> method of its elements in comparisons (rather than default '==' operator), <b>all elements in this collection must implement the</b> 
+               <codeph>org.as3coreaddendum.system.IEquatable</codeph> 
+               <b>interface and also the supplied element.</b>
+            </p>
+	           <p>For example:</p>
+	           <p>myCollection.contains(myElement);</p>
+	           <p>All elements inside <codeph>myCollection</codeph>, and <codeph>myElement</codeph>, must implement the <codeph>org.as3coreaddendum.system.IEquatable</codeph> interface so that <codeph>equals</codeph> method of each element can be used in the comparison.
+	 Otherwise '==' operator is used.</p>
+	           <p>All subclasses of this class <i>must</i> conform with this behavior.</p>
+	           <p>This documentation is partially based in the <i>Java Collections Framework</i> JavaDoc documentation.
+	 For further information see <xref href="http://download.oracle.com/javase/6/docs/technotes/guides/collections/index.html"
+                     scope="external">Java Collections Framework</xref>
+            </p>
+	 
+	        </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.as3collections:SortMapBy">
+         <apiName>SortMapBy</apiName>
+         <shortdesc>
+	 The enumeration class that defines the acceptable values for sort maps by keys or values.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>org.as3coreaddendum.system:Enum</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 The enumeration class that defines the acceptable values for sort maps by keys or values.
+	 <p>This is a type-safe enumeration class, which means there is no possibility of creating instances externally.
+	 All acceptable values will be created automaticaly by this class internaly, through the constants.</p>
+	 
+	        </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.as3collections:AbstractListMap">
+         <apiName>AbstractListMap</apiName>
+         <shortdesc>
+	 This class provides a skeletal implementation of the IListMap interface, to minimize the effort required to implement this interface.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.as3collections:IListMap</apiBaseInterface>
+               <apiBaseClassifier>Object</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 This class provides a skeletal implementation of the <codeph>IListMap</codeph> interface, to minimize the effort required to implement this interface.
+	 <p>This class maintains two <codeph>ArrayList</codeph> objects as its source, one for <codeph>keys</codeph> and one for <codeph>values</codeph>.</p>
+	           <p>This is an abstract class and shouldn't be instantiated directly.</p>
+	           <p>This class makes guarantees as to the order of the map.
+	 The order in which elements are stored is the order in which they were inserted.</p>
+	           <p>The documentation for each non-abstract method in this class describes its implementation in detail.
+	 Each of these methods may be overridden if the map being implemented admits a more efficient implementation.</p>
+	           <p>
+               <b>IMPORTANT:</b>
+            </p>
+	           <p>This class implements equality through <codeph>org.as3coreaddendum.system.IEquatable</codeph> interface in the <codeph>equals</codeph> method and in all methods that compares the elements inside this collection (i.e. <codeph>containsKey</codeph>, <codeph>containsValue</codeph>, <codeph>put</codeph>, <codeph>remove</codeph>, <codeph>removeAll</codeph> and <codeph>retainAll</codeph>).</p>
+	           <p>In order to this map uses the <codeph>equals</codeph> method of its keys and/or values in comparisons (rather than default '==' operator), <b>all keys and/or values in this map must implement the</b> 
+               <codeph>org.as3coreaddendum.system.IEquatable</codeph> 
+               <b>interface and also the supplied key and/or value.</b>
+            </p>
+	           <p>For example:</p>
+	           <p>myMap.containsKey(myKey);</p>
+	           <p>All keys (but in this case only keys) inside <codeph>myMap</codeph>, and <codeph>myKey</codeph>, must implement the <codeph>org.as3coreaddendum.system.IEquatable</codeph> interface so that <codeph>equals</codeph> method of each key can be used in the comparison.
+	 Otherwise '==' operator is used. The same is true for values.
+	 The use of equality for keys and values are independent.
+	 It's possible to use only keys that implement <codeph>IEquatable</codeph>, only values, both, or none.
+	 This usage varies according to application needs.</p>
+	           <p>All subclasses of this class <i>must</i> conform with this behavior.</p>
+	 
+	        </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.as3collections:IList">
+         <apiName>IList</apiName>
+         <shortdesc>
+	 An ordered collection.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiInterface/>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.as3collections:ICollection</apiBaseInterface>
+               <apiBaseClassifier/>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 An ordered collection.
+	 The user of this interface has precise control over where in the list each element is inserted.
+	 The user can access elements by their integer index (position in the list), and search for elements in the list.
+	 <p>Lists typically allow duplicate elements and multiple <codeph>null</codeph> elements if they allow <codeph>null</codeph> elements at all.
+	 But there are lists that prohibits duplicates and/or <codeph>null</codeph> elements, by throwing runtime errors when the user attempts to insert them.</p>
+	           <p>The <codeph>IList</codeph> interface provides the special <codeph>IListIterator</codeph> iterator, that allows element insertion and replacement, and bidirectional access in addition to the normal operations that the <codeph>IIterator</codeph> interface provides.
+	 The <codeph>listIterator()</codeph> method is provided to obtain a <codeph>IListIterator</codeph> implementation that may start at a specified position in the list.</p>
+	           <p>The methods that modify the list are specified to throw <codeph>org.as3coreaddendum.errors.UnsupportedOperationError</codeph> if the list does not support the operation.
+	 These methods are documented as "optional operation".</p>
+	           <p>This documentation is partially based in the <i>Java Collections Framework</i> JavaDoc documentation.
+	 For further information see <xref href="http://download.oracle.com/javase/6/docs/technotes/guides/collections/index.html"
+                     scope="external">Java Collections Framework</xref>
+            </p>
+	 
+	        </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.as3collections:AbstractQueue">
+         <apiName>AbstractQueue</apiName>
+         <shortdesc>
+	 This class provides skeletal implementations of some IQueue operations.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.as3collections:IQueue</apiBaseInterface>
+               <apiBaseClassifier>org.as3collections:AbstractArrayCollection</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 This class provides skeletal implementations of some <codeph>IQueue</codeph> operations.
+	 The implementations in this class are appropriate when the base implementation does not allow <codeph>null</codeph> elements.
+	 Methods <codeph>add</codeph>, <codeph>dequeue</codeph>, and <codeph>element</codeph> are based on <codeph>offer</codeph>, <codeph>poll</codeph>, and <codeph>peek</codeph>, respectively but throw errors instead of indicating failure via <codeph>false</codeph> or <codeph>null</codeph> returns. 
+	 <p>An <codeph>IQueue</codeph> implementation that extends this class must minimally define a method <codeph>offer</codeph> which does not permit insertion of <codeph>null</codeph> elements, along with methods <codeph>peek</codeph>, <codeph>poll</codeph>, <codeph>ICollection.iterator</codeph> supporting <codeph>IIterator.remove</codeph> and <codeph>clone</codeph>.
+	 Typically, additional methods will be overridden as well.
+	 If these requirements cannot be met, consider instead subclassing <codeph>AbstractArrayCollection</codeph>.</p>
+	 
+	        </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.as3collections:IIterable">
+         <apiName>IIterable</apiName>
+         <shortdesc>
+	 Implementing this interface allows an object to be iterable.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiInterface/>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier/>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 Implementing this interface allows an object to be iterable.
+	 
+	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.as3collections:IListMapIterator">
+         <apiName>IListMapIterator</apiName>
+         <shortdesc>
+	 An iterator for maps that allows the programmer to traverse the map in either direction, modify the map during iteration, and obtain the iterator's current position in the map.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiInterface/>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.as3collections:IIterator</apiBaseInterface>
+               <apiBaseClassifier/>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 An iterator for maps that allows the programmer to traverse the map in either direction, modify the map during iteration, and obtain the iterator's current position in the map.
+	 <p>Note that the <codeph>remove</codeph> and <codeph>set</codeph> methods are defined to operate on the last mapping returned by a call to <codeph>next</codeph> or <codeph>previous</codeph>.</p>
+	 
+	        </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.as3collections:ICollection">
+         <apiName>ICollection</apiName>
+         <shortdesc>
+	 The root interface in the collection hierarchy.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiInterface/>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.as3collections:IIterable</apiBaseInterface>
+               <apiBaseInterface>org.as3coreaddendum.system:ICloneable</apiBaseInterface>
+               <apiBaseInterface>org.as3coreaddendum.system:IEquatable</apiBaseInterface>
+               <apiBaseClassifier/>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 The root interface in the <i>collection hierarchy</i>.
+	 A collection represents a group of objects, known as its <i>elements</i>.
+	 <p>Some collections allow duplicate elements and others do not. Some are ordered and others unordered.</p>
+	           <p>This interface is typically used to pass collections around and manipulate them where maximum generality is desired.</p>
+	           <p>The methods that modify the collection are specified to throw org.as3coreaddendum.errors.UnsupportedOperationError if the collection does not support the operation.
+	 These methods are documented as "optional operation".</p>
+	           <p>This documentation is partially based in the <i>Java Collections Framework</i> JavaDoc documentation.
+	 For further information see <xref href="http://download.oracle.com/javase/6/docs/technotes/guides/collections/index.html"
+                     scope="external">Java Collections Framework</xref>
+            </p>
+	 
+	        </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.as3collections:IListMap">
+         <apiName>IListMap</apiName>
+         <shortdesc>
+	 An ordered map.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiInterface/>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.as3collections:IMap</apiBaseInterface>
+               <apiBaseClassifier/>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 An ordered map.
+	 The user of this interface has precise control over where in the map each mapping is inserted.
+	 The user can access mappings by their integer index (position in the map), and search for mappings in the map.
+	 <p>The <codeph>IListMap</codeph> interface provides the special <codeph>IListMapIterator</codeph> iterator, that allows mapping insertion and replacement, and bidirectional access in addition to the normal operations that the <codeph>IIterator</codeph> interface provides.
+	 The <codeph>listMapIterator()</codeph> method is provided to obtain a <codeph>IListMapIterator</codeph> implementation that may start at a specified position in the map.</p>
+	           <p>This interface has the purpose to, in certain degree, unify <codeph>IList</codeph> and <codeph>IMap</codeph> interfaces.</p>
+	           <p>The methods that modify the map are specified to throw <codeph>org.as3coreaddendum.errors.UnsupportedOperationError</codeph> if the map does not support the operation.
+	 These methods are documented as "optional operation".</p>
+	 
+	        </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.as3collections:AbstractHashMap">
+         <apiName>AbstractHashMap</apiName>
+         <shortdesc>
+	 This class provides a skeletal hash table based implementation of the IMap interface, to minimize the effort required to implement this interface.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.as3collections:IMap</apiBaseInterface>
+               <apiBaseClassifier>Object</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 This class provides a skeletal hash table based implementation of the <codeph>IMap</codeph> interface, to minimize the effort required to implement this interface.
+	 <p>This is an abstract class and shouldn't be instantiated directly.</p>
+	           <p>This class maintains a native <codeph>flash.utils.Dictionary</codeph> object as its source.</p>
+	           <p>This class makes no guarantees as to the order of the map.
+	 In particular, it does not guarantee that the order will remain constant over time.</p>
+	           <p>The documentation for each non-abstract method in this class describes its implementation in detail.
+	 Each of these methods may be overridden if the map being implemented admits a more efficient implementation.</p>
+	           <p>
+               <b>IMPORTANT:</b>
+            </p>
+	           <p>This class implements equality through <codeph>org.as3coreaddendum.system.IEquatable</codeph> interface in the <codeph>equals</codeph> method and in all methods that compares the elements inside this collection (i.e. <codeph>containsKey</codeph>, <codeph>containsValue</codeph>, <codeph>put</codeph>, <codeph>remove</codeph>, <codeph>removeAll</codeph> and <codeph>retainAll</codeph>).</p>
+	           <p>In order to this map uses the <codeph>equals</codeph> method of its keys and/or values in comparisons (rather than default '==' operator), <b>all keys and/or values in this map must implement the</b> 
+               <codeph>org.as3coreaddendum.system.IEquatable</codeph> 
+               <b>interface and also the supplied key and/or value.</b>
+            </p>
+	           <p>For example:</p>
+	           <p>myMap.containsKey(myKey);</p>
+	           <p>All keys (but in this case only keys) inside <codeph>myMap</codeph>, and <codeph>myKey</codeph>, must implement the <codeph>org.as3coreaddendum.system.IEquatable</codeph> interface so that <codeph>equals</codeph> method of each key can be used in the comparison.
+	 Otherwise '==' operator is used. The same is true for values.
+	 The use of equality for keys and values are independent.
+	 It's possible to use only keys that implement <codeph>IEquatable</codeph>, only values, both, or none.
+	 This usage varies according to application needs.</p>
+	           <p>All subclasses of this class <i>must</i> conform with this behavior.</p>
+	           <p>This documentation is partially based in the <i>Java Collections Framework</i> JavaDoc documentation.
+	 For further information see <xref href="http://download.oracle.com/javase/6/docs/technotes/guides/collections/index.html"
+                     scope="external">Java Collections Framework</xref>
+            </p>
+	 
+	        </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.as3collections:ISortedList">
+         <apiName>ISortedList</apiName>
+         <shortdesc>
+	 A list that provides a total ordering on its elements.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiInterface/>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.as3collections:IList</apiBaseInterface>
+               <apiBaseInterface>org.as3coreaddendum.system:ISortable</apiBaseInterface>
+               <apiBaseClassifier/>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 A list that provides a <i>total ordering</i> on its elements.
+	 The list is ordered according to the <i>natural ordering</i> of its elements, by a <codeph>IComparator</codeph> typically provided at sorted list creation time, or by the arguments provided to the <codeph>sort</codeph> or <codeph>sortOn</codeph> methods.
+	 
+	 </apiDesc>
+      </apiClassifier>
+   </apiPackage>
+</allClasses>

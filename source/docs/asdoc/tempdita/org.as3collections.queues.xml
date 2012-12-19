@@ -1,0 +1,850 @@
+<?xml version="1.0" encoding="UTF-8"?><apiPackage id="org.as3collections.queues"><apiName>org.as3collections.queues</apiName><apiDetail/><apiClassifier id="org.as3collections.queues:TypedQueue"><apiName>TypedQueue</apiName><shortdesc>
+	 TypedQueue works as a wrapper for a queue.</shortdesc><prolog><author>Flávio Silva
+	 </author><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiAccess value="public"/><apiStatic/><apiBaseInterface>org.as3collections:IQueue</apiBaseInterface><apiBaseClassifier>org.as3collections:TypedCollection</apiBaseClassifier></apiClassifierDef><apiDesc>
+	 <codeph>TypedQueue</codeph> works as a wrapper for a queue.
+	 Since ActionScript 3.0 does not support typed arrays, <codeph>TypedQueue</codeph> is a way to create typed queues.
+	 It stores the <codeph>wrapQueue</codeph> constructor's argument in the <codeph>wrappedQueue</codeph> variable.
+	 So every method call to this class is forwarded to the <codeph>wrappedQueue</codeph> object.
+	 The methods that need to be checked for the type of the elements are previously validated with the <codeph>validateType</codeph> or <codeph>validateCollection</codeph> method before forward the call.
+	 If the type of an element requested to be added to this list is incompatible with the type of the list, the method <codeph>offer</codeph> returns <codeph>false</codeph> and the method <codeph>add</codeph> throws <codeph>org.as3coreaddendum.errors.ClassCastError</codeph>.
+	 The calls that are forwarded to the <codeph>wrappedQueue</codeph> returns the return of the <codeph>wrappedQueue</codeph> call.
+	 <p><codeph>TypedQueue</codeph> does not allow <codeph>null</codeph> elements.</p>
+	 <p>You can also create unique and typed queues. See below the link "QueueUtil.getUniqueTypedQueue()".</p>
+	 
+	 </apiDesc><example>
+	 
+	 <codeblock rev="3.0">
+	 import org.as3collections.IQueue;
+	 import org.as3collections.queues.LinearQueue;
+	 import org.as3collections.queues.TypedQueue;
+	 import org.as3collections.utils.QueueUtil;
+	 
+	 var q1:IQueue = new LinearQueue([1, 5, 3, 7]);
+	 
+	 var queue1:IQueue = new TypedQueue(q1, int); // you can use this way
+	 
+	 //var queue1:IQueue = QueueUtil.getTypedQueue(q1); // or you can use this way
+	 
+	 queue1                      // [1,5,3,7]
+	 queue1.size():              // 4
+	 queue1.isEmpty()            // false
+	 
+	 queue1.poll()               // 1
+	 queue1                      // [5,3,7]
+	 
+	 queue1.offer(2)             // true
+	 queue1                      // [5,3,7,2]
+	 
+	 queue1.offer(5)             // true
+	 queue1                      // [5,3,7,2,5]
+	 
+	 queue1.offer("a")           // false
+	 queue1                      // [5,3,7,2,5]
+	 
+	 queue1.add("a")             // ClassCastError: Invalid element type. element: a | type: String | expected type: int
+	 </codeblock>
+	 
+	 </example></apiClassifierDetail><related-links><link href="org.as3collections.utils.xml#QueueUtil/getTypedQueue()"><linktext>QueueUtil.getTypedQueue()</linktext></link><link href="org.as3collections.utils.xml#QueueUtil/getUniqueTypedQueue()"><linktext>QueueUtil.getUniqueTypedQueue()</linktext></link></related-links><apiConstructor id="org.as3collections.queues:TypedQueue:TypedQueue"><apiName>TypedQueue</apiName><shortdesc>
+		 Constructor, creates a new TypedQueue object.</shortdesc><prolog/><apiConstructorDetail><apiConstructorDef><apiAccess value="public"/><apiException><apiDesc> 	if the <codeph>wrapQueue</codeph> argument is <codeph>null</codeph>.
+		 </apiDesc><apiItemName>ArgumentError</apiItemName><apiOperationClassifier>ArgumentError</apiOperationClassifier></apiException><apiException><apiDesc> 	if the <codeph>type</codeph> argument is <codeph>null</codeph>.
+		 </apiDesc><apiItemName>ArgumentError</apiItemName><apiOperationClassifier>ArgumentError</apiOperationClassifier></apiException><apiException><apiDesc> 		if the types of one or more elements in the <codeph>wrapQueue</codeph> argument are incompatible with the <codeph>type</codeph> argument.
+		 </apiDesc><apiItemName>org.as3coreaddendum.errors:ClassCastError</apiItemName><apiOperationClassifier>org.as3coreaddendum.errors:ClassCastError</apiOperationClassifier></apiException><apiParam><apiItemName>wrapQueue</apiItemName><apiOperationClassifier>org.as3collections:IQueue</apiOperationClassifier><apiDesc>	the target queue to wrap.
+		 </apiDesc></apiParam><apiParam><apiItemName>type</apiItemName><apiType value="any"/><apiDesc>		the type of the elements allowed by this queue.
+		 </apiDesc></apiParam></apiConstructorDef><apiDesc>
+		 Constructor, creates a new <codeph>TypedQueue</codeph> object.
+		 
+		 </apiDesc></apiConstructorDetail></apiConstructor><apiOperation id="org.as3collections.queues:TypedQueue:add"><apiName>add</apiName><shortdesc>
+		 If the element argument is null throws ArgumentError.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiException><apiDesc> 	if the <codeph>element</codeph> argument is <codeph>null</codeph>.
+		 </apiDesc><apiItemName>ArgumentError</apiItemName><apiOperationClassifier>ArgumentError</apiOperationClassifier></apiException><apiException><apiDesc> 		if the type of the element is incompatible with the type of this collection.
+		 </apiDesc><apiItemName>org.as3coreaddendum.errors:ClassCastError</apiItemName><apiOperationClassifier>org.as3coreaddendum.errors:ClassCastError</apiOperationClassifier></apiException><apiReturn><apiDesc>the return of the call <codeph>wrappedCollection.add</codeph>.
+		 </apiDesc><apiType value="Boolean"/></apiReturn><apiParam><apiItemName>element</apiItemName><apiType value="any"/><apiDesc>	the element to forward to <codeph>wrappedCollection.add</codeph>.
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 If the <codeph>element</codeph> argument is <codeph>null</codeph> throws <codeph>ArgumentError</codeph>.
+		 Otherwise the element is validated with the <codeph>validateType</codeph> method to be forwarded to <codeph>wrappedCollection.add</codeph>.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.queues:TypedQueue:clone"><apiName>clone</apiName><shortdesc>
+		 Creates and return a new TypedQueue object with the clone of the wrappedQueue object.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiReturn><apiDesc>a new <codeph>TypedQueue</codeph> object with the clone of the <codeph>wrappedQueue</codeph> object.
+ 		 </apiDesc><apiType value="any"/></apiReturn></apiOperationDef><apiDesc>
+		 Creates and return a new <codeph>TypedQueue</codeph> object with the clone of the <codeph>wrappedQueue</codeph> object.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.queues:TypedQueue:dequeue"><apiName>dequeue</apiName><shortdesc>
+		 Forwards the call to wrappedQueue.dequeue.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiDesc>the return of the call <codeph>wrappedQueue.dequeue</codeph>.
+		 </apiDesc><apiType value="any"/></apiReturn></apiOperationDef><apiDesc>
+		 Forwards the call to <codeph>wrappedQueue.dequeue</codeph>.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.queues:TypedQueue:element"><apiName>element</apiName><shortdesc>
+		 Forwards the call to wrappedQueue.element.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiDesc>the return of the call <codeph>wrappedQueue.element</codeph>.
+		 </apiDesc><apiType value="any"/></apiReturn></apiOperationDef><apiDesc>
+		 Forwards the call to <codeph>wrappedQueue.element</codeph>.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.queues:TypedQueue:equals"><apiName>equals</apiName><shortdesc>
+		 This method first checks if other argument is a TypedQueue.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiReturn><apiDesc><codeph>true</codeph> if the arbitrary evaluation considers the objects equal.
+		 </apiDesc><apiType value="Boolean"/></apiReturn><apiParam><apiItemName>other</apiItemName><apiType value="any"/><apiDesc>	the object to be compared for equality.
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 This method first checks if <codeph>other</codeph> argument is a <codeph>TypedQueue</codeph>.
+		 If not it returns <codeph>false</codeph>. If <codeph>true</codeph> it checks the <codeph>type</codeph> property of both queues.
+		 If they are different it returns <codeph>false</codeph>.
+		 Otherwise it uses <codeph>CollectionUtil.equalConsideringOrder</codeph> method to perform equality, sending this queue and <codeph>other</codeph> argument.
+		 
+		 </apiDesc></apiOperationDetail><related-links><link href="org.as3collections.utils.xml#CollectionUtil/equalConsideringOrder()"><linktext>CollectionUtil.equalConsideringOrder()</linktext></link></related-links></apiOperation><apiOperation id="org.as3collections.queues:TypedQueue:offer"><apiName>offer</apiName><shortdesc>
+		 If isValidType(element) returns false then returns false.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiDesc><codeph>false</codeph> if <codeph>isValidType(element)</codeph> returns <codeph>false</codeph>. Otherwise returns the return of the call <codeph>wrappedQueue.offer</codeph>.
+		 </apiDesc><apiType value="Boolean"/></apiReturn><apiParam><apiItemName>element</apiItemName><apiType value="any"/><apiDesc>	the element to forward to <codeph>wrappedQueue.offer</codeph>.
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 If <codeph>isValidType(element)</codeph> returns <codeph>false</codeph> then returns <codeph>false</codeph>.
+		 Otherwise, it forwards the call to <codeph>wrappedQueue.offer</codeph>.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.queues:TypedQueue:peek"><apiName>peek</apiName><shortdesc>
+		 Forwards the call to wrappedQueue.peek.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiDesc>the return of the call <codeph>wrappedQueue.peek</codeph>.
+		 </apiDesc><apiType value="any"/></apiReturn></apiOperationDef><apiDesc>
+		 Forwards the call to <codeph>wrappedQueue.peek</codeph>.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.queues:TypedQueue:poll"><apiName>poll</apiName><shortdesc>
+		 Forwards the call to wrappedQueue.poll.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiDesc>the return of the call <codeph>wrappedQueue.poll</codeph>.
+		 </apiDesc><apiType value="any"/></apiReturn></apiOperationDef><apiDesc>
+		 Forwards the call to <codeph>wrappedQueue.poll</codeph>.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation></apiClassifier><apiClassifier id="org.as3collections.queues:UniqueQueue"><apiName>UniqueQueue</apiName><shortdesc>
+	 UniqueQueue works as a wrapper for a queue.</shortdesc><prolog><author>Flávio Silva
+	 </author><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiAccess value="public"/><apiStatic/><apiBaseInterface>org.as3collections:IQueue</apiBaseInterface><apiBaseClassifier>org.as3collections:UniqueCollection</apiBaseClassifier></apiClassifierDef><apiDesc>
+	 <codeph>UniqueQueue</codeph> works as a wrapper for a queue.
+	 It does not allow duplicated elements in the queue.
+	 It stores the <codeph>wrapQueue</codeph> constructor's argument in the <codeph>wrappedQueue</codeph> variable.
+	 So every method call to this class is forwarded to the <codeph>wrappedQueue</codeph> object.
+	 The methods that need to be checked for duplication are previously validated before forward the call.
+	 The calls that are forwarded to the <codeph>wrappedQueue</codeph> returns the return of the <codeph>wrappedQueue</codeph> call.
+	 <p>You can also create unique and typed queues. See below the link "QueueUtil.getUniqueTypedQueue()".</p>
+	 
+	 </apiDesc><example>
+	 
+	 <codeblock rev="3.0">
+	 import org.as3collections.IQueue;
+	 import org.as3collections.queues.LinearQueue;
+	 import org.as3collections.queues.UniqueQueue;
+	 import org.as3collections.utils.QueueUtil;
+	 
+	 var q1:IQueue = new LinearQueue([1, 5, 3, 7]);
+	 
+	 var queue1:IQueue = new UniqueQueue(q1); // you can use this way
+	 
+	 //var queue1:IQueue = QueueUtil.getUniqueQueue(q1); // or you can use this way
+	 
+	 queue1                      // [1,5,3,7]
+	 queue1.size()               // 4
+	 queue1.isEmpty()            // false
+	 
+	 queue1.poll()               // 1
+	 queue1                      // [5,3,7]
+	 
+	 queue1.offer(2)             // true
+	 queue1                      // [5,3,7,2]
+	 
+	 queue1.offer(5)             // false
+	 queue1                      // [5,3,7,2]
+	 
+	 queue1.add(5)               // Error: UniqueQueue is a unique queue and does not allow duplicated elements. Requested element: 5
+	 </codeblock>
+	 
+	 </example></apiClassifierDetail><related-links><link href="org.as3collections.utils.xml#QueueUtil/getUniqueQueue()"><linktext>QueueUtil.getUniqueQueue()</linktext></link><link href="org.as3collections.utils.xml#QueueUtil/getUniqueTypedQueue()"><linktext>QueueUtil.getUniqueTypedQueue()</linktext></link></related-links><apiConstructor id="org.as3collections.queues:UniqueQueue:UniqueQueue"><apiName>UniqueQueue</apiName><shortdesc>
+		 Constructor, creates a new UniqueQueue object.</shortdesc><prolog/><apiConstructorDetail><apiConstructorDef><apiAccess value="public"/><apiException><apiDesc> 	if the <codeph>wrapQueue</codeph> argument is <codeph>null</codeph>.
+		 </apiDesc><apiItemName>ArgumentError</apiItemName><apiOperationClassifier>ArgumentError</apiOperationClassifier></apiException><apiParam><apiItemName>wrapQueue</apiItemName><apiOperationClassifier>org.as3collections:IQueue</apiOperationClassifier><apiDesc>	the target queue to wrap.
+		 </apiDesc></apiParam></apiConstructorDef><apiDesc>
+		 Constructor, creates a new <codeph>UniqueQueue</codeph> object.
+		 
+		 </apiDesc></apiConstructorDetail></apiConstructor><apiOperation id="org.as3collections.queues:UniqueQueue:add"><apiName>add</apiName><shortdesc>
+		 Inserts the specified element into this queue if it is possible to do so immediately without violating restrictions.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiException><apiDesc> 	if the specified element is <codeph>null</codeph>.
+		 </apiDesc><apiItemName>ArgumentError</apiItemName><apiOperationClassifier>ArgumentError</apiOperationClassifier></apiException><apiException><apiDesc> 		if the class of the specified element prevents it from being added to this queue.
+		 </apiDesc><apiItemName>org.as3coreaddendum.errors:ClassCastError</apiItemName><apiOperationClassifier>org.as3coreaddendum.errors:ClassCastError</apiOperationClassifier></apiException><apiException><apiDesc> 			if <codeph>wrappedQueue.contains(element)</codeph> returns <codeph>true</codeph>.
+		 </apiDesc><apiItemName>flash.errors:IllegalOperationError</apiItemName><apiOperationClassifier>flash.errors:IllegalOperationError</apiOperationClassifier></apiException><apiReturn><apiDesc><codeph>true</codeph> if this queue changed as a result of the call.
+		 </apiDesc><apiType value="Boolean"/></apiReturn><apiParam><apiItemName>element</apiItemName><apiType value="any"/><apiDesc>	the element to be added.
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Inserts the specified element into this queue if it is possible to do so immediately without violating restrictions.
+		 This method differs from <codeph>offer</codeph> only in that it throws an error if the element cannot be inserted.
+		 <p>This implementation returns the result of <codeph>offer</codeph> unless the element cannot be inserted.</p>
+		 <p>If <codeph>wrappedQueue.contains(element)</codeph> returns <codeph>true</codeph> an <codeph>IllegalOperationError</codeph> is thrown.</p>
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.queues:UniqueQueue:clone"><apiName>clone</apiName><shortdesc>
+		 Creates and return a new UniqueQueue object with the clone of the wrappedQueue object.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiReturn><apiDesc>a new <codeph>UniqueQueue</codeph> object with the clone of the <codeph>wrappedQueue</codeph> object.
+ 		 </apiDesc><apiType value="any"/></apiReturn></apiOperationDef><apiDesc>
+		 Creates and return a new <codeph>UniqueQueue</codeph> object with the clone of the <codeph>wrappedQueue</codeph> object.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.queues:UniqueQueue:dequeue"><apiName>dequeue</apiName><shortdesc>
+		 Forwards the call to wrappedQueue.dequeue.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiDesc>the return of the call <codeph>wrappedQueue.dequeue</codeph>.
+		 </apiDesc><apiType value="any"/></apiReturn></apiOperationDef><apiDesc>
+		 Forwards the call to <codeph>wrappedQueue.dequeue</codeph>.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.queues:UniqueQueue:element"><apiName>element</apiName><shortdesc>
+		 Forwards the call to wrappedQueue.element.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiDesc>the return of the call <codeph>wrappedQueue.element</codeph>.
+		 </apiDesc><apiType value="any"/></apiReturn></apiOperationDef><apiDesc>
+		 Forwards the call to <codeph>wrappedQueue.element</codeph>.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.queues:UniqueQueue:equals"><apiName>equals</apiName><shortdesc>
+		 This method uses CollectionUtil.equalConsideringOrder method to perform equality, sending this list and other argument.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiReturn><apiDesc><codeph>true</codeph> if the arbitrary evaluation considers the objects equal.
+		 </apiDesc><apiType value="Boolean"/></apiReturn><apiParam><apiItemName>other</apiItemName><apiType value="any"/><apiDesc>	the object to be compared for equality.
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 This method uses <codeph>CollectionUtil.equalConsideringOrder</codeph> method to perform equality, sending this list and <codeph>other</codeph> argument.
+		 
+		 </apiDesc></apiOperationDetail><related-links><link href="org.as3collections.utils.xml#CollectionUtil/equalConsideringOrder()"><linktext>CollectionUtil.equalConsideringOrder()</linktext></link></related-links></apiOperation><apiOperation id="org.as3collections.queues:UniqueQueue:offer"><apiName>offer</apiName><shortdesc>
+		 If wrappedQueue.contains(element) returns true then returns false.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiDesc><codeph>false</codeph> if <codeph>wrappedQueue.contains(element)</codeph> returns <codeph>true</codeph>. Otherwise returns the return of the call <codeph>wrappedQueue.offer</codeph>.
+		 </apiDesc><apiType value="Boolean"/></apiReturn><apiParam><apiItemName>element</apiItemName><apiType value="any"/><apiDesc>	the element to forward to <codeph>wrappedQueue.offer</codeph>.
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 If <codeph>wrappedQueue.contains(element)</codeph> returns <codeph>true</codeph> then returns <codeph>false</codeph>.
+		 Otherwise, it forwards the call to <codeph>wrappedQueue.offer</codeph>.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.queues:UniqueQueue:peek"><apiName>peek</apiName><shortdesc>
+		 Forwards the call to wrappedQueue.peek.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiDesc>the return of the call <codeph>wrappedQueue.peek</codeph>.
+		 </apiDesc><apiType value="any"/></apiReturn></apiOperationDef><apiDesc>
+		 Forwards the call to <codeph>wrappedQueue.peek</codeph>.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.queues:UniqueQueue:poll"><apiName>poll</apiName><shortdesc>
+		 Forwards the call to wrappedQueue.poll.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiDesc>the return of the call <codeph>wrappedQueue.poll</codeph>.
+		 </apiDesc><apiType value="any"/></apiReturn></apiOperationDef><apiDesc>
+		 Forwards the call to <codeph>wrappedQueue.poll</codeph>.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation></apiClassifier><apiClassifier id="org.as3collections.queues:PriorityQueue"><apiName>PriorityQueue</apiName><shortdesc>
+	 This queue uses a org.as3coreaddendum.system.comparators.PriorityComparator object to sort the elements.</shortdesc><prolog><author>Flávio Silva
+	 </author><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiAccess value="public"/><apiStatic/><apiBaseClassifier>org.as3collections.queues:SortedQueue</apiBaseClassifier></apiClassifierDef><apiDesc>
+	 This queue uses a <codeph>org.as3coreaddendum.system.comparators.PriorityComparator</codeph> object to sort the elements.
+	 All elements must implement the <codeph>org.as3coreaddendum.system.IPriority</codeph> interface, otherwise a <codeph>org.as3coreaddendum.errors.ClassCastError</codeph> is thrown.
+	 <p>This queue also adds an event listener on elements to <codeph>org.as3coreaddendum.events.PriorityEvent</codeph> (if elements implement <codeph>flash.events.IEventDispatcher</codeph>).
+	 Thus this queue keeps itself automatically sorted if its elements dispatch a <codeph>org.as3coreaddendum.events.PriorityEvent</codeph> when its priority changes.</p>
+	 
+	 </apiDesc><example>
+	 
+	 <codeblock rev="3.0">
+	 package test
+	 {
+	     import org.as3coreaddendum.system.IPriority;
+	 
+	     public class TestPriority extends EventDispatcher implements IPriority
+	     {
+	         private var _name:String;
+	         private var _priority:int;
+	 
+	         public function get priority(): int { return _priority; }
+	 
+	         public function set priority(value : int) : void
+	         {
+	             _priority = value;
+	             dispatchEvent(new PriorityEvent(PriorityEvent.CHANGED, _priority));
+	         }
+	 
+	         public function TestPriority(name:String, priority:int)
+	         {
+	             _name = name;
+	             _priority = priority;
+	         }
+	 
+	         public function toString(): String
+	         {
+	             return "[TestPriority " + _name + "]";
+	         }
+	     }
+	 }
+	 </codeblock>
+	 
+	 <codeblock rev="3.0">
+	 import org.as3collections.ISortedQueue;
+	 import org.as3collections.queues.PriorityQueue;
+	 import test.TestPriority;
+	 
+	 var queue1:ISortedQueue = new PriorityQueue();
+	 
+	 var o1:TestPriority = new TestPriority("o1", 1);
+	 var o2:TestPriority = new TestPriority("o2", 2);
+	 var o3:TestPriority = new TestPriority("o3", 3);
+	 var o4:TestPriority = new TestPriority("o4", 4);
+	 
+	 queue1.offer(o2)            // true
+	 queue1                      // [[TestPriority o2]]
+	 queue1.size()               // 1
+	 
+	 queue1.offer(o3)            // true
+	 queue1                      // [[TestPriority o3],[TestPriority o2]]
+	 queue1.size()               // 2
+	 
+	 queue1.offer(o2)            // true
+	 queue1                      // [[TestPriority o3],[TestPriority o2],[TestPriority o2]]
+	 
+	 queue1.offer(o1)            // true
+	 queue1                      // [[TestPriority o3],[TestPriority o2],[TestPriority o2],[TestPriority o1]]
+	 
+	 queue1.offer(o4)            // true
+	 queue1                      // [[TestPriority o4],[TestPriority o3],[TestPriority o2],[TestPriority o2],[TestPriority o1]]
+	 
+	 queue1.offer(1)             // false
+	 queue1                      // [[TestPriority o4],[TestPriority o3],[TestPriority o2],[TestPriority o2],[TestPriority o1]]
+	 
+	 queue1.add(1)               // ClassCastError: The element must implement the 'org.as3coreaddendum.system.IPriority' interface. Type received: int
+	 </codeblock>
+	 
+	 </example></apiClassifierDetail><related-links><link href="http://as3coreaddendum.org/en-us/documentation/asdoc/org/as3coreaddendum/system/IPriority.html"><linktext>org.as3coreaddendum.system.IPriority</linktext></link><link href="http://as3coreaddendum.org/en-us/documentation/asdoc/org/as3coreaddendum/events/PriorityEvent.html"><linktext>org.as3coreaddendum.events.PriorityEvent</linktext></link></related-links><apiConstructor id="org.as3collections.queues:PriorityQueue:PriorityQueue"><apiName>PriorityQueue</apiName><shortdesc>
+		 Constructor, creates a new PriorityQueue object.</shortdesc><prolog/><apiConstructorDetail><apiConstructorDef><apiAccess value="public"/><apiException><apiDesc> 		if one or more elements in the <codeph>source</codeph> argument do not implement the <codeph>org.as3coreaddendum.system.IPriority</codeph> interface.
+		 </apiDesc><apiItemName>org.as3coreaddendum.errors:ClassCastError</apiItemName><apiOperationClassifier>org.as3coreaddendum.errors:ClassCastError</apiOperationClassifier></apiException><apiParam><apiItemName>source</apiItemName><apiType value="Array"/><apiData>null</apiData><apiDesc>		an array to fill the queue.
+		 </apiDesc></apiParam></apiConstructorDef><apiDesc>
+		 Constructor, creates a new <codeph>PriorityQueue</codeph> object.
+		 
+		 </apiDesc></apiConstructorDetail></apiConstructor><apiOperation id="org.as3collections.queues:PriorityQueue:add"><apiName>add</apiName><shortdesc>
+		 Inserts the specified element into this queue if it is possible to do so immediately without violating restrictions.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiException><apiDesc> 	if the specified element is <codeph>null</codeph>.
+		 </apiDesc><apiItemName>ArgumentError</apiItemName><apiOperationClassifier>ArgumentError</apiOperationClassifier></apiException><apiException><apiDesc> 		if the element does not implements the <codeph>org.as3coreaddendum.system.IPriority</codeph> interface.
+		 </apiDesc><apiItemName>org.as3coreaddendum.errors:ClassCastError</apiItemName><apiOperationClassifier>org.as3coreaddendum.errors:ClassCastError</apiOperationClassifier></apiException><apiException><apiDesc> 			if the specified element cannot be inserted.
+		 </apiDesc><apiItemName>flash.errors:IllegalOperationError</apiItemName><apiOperationClassifier>flash.errors:IllegalOperationError</apiOperationClassifier></apiException><apiReturn><apiDesc><codeph>true</codeph> if this queue changed as a result of the call.
+		 </apiDesc><apiType value="Boolean"/></apiReturn><apiParam><apiItemName>element</apiItemName><apiType value="any"/><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Inserts the specified element into this queue if it is possible to do so immediately without violating restrictions.
+		 This method differs from <codeph>offer</codeph> only in that it throws an error if the element cannot be inserted.
+		 <p>This implementation returns the result of <codeph>offer</codeph> unless the element cannot be inserted.</p>
+		 <p>This implementation only allow elements that implements the <codeph>org.as3coreaddendum.system.IPriority</codeph> interface.
+		 A <codeph>org.as3coreaddendum.errors.ClassCastError</codeph> is thrown if the element does not implements this interface.</p>
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.queues:PriorityQueue:clone"><apiName>clone</apiName><shortdesc>
+		 Creates and return a new PriorityQueue object containing all elements in this queue (in the same order).</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiReturn><apiDesc>a new <codeph>PriorityQueue</codeph> object containing all elements in this queue (in the same order).
+ 		 </apiDesc><apiType value="any"/></apiReturn></apiOperationDef><apiDesc>
+		 Creates and return a new <codeph>PriorityQueue</codeph> object containing all elements in this queue (in the same order).
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.queues:PriorityQueue:offer"><apiName>offer</apiName><shortdesc>
+		 Inserts the specified element into this queue if it is possible to do so immediately without violating restrictions.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiReturn><apiDesc><codeph>true</codeph> if the element was added to this queue, else <codeph>false</codeph>. 
+		 </apiDesc><apiType value="Boolean"/></apiReturn><apiParam><apiItemName>element</apiItemName><apiType value="any"/><apiDesc>	the element to add.
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Inserts the specified element into this queue if it is possible to do so immediately without violating restrictions.
+		 When using a restricted queue (like <codeph>TypedQueue</codeph> and <codeph>UniqueQueue</codeph>), this method is generally preferable to <codeph>add</codeph>, which can fail to insert an element only by throwing an error. 
+		 <p>This implementation only allow elements that implements the <codeph>org.as3coreaddendum.system.IPriority</codeph> interface.
+		 If the element does not implements this interface the method returns <codeph>false</codeph>.</p>
+		 <p>Before returning, the queue is reordered.</p>
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiValue id="org.as3collections.queues:PriorityQueue:comparator:set"><apiName>comparator</apiName><shortdesc>
+		 PriorityQueue does not allow changing its comparator object.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiIsOverride/><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="org.as3coreaddendum.system:IComparator"/></apiValueDef><apiDesc>
+		 <codeph>PriorityQueue</codeph> does not allow changing its <codeph>comparator</codeph> object.
+		 <p><codeph>PriorityQueue</codeph> was designed to be used exclusively with its default comparator object.
+		 If you want to change the comparator object using this setter, consider using <codeph>SortedQueue</codeph> class instead.</p>
+		 <p>If this setter is used an <codeph>IllegalOperationError</codeph> is thrown.</p>
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.as3collections.queues:PriorityQueue:options:set"><apiName>options</apiName><shortdesc>
+		 PriorityQueue does not allow changing its options.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiIsOverride/><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="uint"/></apiValueDef><apiDesc>
+		 <codeph>PriorityQueue</codeph> does not allow changing its options.
+		 <p><codeph>PriorityQueue</codeph> was designed to be used exclusively with its default options.
+		 If you want to change the options using this setter, consider using <codeph>SortedQueue</codeph> class instead.</p>
+		 <p>If this setter is used an <codeph>IllegalOperationError</codeph> is thrown.</p>
+		 </apiDesc></apiValueDetail></apiValue></apiClassifier><apiClassifier id="org.as3collections.queues:LinearQueue"><apiName>LinearQueue</apiName><shortdesc>
+	 LinearQueue orders elements in a FIFO (first-in-first-out) manner.</shortdesc><prolog><author>Flávio Silva
+	 </author><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiAccess value="public"/><apiStatic/><apiBaseClassifier>org.as3collections:AbstractQueue</apiBaseClassifier></apiClassifierDef><apiDesc>
+	 <codeph>LinearQueue</codeph> orders elements in a FIFO (first-in-first-out) manner.
+	 <p><codeph>LinearQueue</codeph> does not allow <codeph>null</codeph> elements.</p>
+	 
+	 </apiDesc><example>
+	 
+	 <b>Example 1</b>
+	 
+	 <codeblock rev="3.0">
+	 import org.as3collections.IQueue;
+	 import org.as3collections.queues.LinearQueue;
+	 
+	 var queue:IQueue = new LinearQueue();
+	 
+	 queue                       // []
+	 queue.size()                // 0
+	 queue.isEmpty()             // true
+	 
+	 queue.peek()                // null
+	 queue.element()             // NoSuchElementError: The queue is empty.
+	 
+	 queue.offer(3)              // true
+	 queue                       // [3]
+	 queue.size()                // 1
+	 queue.isEmpty()             // false
+	 
+	 queue.offer("a")            // true
+	 queue                       // [3,a]
+	 
+	 queue.offer(1)              // true
+	 queue                       // [3,a,1]
+	 
+	 queue.offer(7)              // true
+	 queue                       // [3,a,1,7]
+	 
+	 queue.offer(null)           // false
+	 queue.add(null)             // ArgumentError: The 'element' argument must not be 'null'.
+	 queue                       // [3,a,1,7]
+	 
+	 queue.peek()                // 3
+	 queue.element()             // 3
+	 queue:                      // [3,a,1,7]
+	 
+	 queue.poll()                // 3
+	 queue                       // [a,1,7]
+	 
+	 queue.dequeue()             // a
+	 queue                       // [1,7]
+	 
+	 queue.remove(10)            // false
+	 queue                       // [1,7]
+	 
+	 queue.remove(7)             // true
+	 queue                       // [1]
+	 
+	 queue.clear()
+	 queue                       // []
+	 queue.size()                // 0
+	 queue.isEmpty()             // true
+	 
+	 queue.poll()                // null
+	 queue.dequeue()             // NoSuchElementError: The queue is empty.
+	 </codeblock>
+	 
+	 <b>Example 2</b>
+	 
+	 <codeblock rev="3.0">
+	 import org.as3collections.IQueue;
+	 import org.as3collections.queues.LinearQueue;
+	 
+	 var queue1:IQueue = new LinearQueue([1, 5, 3, 7]);
+	 
+	 queue1                      // [1,5,3,7]
+	 queue1.size()               // 4
+	 queue1.isEmpty()            // false
+	 
+	 var queue2:IQueue = queue1.clone();
+	 
+	 queue2                      // [1,5,3,7]
+	 queue2.size()               // 4
+	 queue2.isEmpty()            // false
+	 
+	 queue2.equals(queue1)       // true
+	 queue1.equals(queue2)       // true
+	 
+	 queue2.poll()               // 1
+	 queue2                      // [5,3,7]
+	 
+	 queue2.equals(queue1)       // false
+	 queue1.equals(queue2)       // false
+	 queue2.equals(queue2)       // true
+	 
+	 queue1.clear()
+	 queue1                      // []
+	 
+	 queue2.clear()
+	 queue2:                     // []
+	 
+	 queue2.equals(queue1)       // true
+	 </codeblock>
+	 
+	 </example></apiClassifierDetail><apiConstructor id="org.as3collections.queues:LinearQueue:LinearQueue"><apiName>LinearQueue</apiName><shortdesc>
+		 Constructor, creates a new LinearQueue object.</shortdesc><prolog/><apiConstructorDetail><apiConstructorDef><apiAccess value="public"/><apiParam><apiItemName>source</apiItemName><apiType value="Array"/><apiData>null</apiData><apiDesc>	an array to fill the queue.
+		 </apiDesc></apiParam></apiConstructorDef><apiDesc>
+		 Constructor, creates a new <codeph>LinearQueue</codeph> object.
+		 
+		 </apiDesc></apiConstructorDetail></apiConstructor><apiOperation id="org.as3collections.queues:LinearQueue:clear"><apiName>clear</apiName><shortdesc>
+		 Removes all of the elements from this queue.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiReturn><apiType value="void"/></apiReturn></apiOperationDef><apiDesc>
+		 Removes all of the elements from this queue. The queue will be empty after this method returns.
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.queues:LinearQueue:clone"><apiName>clone</apiName><shortdesc>
+		 Creates and return a new LinearQueue object containing all elements in this queue (in the same order).</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiReturn><apiDesc>a new <codeph>LinearQueue</codeph> object containing all elements in this queue (in the same order).
+ 		 </apiDesc><apiType value="any"/></apiReturn></apiOperationDef><apiDesc>
+		 Creates and return a new <codeph>LinearQueue</codeph> object containing all elements in this queue (in the same order).
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.queues:LinearQueue:iterator"><apiName>iterator</apiName><shortdesc>
+		 Returns an iterator over a set of elements.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiReturn><apiDesc>an iterator over a set of elements.
+		 </apiDesc><apiOperationClassifier>org.as3collections:IIterator</apiOperationClassifier></apiReturn></apiOperationDef><apiDesc>
+		 Returns an iterator over a set of elements.
+		 <p>This implementation returns an <codeph>ArrayIterator</codeph> object.</p>
+		 
+		 </apiDesc></apiOperationDetail><related-links><link href="org.as3collections.iterators.xml#ArrayIterator"><linktext>ArrayIterator</linktext></link></related-links></apiOperation><apiOperation id="org.as3collections.queues:LinearQueue:offer"><apiName>offer</apiName><shortdesc>
+		 Inserts the specified element into this queue if it is possible to do so immediately without violating restrictions.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiReturn><apiDesc><codeph>true</codeph> if the element was added to this queue, else <codeph>false</codeph>. 
+		 </apiDesc><apiType value="Boolean"/></apiReturn><apiParam><apiItemName>element</apiItemName><apiType value="any"/><apiDesc>	the element to add.
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Inserts the specified element into this queue if it is possible to do so immediately without violating restrictions.
+		 When using a restricted queue (like <codeph>TypedQueue</codeph> and <codeph>UniqueQueue</codeph>), this method is generally preferable to <codeph>add</codeph>, which can fail to insert an element only by throwing an error. 
+		 <p>This implementation adds the element to the tail of the queue.</p>
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.queues:LinearQueue:peek"><apiName>peek</apiName><shortdesc>
+		 Retrieves, but does not remove, the head of this queue, or returns null if this queue is empty.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiReturn><apiDesc>the head of this queue, or <codeph>null</codeph> if this queue is empty.
+ 		 </apiDesc><apiType value="any"/></apiReturn></apiOperationDef><apiDesc>
+		 Retrieves, but does not remove, the head of this queue, or returns <codeph>null</codeph> if this queue is empty. 
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.queues:LinearQueue:poll"><apiName>poll</apiName><shortdesc>
+		 Retrieves and removes the head of this queue, or returns null if this queue is empty.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiReturn><apiDesc>the head of this queue, or <codeph>null</codeph> if this queue is empty.
+ 		 </apiDesc><apiType value="any"/></apiReturn></apiOperationDef><apiDesc>
+		 Retrieves and removes the head of this queue, or returns <codeph>null</codeph> if this queue is empty. 
+		 
+		 </apiDesc></apiOperationDetail></apiOperation></apiClassifier><apiClassifier id="org.as3collections.queues:IndexQueue"><apiName>IndexQueue</apiName><shortdesc>
+	 This queue uses a org.as3coreaddendum.system.comparators.IndexComparator object to sort the elements.</shortdesc><prolog><author>Flávio Silva
+	 </author><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiAccess value="public"/><apiStatic/><apiBaseClassifier>org.as3collections.queues:SortedQueue</apiBaseClassifier></apiClassifierDef><apiDesc>
+	 This queue uses a <codeph>org.as3coreaddendum.system.comparators.IndexComparator</codeph> object to sort the elements.
+	 All elements must implement the <codeph>org.as3coreaddendum.system.IIndexable</codeph> interface, otherwise a <codeph>org.as3coreaddendum.errors.ClassCastError</codeph> is thrown.
+	 <p>This queue also adds an event listener on elements to <codeph>org.as3coreaddendum.events.IndexEvent</codeph> (if elements implement <codeph>flash.events.IEventDispatcher</codeph>).
+	 Thus this queue keeps itself automatically sorted if its elements dispatch a <codeph>org.as3coreaddendum.events.IndexEvent</codeph> when its index changes.</p>
+	 
+	 </apiDesc><example>
+	 
+	 <codeblock rev="3.0">
+	 package test
+	 {
+	     import org.as3coreaddendum.system.IIndexable;
+	 
+	     public class TestIndex extends EventDispatcher implements IIndexable
+	     {
+	         private var _name:String;
+	         private var _index:int;
+	 
+	         public function get index(): int { return _index; }
+	 
+	         public function set index(value : int) : void
+	         {
+	             _index = value;
+	             dispatchEvent(new IndexEvent(IndexEvent.CHANGED, _index));
+	         }
+	 
+	         public function TestIndex(name:String, index:int)
+	         {
+	             _name = name;
+	             _index = index;
+	         }
+	 
+	         public function toString(): String
+	         {
+	             return "[TestIndex " + _name + "]";
+	         }
+	     }
+	 }
+	 </codeblock>
+	 
+	 <codeblock rev="3.0">
+	 import org.as3collections.ISortedQueue;
+	 import org.as3collections.queues.IndexQueue;
+	 import test.TestIndex;
+	 
+	 var queue1:ISortedQueue = new IndexQueue();
+	 
+	 var o0:TestIndex = new TestIndex("o0", 0);
+	 var o1:TestIndex = new TestIndex("o1", 1);
+	 var o2:TestIndex = new TestIndex("o2", 2);
+	 var o3:TestIndex = new TestIndex("o3", 3);
+	 
+	 queue1.offer(o1)            // true
+	 queue1                      // [[TestIndex o1]]
+	 queue1.size()               // 1
+	 
+	 queue1.offer(o2)            // true
+	 queue1                      // [[TestIndex o1],[TestIndex o2]]
+	 queue1.size()               // 2
+	 
+	 queue1.offer(o1)            // true
+	 queue1                      // [[TestIndex o1],[TestIndex o1],[TestIndex o2]]
+	 
+	 queue1.offer(o0)            // true
+	 queue1                      // [[TestIndex o0],[TestIndex o1],[TestIndex o1],[TestIndex o2]]
+	 
+	 queue1.offer(o3)            // true
+	 queue1                      // [[TestIndex o0],[TestIndex o1],[TestIndex o1],[TestIndex o2],[TestIndex o3]]
+	 
+	 queue1.offer(1)             // false
+	 queue1                      // [[TestIndex o0],[TestIndex o1],[TestIndex o1],[TestIndex o2],[TestIndex o3]]
+	 
+	 queue1.add(1)               // ClassCastError: The element must implement the 'org.as3coreaddendum.system.IIndexable' interface. Type received: int
+	 </codeblock>
+	 
+	 </example></apiClassifierDetail><related-links><link href="http://as3coreaddendum.org/en-us/documentation/asdoc/org/as3coreaddendum/system/IIndexable.html"><linktext>org.as3coreaddendum.system.IIndexable</linktext></link><link href="http://as3coreaddendum.org/en-us/documentation/asdoc/org/as3coreaddendum/events/IndexEvent.html"><linktext>org.as3coreaddendum.events.IndexEvent</linktext></link></related-links><apiConstructor id="org.as3collections.queues:IndexQueue:IndexQueue"><apiName>IndexQueue</apiName><shortdesc>
+		 Constructor, creates a new IndexQueue object.</shortdesc><prolog/><apiConstructorDetail><apiConstructorDef><apiAccess value="public"/><apiException><apiDesc> 		if one or more elements in the <codeph>source</codeph> argument do not implement the <codeph>org.as3coreaddendum.system.IIndexable</codeph> interface.
+		 </apiDesc><apiItemName>org.as3coreaddendum.errors:ClassCastError</apiItemName><apiOperationClassifier>org.as3coreaddendum.errors:ClassCastError</apiOperationClassifier></apiException><apiParam><apiItemName>source</apiItemName><apiType value="Array"/><apiData>null</apiData><apiDesc>		an array to fill the queue.
+		 </apiDesc></apiParam></apiConstructorDef><apiDesc>
+		 Constructor, creates a new <codeph>IndexQueue</codeph> object.
+		 
+		 </apiDesc></apiConstructorDetail></apiConstructor><apiOperation id="org.as3collections.queues:IndexQueue:add"><apiName>add</apiName><shortdesc>
+		 Inserts the specified element into this queue if it is possible to do so immediately without violating restrictions.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiException><apiDesc> 	if the specified element is <codeph>null</codeph>.
+		 </apiDesc><apiItemName>ArgumentError</apiItemName><apiOperationClassifier>ArgumentError</apiOperationClassifier></apiException><apiException><apiDesc> 		if the element does not implements the <codeph>org.as3coreaddendum.system.IIndexable</codeph> interface.
+		 </apiDesc><apiItemName>org.as3coreaddendum.errors:ClassCastError</apiItemName><apiOperationClassifier>org.as3coreaddendum.errors:ClassCastError</apiOperationClassifier></apiException><apiException><apiDesc> 			if the specified element cannot be inserted.
+		 </apiDesc><apiItemName>flash.errors:IllegalOperationError</apiItemName><apiOperationClassifier>flash.errors:IllegalOperationError</apiOperationClassifier></apiException><apiReturn><apiDesc><codeph>true</codeph> if this queue changed as a result of the call.
+		 </apiDesc><apiType value="Boolean"/></apiReturn><apiParam><apiItemName>element</apiItemName><apiType value="any"/><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Inserts the specified element into this queue if it is possible to do so immediately without violating restrictions.
+		 This method differs from <codeph>offer</codeph> only in that it throws an error if the element cannot be inserted.
+		 <p>This implementation returns the result of <codeph>offer</codeph> unless the element cannot be inserted.</p>
+		 <p>This implementation only allow elements that implements the <codeph>org.as3coreaddendum.system.IIndexable</codeph> interface.
+		 A <codeph>org.as3coreaddendum.errors.ClassCastError</codeph> is thrown if the element does not implements this interface.</p>
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.queues:IndexQueue:clone"><apiName>clone</apiName><shortdesc>
+		 Creates and return a new IndexQueue object containing all elements in this queue (in the same order).</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiReturn><apiDesc>a new <codeph>IndexQueue</codeph> object containing all elements in this queue (in the same order).
+ 		 </apiDesc><apiType value="any"/></apiReturn></apiOperationDef><apiDesc>
+		 Creates and return a new <codeph>IndexQueue</codeph> object containing all elements in this queue (in the same order).
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.queues:IndexQueue:offer"><apiName>offer</apiName><shortdesc>
+		 Inserts the specified element into this queue if it is possible to do so immediately without violating restrictions.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiReturn><apiDesc><codeph>true</codeph> if the element was added to this queue, else <codeph>false</codeph>. 
+		 </apiDesc><apiType value="Boolean"/></apiReturn><apiParam><apiItemName>element</apiItemName><apiType value="any"/><apiDesc>	the element to add.
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Inserts the specified element into this queue if it is possible to do so immediately without violating restrictions.
+		 When using a restricted queue (like <codeph>TypedQueue</codeph> and <codeph>UniqueQueue</codeph>), this method is generally preferable to <codeph>add</codeph>, which can fail to insert an element only by throwing an error. 
+		 <p>This implementation only allow elements that implements the <codeph>org.as3coreaddendum.system.IIndexable</codeph> interface.
+		 If the element does not implements this interface the method returns <codeph>false</codeph>.</p>
+		 <p>Before returning, the queue is reordered.</p>
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiValue id="org.as3collections.queues:IndexQueue:comparator:set"><apiName>comparator</apiName><shortdesc>
+		 IndexQueue does not allow changing its comparator object.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiIsOverride/><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="org.as3coreaddendum.system:IComparator"/></apiValueDef><apiDesc>
+		 <codeph>IndexQueue</codeph> does not allow changing its <codeph>comparator</codeph> object.
+		 <p><codeph>IndexQueue</codeph> was designed to be used exclusively with its default comparator object.
+		 If you want to change the comparator object using this setter, consider using <codeph>SortedQueue</codeph> class instead.</p>
+		 <p>If this setter is used an <codeph>IllegalOperationError</codeph> is thrown.</p>
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.as3collections.queues:IndexQueue:options:set"><apiName>options</apiName><shortdesc>
+		 IndexQueue does not allow changing its options.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiIsOverride/><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="uint"/></apiValueDef><apiDesc>
+		 <codeph>IndexQueue</codeph> does not allow changing its options.
+		 <p><codeph>IndexQueue</codeph> was designed to be used exclusively with its default options.
+		 If you want to change the options using this setter, consider using <codeph>SortedQueue</codeph> class instead.</p>
+		 <p>If this setter is used an <codeph>IllegalOperationError</codeph> is thrown.</p>
+		 </apiDesc></apiValueDetail></apiValue></apiClassifier><apiClassifier id="org.as3collections.queues:PriorityIndexQueue"><apiName>PriorityIndexQueue</apiName><shortdesc>
+	 This queue uses an org.as3coreaddendum.system.comparators.PriorityIndexComparator object to sort the elements.</shortdesc><prolog><author>Flávio Silva
+	 </author><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiAccess value="public"/><apiStatic/><apiBaseClassifier>org.as3collections.queues:SortedQueue</apiBaseClassifier></apiClassifierDef><apiDesc>
+	 This queue uses an <codeph>org.as3coreaddendum.system.comparators.PriorityIndexComparator</codeph> object to sort the elements.
+	 All elements must implement the <codeph>org.as3coreaddendum.system.IPriority</codeph> and <codeph>org.as3coreaddendum.system.IIndexable</codeph> interfaces, otherwise a <codeph>org.as3coreaddendum.errors.ClassCastError</codeph> is thrown.
+	 <p>This queue is useful when you want to sort the objects by priority, but if the priority of two objects are equal, the <codeph>index</codeph> property of the objects are compared to decide wich object comes before.</p>
+	 <p>This queue also adds an event listener on elements to <codeph>org.as3coreaddendum.events.PriorityEvent</codeph> and <codeph>org.as3coreaddendum.events.IndexEvent</codeph> (if elements implement <codeph>flash.events.IEventDispatcher</codeph>).
+	 Thus this queue keeps itself automatically sorted if its elements dispatch a <codeph>org.as3coreaddendum.events.PriorityEvent</codeph> or <codeph>org.as3coreaddendum.events.IndexEvent</codeph> when its priority or index changes.</p>
+	 
+	 </apiDesc><example>
+	 
+	 <codeblock rev="3.0">
+	 package test
+	 {
+	     import org.as3coreaddendum.system.IIndexable;
+	     import org.as3coreaddendum.system.IPriority;
+	 
+	     public class TestIndexablePriority implements IIndexable, IPriority
+	     {
+	         private var _index:int;
+	         private var _name:String;
+	         private var _priority:int;
+	 
+	 
+	         public function get priority(): int { return _priority; }
+	 
+	         public function set priority(value:int): void { _priority = value; }
+	 
+	         public function get index(): int { return _index; }
+	 
+	         public function set index(value:int): void { _index = value; }
+	 
+	         public function TestIndexablePriority(name:String, priority:int, index:int)
+	         {
+	             _name = name;
+	             _priority = priority;
+	             _index = index;
+	         }
+	 
+	         public function toString(): String
+	         {
+	             return "[TestIndexablePriority " + _name + "]";
+	         }
+	     }
+	 }
+	 </codeblock>
+	 
+	 <codeblock rev="3.0">
+	 import org.as3collections.ISortedQueue;
+	 import org.as3collections.queues.IndexablePriorityQueue;
+	 import test.TestIndexablePriority;
+	 
+	 var queue1:ISortedQueue = new IndexablePriorityQueue();
+	 
+	 var o1:TestIndexablePriority = new TestIndexablePriority("o1", 1, 0);
+	 var o2:TestIndexablePriority = new TestIndexablePriority("o2", 2, 1);
+	 var o3:TestIndexablePriority = new TestIndexablePriority("o3", 2, 2);
+	 var o4:TestIndexablePriority = new TestIndexablePriority("o4", 4, 3);
+	 
+	 queue1.offer(o2)            // true
+	 queue1                      // [[TestIndexablePriority o2]]
+	 queue1.size()               // 1
+	 
+	 queue1.offer(o3)            // true
+	 queue1                      // [[TestIndexablePriority o2],[TestIndexablePriority o3]]
+	 queue1.size()               // 2
+	 
+	 queue1.offer(o2)            // true
+	 queue1                      // [[TestIndexablePriority o2],[TestIndexablePriority o2],[TestIndexablePriority o3]]
+	 
+	 queue1.offer(o1)            // true
+	 queue1                      // [[TestIndexablePriority o2],[TestIndexablePriority o2],[TestIndexablePriority o3],[TestIndexablePriority o1]]
+	 
+	 queue1.offer(o4)            // true
+	 queue1                      // [[TestIndexablePriority o4],[TestIndexablePriority o2],[TestIndexablePriority o2],[TestIndexablePriority o3],[TestIndexablePriority o1]]
+	 
+	 queue1.offer(1)             // false
+	 queue1                      // [[TestIndexablePriority o4],[TestIndexablePriority o2],[TestIndexablePriority o2],[TestIndexablePriority o3],[TestIndexablePriority o1]]
+	 
+	 queue1.add(1)               // ClassCastError: The element must implement the 'org.as3coreaddendum.system.IPriority' interface. Type received: int
+	 </codeblock>
+	 
+	 </example></apiClassifierDetail><related-links><link href="http://as3coreaddendum.org/en-us/documentation/asdoc/org/as3coreaddendum/system/IPriority.html"><linktext>org.as3coreaddendum.system.IPriority</linktext></link><link href="http://as3coreaddendum.org/en-us/documentation/asdoc/org/as3coreaddendum/system/IIndexable.html"><linktext>org.as3coreaddendum.system.IIndexable</linktext></link><link href="http://as3coreaddendum.org/en-us/documentation/asdoc/org/as3coreaddendum/events/PriorityEvent.html"><linktext>org.as3coreaddendum.events.PriorityEvent</linktext></link><link href="http://as3coreaddendum.org/en-us/documentation/asdoc/org/as3coreaddendum/events/IndexEvent.html"><linktext>org.as3coreaddendum.events.IndexEvent</linktext></link></related-links><apiConstructor id="org.as3collections.queues:PriorityIndexQueue:PriorityIndexQueue"><apiName>PriorityIndexQueue</apiName><shortdesc>
+		 Constructor, creates a new IndexablePriorityQueue object.</shortdesc><prolog/><apiConstructorDetail><apiConstructorDef><apiAccess value="public"/><apiException><apiDesc> 		if one or more elements in the <codeph>source</codeph> argument do not implement the <codeph>org.as3coreaddendum.system.IPriority</codeph> and <codeph>org.as3coreaddendum.system.IIndexable</codeph> interfaces.
+		 </apiDesc><apiItemName>org.as3coreaddendum.errors:ClassCastError</apiItemName><apiOperationClassifier>org.as3coreaddendum.errors:ClassCastError</apiOperationClassifier></apiException><apiParam><apiItemName>source</apiItemName><apiType value="Array"/><apiData>null</apiData><apiDesc>		an array to fill the queue.
+		 </apiDesc></apiParam></apiConstructorDef><apiDesc>
+		 Constructor, creates a new <codeph>IndexablePriorityQueue</codeph> object.
+		 
+		 </apiDesc></apiConstructorDetail></apiConstructor><apiOperation id="org.as3collections.queues:PriorityIndexQueue:add"><apiName>add</apiName><shortdesc>
+		 Inserts the specified element into this queue if it is possible to do so immediately without violating restrictions.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiException><apiDesc> 	if the specified element is <codeph>null</codeph>.
+		 </apiDesc><apiItemName>ArgumentError</apiItemName><apiOperationClassifier>ArgumentError</apiOperationClassifier></apiException><apiException><apiDesc> 		if the element does not implements the <codeph>org.as3coreaddendum.system.IPriority</codeph> or <codeph>org.as3coreaddendum.system.IIndexable</codeph> interfaces.
+		 </apiDesc><apiItemName>org.as3coreaddendum.errors:ClassCastError</apiItemName><apiOperationClassifier>org.as3coreaddendum.errors:ClassCastError</apiOperationClassifier></apiException><apiException><apiDesc> 			if the specified element cannot be inserted.
+		 </apiDesc><apiItemName>flash.errors:IllegalOperationError</apiItemName><apiOperationClassifier>flash.errors:IllegalOperationError</apiOperationClassifier></apiException><apiReturn><apiDesc><codeph>true</codeph> if this queue changed as a result of the call.
+		 </apiDesc><apiType value="Boolean"/></apiReturn><apiParam><apiItemName>element</apiItemName><apiType value="any"/><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Inserts the specified element into this queue if it is possible to do so immediately without violating restrictions.
+		 This method differs from <codeph>offer</codeph> only in that it throws an error if the element cannot be inserted.
+		 <p>This implementation returns the result of <codeph>offer</codeph> unless the element cannot be inserted.</p>
+		 <p>This implementation only allow elements that implements the <codeph>org.as3coreaddendum.system.IPriority</codeph> and <codeph>org.as3coreaddendum.system.IIndexable</codeph> interfaces.
+		 A <codeph>org.as3coreaddendum.errors.ClassCastError</codeph> is thrown if the element does not implements this interfaces.</p>
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.queues:PriorityIndexQueue:clone"><apiName>clone</apiName><shortdesc>
+		 Creates and return a new IndexablePriorityQueue object containing all elements in this queue (in the same order).</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiReturn><apiDesc>a new <codeph>IndexablePriorityQueue</codeph> object containing all elements in this queue (in the same order).
+ 		 </apiDesc><apiType value="any"/></apiReturn></apiOperationDef><apiDesc>
+		 Creates and return a new <codeph>IndexablePriorityQueue</codeph> object containing all elements in this queue (in the same order).
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.queues:PriorityIndexQueue:offer"><apiName>offer</apiName><shortdesc>
+		 Inserts the specified element into this queue if it is possible to do so immediately without violating restrictions.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiReturn><apiDesc><codeph>true</codeph> if the element was added to this queue, else <codeph>false</codeph>. 
+		 </apiDesc><apiType value="Boolean"/></apiReturn><apiParam><apiItemName>element</apiItemName><apiType value="any"/><apiDesc>	the element to add.
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Inserts the specified element into this queue if it is possible to do so immediately without violating restrictions.
+		 When using a restricted queue (like <codeph>TypedQueue</codeph> and <codeph>UniqueQueue</codeph>), this method is generally preferable to <codeph>add</codeph>, which can fail to insert an element only by throwing an error. 
+		 <p>This implementation only allow elements that implements the <codeph>org.as3coreaddendum.system.IPriority</codeph> and <codeph>org.as3coreaddendum.system.IIndexable</codeph> interfaces.
+		 If the element does not implements this interfaces the method returns <codeph>false</codeph>.</p>
+		 <p>Before returning, the queue is reordered.</p>
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiValue id="org.as3collections.queues:PriorityIndexQueue:comparator:set"><apiName>comparator</apiName><shortdesc>
+		 IndexablePriorityQueue does not allow changing its comparator object.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiIsOverride/><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="org.as3coreaddendum.system:IComparator"/></apiValueDef><apiDesc>
+		 <codeph>IndexablePriorityQueue</codeph> does not allow changing its <codeph>comparator</codeph> object.
+		 <p><codeph>IndexablePriorityQueue</codeph> was designed to be used exclusively with its default comparator object.
+		 If you want to change the comparator object using this setter, consider using <codeph>SortedQueue</codeph> class instead.</p>
+		 <p>If this setter is used an <codeph>IllegalOperationError</codeph> is thrown.</p>
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.as3collections.queues:PriorityIndexQueue:options:set"><apiName>options</apiName><shortdesc>
+		 IndexablePriorityQueue does not allow changing its options.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiIsOverride/><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="uint"/></apiValueDef><apiDesc>
+		 <codeph>IndexablePriorityQueue</codeph> does not allow changing its options.
+		 <p><codeph>IndexablePriorityQueue</codeph> was designed to be used exclusively with its default options.
+		 If you want to change the options using this setter, consider using <codeph>SortedQueue</codeph> class instead.</p>
+		 <p>If this setter is used an <codeph>IllegalOperationError</codeph> is thrown.</p>
+		 </apiDesc></apiValueDetail></apiValue></apiClassifier><apiClassifier id="org.as3collections.queues:SortedQueue"><apiName>SortedQueue</apiName><shortdesc>
+	 A queue that provides a total ordering on its elements.</shortdesc><prolog><author>Flávio Silva
+	 </author><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiAccess value="public"/><apiStatic/><apiBaseInterface>org.as3collections:ISortedQueue</apiBaseInterface><apiBaseClassifier>org.as3collections.queues:LinearQueue</apiBaseClassifier></apiClassifierDef><apiDesc>
+	 A queue that provides a <i>total ordering</i> on its elements.
+	 The queue is ordered according to the <i>natural ordering</i> of its elements, by a <i>IComparator</i> typically provided at sorted queue creation time, or by the arguments provided to the <codeph>sort</codeph> or <codeph>sortOn</codeph> methods.
+	 <p>For each change that occurs the queue is automatically ordered using the <codeph>comparator</codeph> and <codeph>options</codeph>.
+	 If none was provided the default behavior of the <codeph>sort</codeph> method is used.</p>
+	 <p>The user of this queue may change their order at any time by calling the <codeph>sort</codeph> or <codeph>sortOn</codeph> method and imposing others arguments to change the sort behaviour.</p>
+	 <p>It's possible to create unique sorted queues, typed sorted queues and even unique typed sorted queues.
+	 You just sends the <codeph>SortedQueue</codeph> object to the wrappers <codeph>UniqueQueue</codeph> or <codeph>TypedQueue</codeph> or uses the <codeph>QueueUtil.getUniqueTypedQueue</codeph>.
+	 But there's a problem here: the return type will be <codeph>UniqueQueue</codeph> or <codeph>TypedQueue</codeph>.
+	 Thus you will can no longer use the <codeph>sort</codeph> and <codeph>sortOn</codeph> methods directly.
+	 The wrapped <codeph>SortedQueue</codeph> will be only automatically ordered, with the provided <codeph>comparator</codeph> and <codeph>options</codeph> constructor's arguments.
+	 Check the examples at the bottom of the page.</p>
+	 
+	 </apiDesc><example>
+	 
+	 <codeblock rev="3.0">
+	 import org.as3collections.ISortedQueue;
+	 import org.as3collections.queues.SortedQueue;
+	 
+	 var queue1:ISortedQueue = new SortedQueue([3, 5, 1, 7], null, Array.NUMERIC | Array.DESCENDING);
+	 
+	 queue1                      // [7,5,3,1]
+	 queue1.size()               // 4
+	 
+	 queue1.add(-1)              // true
+	 queue1                      // [7,5,3,1,-1]
+	 queue1.size()               // 5
+	 
+	 queue1.add(4)               // true
+	 queue1                      // [7,5,4,3,1,-1]
+	 queue1.size()               // 6
+	 
+	 queue1.add(5)               // true
+	 queue1                      // [7,5,5,4,3,1,-1]
+	 queue1.size()               // 7
+	 
+	 queue1.poll()               // 7
+	 queue1                      // [5,5,4,3,1,-1]
+	 queue1.size()               // 6
+	 
+	 queue1.sort(null, Array.NUMERIC)
+	 queue1                      // [-1,1,3,4,5,5]
+	 
+	 queue1.poll()               // -1
+	 queue1                      // [5,5,4,3,1]
+	 queue1.size()               // 5
+	 
+	 queue1.add(2)               // true
+	 queue1                      // [5,5,4,3,2,1]
+	 queue1.size()               // 6
+	 
+	 queue1.add(10)              // true
+	 queue1                      // [10,5,5,4,3,2,1]
+	 </codeblock>
+	 
+	 </example></apiClassifierDetail><apiConstructor id="org.as3collections.queues:SortedQueue:SortedQueue"><apiName>SortedQueue</apiName><shortdesc>
+		 Constructor, creates a new SortedQueue object.</shortdesc><prolog/><apiConstructorDetail><apiConstructorDef><apiAccess value="public"/><apiParam><apiItemName>source</apiItemName><apiType value="Array"/><apiData>null</apiData><apiDesc>		an array to fill the queue.
+		 </apiDesc></apiParam><apiParam><apiItemName>comparator</apiItemName><apiType value="org.as3coreaddendum.system:IComparator"/><apiData>null</apiData><apiDesc>	the comparator object to be used internally to sort.
+		 </apiDesc></apiParam><apiParam><apiItemName>options</apiItemName><apiType value="uint"/><apiData>0</apiData><apiDesc>	the options to be used internally to sort.
+		 </apiDesc></apiParam></apiConstructorDef><apiDesc>
+		 Constructor, creates a new <codeph>SortedQueue</codeph> object.
+		 
+		 </apiDesc></apiConstructorDetail></apiConstructor><apiOperation id="org.as3collections.queues:SortedQueue:clone"><apiName>clone</apiName><shortdesc>
+		 Creates and return a new SortedQueue object containing all elements in this queue (in the same order).</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiReturn><apiDesc>a new <codeph>SortedQueue</codeph> object containing all elements in this queue (in the same order).
+ 		 </apiDesc><apiType value="any"/></apiReturn></apiOperationDef><apiDesc>
+		 Creates and return a new <codeph>SortedQueue</codeph> object containing all elements in this queue (in the same order).
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.queues:SortedQueue:equals"><apiName>equals</apiName><shortdesc>
+		 Performs an arbitrary, specific evaluation of equality between this object and the other object.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiReturn><apiDesc><codeph>true</codeph> if the arbitrary evaluation considers the objects equal.
+		 </apiDesc><apiType value="Boolean"/></apiReturn><apiParam><apiItemName>other</apiItemName><apiType value="any"/><apiDesc>	the object to be compared for equality.
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Performs an arbitrary, specific evaluation of equality between this object and the <codeph>other</codeph> object.
+		 <p>This implementation considers two differente objects equal if:</p>
+		 <p>
+		 <ul><li>object A and object B are instances of the same class (i.e. if they have <b>exactly</b> the same type)</li>
+		 <li>object A contains all elements of object B</li>
+		 <li>object B contains all elements of object A</li>
+		 <li>elements have exactly the same order</li>
+		 <li>object A and object B has the same type of comparator</li>
+		 <li>object A and object B has the same options</li>
+		 </ul></p>
+		 <p>This implementation takes care of the order of the elements in the queue.
+		 So, for two queues are equal the order of elements returned by the iterator object must be equal.</p>
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.queues:SortedQueue:offer"><apiName>offer</apiName><shortdesc>
+		 Inserts the specified element into this queue if it is possible to do so immediately without violating restrictions.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiReturn><apiDesc><codeph>true</codeph> if the element was added to this queue, else <codeph>false</codeph>. 
+		 </apiDesc><apiType value="Boolean"/></apiReturn><apiParam><apiItemName>element</apiItemName><apiType value="any"/><apiDesc>	the element to add.
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Inserts the specified element into this queue if it is possible to do so immediately without violating restrictions.
+		 When using a restricted queue (like <codeph>TypedQueue</codeph> and <codeph>UniqueQueue</codeph>), this method is generally preferable to <codeph>add</codeph>, which can fail to insert an element only by throwing an error. 
+		 <p>Before returning, the queue is reordered.</p>
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.queues:SortedQueue:poll"><apiName>poll</apiName><shortdesc>
+		 Retrieves and removes the head of this queue, or returns null if this queue is empty.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiReturn><apiDesc>the head of this queue, or <codeph>null</codeph> if this queue is empty.
+ 		 </apiDesc><apiType value="any"/></apiReturn></apiOperationDef><apiDesc>
+		 Retrieves and removes the head of this queue, or returns <codeph>null</codeph> if this queue is empty. 
+		 <p>Before returning, the queue is reordered.</p>
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.queues:SortedQueue:removeAll"><apiName>removeAll</apiName><shortdesc>
+		 Removes all of this queue's elements that are also contained in the specified collection.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiReturn><apiDesc><codeph>true</codeph> if this queue changed as a result of the call.
+		 </apiDesc><apiType value="Boolean"/></apiReturn><apiParam><apiItemName>collection</apiItemName><apiOperationClassifier>org.as3collections:ICollection</apiOperationClassifier><apiDesc>	the collection containing elements to be removed from this queue.
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Removes all of this queue's elements that are also contained in the specified collection. After this call returns, this queue will contain no elements in common with the specified collection.
+		 <p>Before returning, the queue is reordered.</p>
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.queues:SortedQueue:remove"><apiName>remove</apiName><shortdesc>
+		 Removes a single instance (only one occurrence) of the specified object from this queue, if it is present.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiReturn><apiDesc><codeph>true</codeph> if an object was removed as a result of this call.
+		 </apiDesc><apiType value="Boolean"/></apiReturn><apiParam><apiItemName>o</apiItemName><apiType value="any"/><apiDesc>	the object to be removed from this collection, if present.
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Removes a single instance (only one occurrence) of the specified object from this queue, if it is present.
+		 <p>Before returning, the queue is reordered.</p>
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.queues:SortedQueue:sortOn"><apiName>sortOn</apiName><shortdesc>
+		 
+		 Sorts the elements in an array according to one or more fields in the array.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiDesc>
+		 </apiDesc><apiType value="Array"/></apiReturn><apiParam><apiItemName>fieldName</apiItemName><apiType value="any"/><apiDesc>	 </apiDesc></apiParam><apiParam><apiItemName>options</apiItemName><apiType value="any"/><apiData>null</apiData><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 
+		 Sorts the elements in an array according to one or more fields in the array.
+		 <p>Consult <codeph>Array.sortOn</codeph> in the ActionScript 3.0 Language Reference in the link below for more info.</p>
+		 
+		 </apiDesc></apiOperationDetail><related-links><link href="http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/Array.html#sortOn()"><linktext>http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/Array.html#sortOn()</linktext></link></related-links></apiOperation><apiOperation id="org.as3collections.queues:SortedQueue:sort"><apiName>sort</apiName><shortdesc>
+		 Sorts the objects within this class.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiDesc>
+		 </apiDesc><apiType value="Array"/></apiReturn><apiParam><apiItemName>compare</apiItemName><apiType value="Function"/><apiData>null</apiData><apiDesc>	 </apiDesc></apiParam><apiParam><apiItemName>options</apiItemName><apiType value="uint"/><apiData>0</apiData><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Sorts the objects within this class.
+		 <p>For more info see <codeph>org.as3coreaddendum.system.ISortable.sort()</codeph> in the link below.</p>
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiValue id="org.as3collections.queues:SortedQueue:comparator:get"><apiName>comparator</apiName><shortdesc>
+		 Defines the comparator object to be used automatically to sort.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="org.as3coreaddendum.system:IComparator"/></apiValueDef><apiDesc>
+		 Defines the comparator object to be used automatically to sort.
+		 <p>If this value change the queue is automatically reordered with the new value.</p>
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.as3collections.queues:SortedQueue:options:get"><apiName>options</apiName><shortdesc>
+		 Defines the options to be used automatically to sort.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="uint"/></apiValueDef><apiDesc>
+		 Defines the options to be used automatically to sort.
+		 <p>If this value change the queue is automatically reordered with the new value.</p>
+		 </apiDesc></apiValueDetail></apiValue></apiClassifier></apiPackage>

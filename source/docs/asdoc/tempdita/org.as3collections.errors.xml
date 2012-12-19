@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?><apiPackage id="org.as3collections.errors"><apiName>org.as3collections.errors</apiName><apiDetail/><apiClassifier id="org.as3collections.errors:IndexOutOfBoundsError"><apiName>IndexOutOfBoundsError</apiName><shortdesc>
+	 The error that is thrown to indicate that an index of some sort (such as to an array) is out of range.</shortdesc><prolog><author>Flávio Silva
+	 </author><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiAccess value="public"/><apiStatic/><apiBaseClassifier>Error</apiBaseClassifier></apiClassifierDef><apiDesc>
+	 The error that is thrown to indicate that an index of some sort (such as to an array) is out of range.
+	 
+	 </apiDesc></apiClassifierDetail><apiConstructor id="org.as3collections.errors:IndexOutOfBoundsError:IndexOutOfBoundsError"><apiName>IndexOutOfBoundsError</apiName><shortdesc>
+		 Constructor, creates a new IndexOutOfBoundsError instance.</shortdesc><prolog/><apiConstructorDetail><apiConstructorDef><apiAccess value="public"/><apiParam><apiItemName>message</apiItemName><apiType value="String"/><apiData>null</apiData><apiDesc>A string associated with the error object.
+		 </apiDesc></apiParam></apiConstructorDef><apiDesc>
+		 Constructor, creates a new IndexOutOfBoundsError instance.
+		 
+		 </apiDesc></apiConstructorDetail></apiConstructor></apiClassifier><apiClassifier id="org.as3collections.errors:ConcurrentModificationError"><apiName>ConcurrentModificationError</apiName><shortdesc>
+	 The error that is thrown by methods that have detected concurrent modification of an object when such modification is not permissible.</shortdesc><prolog><author>Flávio Silva
+	 </author><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiAccess value="public"/><apiStatic/><apiBaseClassifier>Error</apiBaseClassifier></apiClassifierDef><apiDesc>
+	 The error that is thrown by methods that have detected concurrent modification of an object when such modification is not permissible.
+	 
+	 </apiDesc></apiClassifierDetail><apiConstructor id="org.as3collections.errors:ConcurrentModificationError:ConcurrentModificationError"><apiName>ConcurrentModificationError</apiName><shortdesc>
+		 Constructor, creates a new ConcurrentModificationError instance.</shortdesc><prolog/><apiConstructorDetail><apiConstructorDef><apiAccess value="public"/><apiParam><apiItemName>message</apiItemName><apiType value="String"/><apiData>null</apiData><apiDesc>A string associated with the error object.
+		 </apiDesc></apiParam></apiConstructorDef><apiDesc>
+		 Constructor, creates a new ConcurrentModificationError instance.
+		 
+		 </apiDesc></apiConstructorDetail></apiConstructor></apiClassifier><apiClassifier id="org.as3collections.errors:NoSuchElementError"><apiName>NoSuchElementError</apiName><shortdesc>
+	 The error that is thrown to indicate that there are no more elements in the iteration.</shortdesc><prolog><author>Flávio Silva
+	 </author><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiAccess value="public"/><apiStatic/><apiBaseClassifier>Error</apiBaseClassifier></apiClassifierDef><apiDesc>
+	 The error that is thrown to indicate that there are no more elements in the iteration.
+	 
+	 </apiDesc></apiClassifierDetail><apiConstructor id="org.as3collections.errors:NoSuchElementError:NoSuchElementError"><apiName>NoSuchElementError</apiName><shortdesc>
+		 Constructor, creates a new NoSuchElementError instance.</shortdesc><prolog/><apiConstructorDetail><apiConstructorDef><apiAccess value="public"/><apiParam><apiItemName>message</apiItemName><apiType value="String"/><apiData>null</apiData><apiDesc>A string associated with the error object.
+		 </apiDesc></apiParam></apiConstructorDef><apiDesc>
+		 Constructor, creates a new NoSuchElementError instance.
+		 
+		 </apiDesc></apiConstructorDetail></apiConstructor></apiClassifier></apiPackage>

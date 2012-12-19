@@ -1,0 +1,1451 @@
+<?xml version="1.0" encoding="UTF-8"?><apiPackage id="org.as3collections.lists"><apiName>org.as3collections.lists</apiName><apiDetail/><apiClassifier id="org.as3collections.lists:UniqueList"><apiName>UniqueList</apiName><shortdesc>
+	 UniqueList works as a wrapper for a IList object.</shortdesc><prolog><author>Flávio Silva
+	 </author><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiAccess value="public"/><apiStatic/><apiBaseInterface>org.as3collections:IList</apiBaseInterface><apiBaseClassifier>org.as3collections:UniqueCollection</apiBaseClassifier></apiClassifierDef><apiDesc>
+	 <codeph>UniqueList</codeph> works as a wrapper for a <codeph>IList</codeph> object.
+	 It does not allow duplicated elements in the collection.
+	 It stores the <codeph>wrapList</codeph> constructor's argument in the <codeph>wrappedList</codeph> variable.
+	 So every method call to this class is forwarded to the <codeph>wrappedList</codeph> object.
+	 The methods that need to be checked for duplication are previously validated before forward the call.
+	 No error is thrown by the validation of duplication.
+	 The calls that are forwarded to the <codeph>wrappedList</codeph> returns the return of the <codeph>wrappedList</codeph> call.
+	 <p>You can also create unique and typed lists. See below the link "ListUtil.getUniqueTypedList()".</p>
+	 
+	 </apiDesc><example>
+	 
+	 <codeblock rev="3.0">
+	 import org.as3collections.IList;
+	 import org.as3collections.IListIterator;
+	 import org.as3collections.lists.ArrayList;
+	 import org.as3collections.lists.UniqueList;
+	 import org.as3collections.utils.ListUtil;
+	 
+	 var l1:IList = new ArrayList([3, 5, 1, 7]);
+	 
+	 var list1:IList = new UniqueList(l1); // you can use this way
+	 
+	 //var list1:IList = ListUtil.getUniqueList(l1); // or you can use this way
+	 
+	 list1                       // [3,5,1,7]
+	 list1.size()                // 4
+	 
+	 list1.addAt(1, 4)           // true
+	 list1                       // [3,4,5,1,7]
+	 list1.size()                // 5
+	 
+	 list1.addAt(2, 3)           // false
+	 list1                       // [3,4,5,1,7]
+	 list1.size()                // 5
+	 
+	 list1.add(5)                // false
+	 list1                       // [3,4,5,1,7]
+	 list1.size()                // 5
+	 
+	 var it:IListIterator = list1.listIterator();
+	 var e:int;
+	 
+	 while (it.hasNext())
+	 {
+	 
+	     e = it.next()
+	     e                       // 3
+	 
+	     e = it.next()
+	     e                       // 4
+	 
+	     e = it.next()
+	     e                       // 5
+	 
+	     if (e == 5)
+	     {
+	         it.add(0)
+	 
+	         list1               // [3,4,5,0,1,7]
+	         list1.size()        // 6
+	     }
+	 
+	     e = it.next()
+	     e                       // 1
+	 
+	     if (e == 1)
+	     {
+	         it.add(3)
+	 
+	         list1               // [3,4,5,0,1,7]
+	         list1.size()        // 6
+	     }
+	 
+	     e = it.next()
+	     e                       // 7
+	 }
+	 
+	 list1                       // [3,4,5,0,1,7]
+	 list1.size()                // 6
+	 
+	 var l2:IList = new ArrayList([1, 2, 3, 4, 5, 1, 3, 5]);
+	 
+	 var list2:IList = new UniqueList(l2); // you can use this way
+	 
+	 //var list2:IList = ListUtil.getUniqueList(l2); // or you can use this way
+	 
+	 list2                       // [1,2,3,4,5]
+	 list2.size()                // 5
+	 </codeblock>
+	 
+	 </example></apiClassifierDetail><related-links><link href="org.as3collections.utils.xml#ListUtil/getUniqueList()"><linktext>ListUtil.getUniqueList()</linktext></link><link href="org.as3collections.utils.xml#ListUtil/getUniqueTypedList()"><linktext>ListUtil.getUniqueTypedList()</linktext></link></related-links><apiConstructor id="org.as3collections.lists:UniqueList:UniqueList"><apiName>UniqueList</apiName><shortdesc>
+		 Constructor, creates a new UniqueList object.</shortdesc><prolog/><apiConstructorDetail><apiConstructorDef><apiAccess value="public"/><apiException><apiDesc> 	if the <codeph>wrappedList</codeph> argument is <codeph>null</codeph>.
+		 </apiDesc><apiItemName>ArgumentError</apiItemName><apiOperationClassifier>ArgumentError</apiOperationClassifier></apiException><apiParam><apiItemName>wrapList</apiItemName><apiOperationClassifier>org.as3collections:IList</apiOperationClassifier><apiDesc>	the target list to wrap.
+		 </apiDesc></apiParam></apiConstructorDef><apiDesc>
+		 Constructor, creates a new <codeph>UniqueList</codeph> object.
+		 
+		 </apiDesc></apiConstructorDetail></apiConstructor><apiOperation id="org.as3collections.lists:UniqueList:addAllAt"><apiName>addAllAt</apiName><shortdesc>
+		 If the specified collection is empty returns false.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiException><apiDesc> 	 if the specified collection contains a <codeph>null</codeph> element and <codeph>wrappedList</codeph> does not permit <codeph>null</codeph> elements, or if the specified collection is <codeph>null</codeph>.
+		 </apiDesc><apiItemName>ArgumentError</apiItemName><apiOperationClassifier>ArgumentError</apiOperationClassifier></apiException><apiReturn><apiDesc><codeph>false</codeph> if the specified collection is <codeph>null</codeph> or empty. Otherwise returns the return of the call <codeph>wrappedList.addAllAt</codeph>.
+		 </apiDesc><apiType value="Boolean"/></apiReturn><apiParam><apiItemName>index</apiItemName><apiType value="int"/><apiDesc>		index at which to insert the first element from the specified collection.
+		 </apiDesc></apiParam><apiParam><apiItemName>collection</apiItemName><apiOperationClassifier>org.as3collections:ICollection</apiOperationClassifier><apiDesc>	the collection to forward to <codeph>wrappedList.addAllAt</codeph>.
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 If the specified collection is empty returns <codeph>false</codeph>.
+		 Otherwise, it clones the specified collection, removes from the cloned collection all elements that already are in the <codeph>wrappedList</codeph> and removes all duplicates.
+		 Then it forwards the call to <codeph>wrappedList.addAllAt</codeph> sending the cloned (and filtered) collection.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.lists:UniqueList:addAt"><apiName>addAt</apiName><shortdesc>
+		 If wrappedList.contains(element) returns true then returns false.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiDesc><codeph>false</codeph> if <codeph>wrappedList.contains(element)</codeph> returns <codeph>true</codeph>. Otherwise returns the return of the call <codeph>wrappedList.addAt</codeph>.
+		 </apiDesc><apiType value="Boolean"/></apiReturn><apiParam><apiItemName>index</apiItemName><apiType value="int"/><apiDesc>		index at which the specified element is to be inserted.
+		 </apiDesc></apiParam><apiParam><apiItemName>element</apiItemName><apiType value="any"/><apiDesc>	the element to be added.
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 If <codeph>wrappedList.contains(element)</codeph> returns <codeph>true</codeph> then returns <codeph>false</codeph>.
+		 Otherwise, it forwards the call to <codeph>wrappedList.addAt</codeph>.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.lists:UniqueList:clone"><apiName>clone</apiName><shortdesc>
+		 Creates and return a new UniqueList object with the clone of the wrappedList object.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiReturn><apiDesc>a new <codeph>UniqueList</codeph> object with the clone of the <codeph>wrappedList</codeph> object.
+ 		 </apiDesc><apiType value="any"/></apiReturn></apiOperationDef><apiDesc>
+		 Creates and return a new <codeph>UniqueList</codeph> object with the clone of the <codeph>wrappedList</codeph> object.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.lists:UniqueList:equals"><apiName>equals</apiName><shortdesc>
+		 This method uses CollectionUtil.equalConsideringOrder method to perform equality, sending this list and other argument.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiReturn><apiDesc><codeph>true</codeph> if the arbitrary evaluation considers the objects equal.
+		 </apiDesc><apiType value="Boolean"/></apiReturn><apiParam><apiItemName>other</apiItemName><apiType value="any"/><apiDesc>	the object to be compared for equality.
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 This method uses <codeph>CollectionUtil.equalConsideringOrder</codeph> method to perform equality, sending this list and <codeph>other</codeph> argument.
+		 
+		 </apiDesc></apiOperationDetail><related-links><link href="org.as3collections.utils.xml#CollectionUtil/equalConsideringOrder()"><linktext>CollectionUtil.equalConsideringOrder()</linktext></link></related-links></apiOperation><apiOperation id="org.as3collections.lists:UniqueList:getAt"><apiName>getAt</apiName><shortdesc>
+		 Forwards the call to wrappedList.getAt.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiDesc>the return of the call <codeph>wrappedList.getAt</codeph>.
+		 </apiDesc><apiType value="any"/></apiReturn><apiParam><apiItemName>index</apiItemName><apiType value="int"/><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Forwards the call to <codeph>wrappedList.getAt</codeph>.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.lists:UniqueList:indexOf"><apiName>indexOf</apiName><shortdesc>
+		 Forwards the call to wrappedList.indexOf.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiDesc>the return of the call <codeph>wrappedList.indexOf</codeph>.
+		 </apiDesc><apiType value="int"/></apiReturn><apiParam><apiItemName>element</apiItemName><apiType value="any"/><apiDesc>	 </apiDesc></apiParam><apiParam><apiItemName>fromIndex</apiItemName><apiType value="int"/><apiData>0</apiData><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Forwards the call to <codeph>wrappedList.indexOf</codeph>.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.lists:UniqueList:lastIndexOf"><apiName>lastIndexOf</apiName><shortdesc>
+		 Forwards the call to wrappedList.lastIndexOf.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiDesc>the return of the call <codeph>wrappedList.lastIndexOf</codeph>.
+		 </apiDesc><apiType value="int"/></apiReturn><apiParam><apiItemName>element</apiItemName><apiType value="any"/><apiDesc>	 </apiDesc></apiParam><apiParam><apiItemName>fromIndex</apiItemName><apiType value="int"/><apiData>0x7fffffff</apiData><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Forwards the call to <codeph>wrappedList.lastIndexOf</codeph>.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.lists:UniqueList:listIterator"><apiName>listIterator</apiName><shortdesc>
+		 Returns a list iterator of the elements in this list (in proper sequence), starting at the specified position in this list.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiDesc>a list iterator of the elements in this list (in proper sequence), starting at the specified position in this list.
+		 </apiDesc><apiOperationClassifier>org.as3collections:IListIterator</apiOperationClassifier></apiReturn><apiParam><apiItemName>index</apiItemName><apiType value="int"/><apiData>0</apiData><apiDesc>	index of first element to be returned from the list iterator (by a call to the <codeph>next</codeph> method) 
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Returns a list iterator of the elements in this list (in proper sequence), starting at the specified position in this list.
+		 The specified index indicates the first element that would be returned by an initial call to <codeph>next</codeph>.
+		 An initial call to <codeph>previous</codeph> would return the element with the specified index minus one. 
+		 <p>This implementation returns an <codeph>ListIterator</codeph> object.</p>
+		 
+		 </apiDesc></apiOperationDetail><related-links><link href="org.as3collections.iterators.xml#ListIterator"><linktext>ListIterator</linktext></link></related-links></apiOperation><apiOperation id="org.as3collections.lists:UniqueList:removeAt"><apiName>removeAt</apiName><shortdesc>
+		 Forwards the call to wrappedList.removeAt.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiDesc>the return of the call <codeph>wrappedList.removeAt</codeph>.
+		 </apiDesc><apiType value="any"/></apiReturn><apiParam><apiItemName>index</apiItemName><apiType value="int"/><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Forwards the call to <codeph>wrappedList.removeAt</codeph>.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.lists:UniqueList:removeRange"><apiName>removeRange</apiName><shortdesc>
+		 Forwards the call to wrappedList.removeRange.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiDesc>the return of the call <codeph>wrappedList.removeRange</codeph>.
+		 </apiDesc><apiOperationClassifier>org.as3collections:ICollection</apiOperationClassifier></apiReturn><apiParam><apiItemName>fromIndex</apiItemName><apiType value="int"/><apiDesc>	 </apiDesc></apiParam><apiParam><apiItemName>toIndex</apiItemName><apiType value="int"/><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Forwards the call to <codeph>wrappedList.removeRange</codeph>.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.lists:UniqueList:reverse"><apiName>reverse</apiName><shortdesc>
+		 Forwards the call to wrappedList.reverse.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="void"/></apiReturn></apiOperationDef><apiDesc>
+		 Forwards the call to <codeph>wrappedList.reverse</codeph>.
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.lists:UniqueList:setAt"><apiName>setAt</apiName><shortdesc>
+		 If wrappedList.contains(element) returns true then returns false.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiDesc><codeph>false</codeph> if <codeph>wrappedList.contains(element)</codeph> returns <codeph>true</codeph>. Otherwise returns the return of the call <codeph>wrappedList.setAt</codeph>.
+		 </apiDesc><apiType value="any"/></apiReturn><apiParam><apiItemName>index</apiItemName><apiType value="int"/><apiDesc>	 </apiDesc></apiParam><apiParam><apiItemName>element</apiItemName><apiType value="any"/><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 If <codeph>wrappedList.contains(element)</codeph> returns <codeph>true</codeph> then returns <codeph>false</codeph>. Otherwise, it forwards the call to <codeph>wrappedList.setAt</codeph>.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.lists:UniqueList:subList"><apiName>subList</apiName><shortdesc>
+		 Returns a new UniqueList(wrappedList.subList(fromIndex, toIndex)).</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiException><apiDesc>		if <codeph>fromIndex</codeph> or <codeph>toIndex</codeph> is out of range <codeph>(index &lt; 0 || index &gt; size())</codeph>.
+		 </apiDesc><apiItemName>IndexOutOfBoundsError</apiItemName><apiOperationClassifier>org.as3collections.errors:IndexOutOfBoundsError</apiOperationClassifier></apiException><apiReturn><apiDesc>a new <codeph>UniqueList(wrappedList.subList(fromIndex, toIndex))</codeph>.
+		 </apiDesc><apiOperationClassifier>org.as3collections:IList</apiOperationClassifier></apiReturn><apiParam><apiItemName>fromIndex</apiItemName><apiType value="int"/><apiDesc>	the index to start retrieving elements (inclusive).
+		 </apiDesc></apiParam><apiParam><apiItemName>toIndex</apiItemName><apiType value="int"/><apiDesc>	the index to stop retrieving elements (exclusive).
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Returns a new <codeph>UniqueList(wrappedList.subList(fromIndex, toIndex))</codeph>. 
+		 <p>Modifications in the returned <codeph>UniqueList</codeph> object does not affect this list.</p>
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiValue id="org.as3collections.lists:UniqueList:modCount:get"><apiName>modCount</apiName><shortdesc>
+		 Returns the return of the call wrappedList.modCount.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="read"/><apiType value="int"/></apiValueDef><apiDesc>
+		 Returns the return of the call <codeph>wrappedList.modCount</codeph>.
+		 </apiDesc></apiValueDetail></apiValue></apiClassifier><apiClassifier id="org.as3collections.lists:TypedList"><apiName>TypedList</apiName><shortdesc>
+	 TypedList works as a wrapper for a IList object.</shortdesc><prolog><author>Flávio Silva
+	 </author><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiAccess value="public"/><apiStatic/><apiBaseInterface>org.as3collections:IList</apiBaseInterface><apiBaseClassifier>org.as3collections:TypedCollection</apiBaseClassifier></apiClassifierDef><apiDesc>
+	 <codeph>TypedList</codeph> works as a wrapper for a <codeph>IList</codeph> object.
+	 Since ActionScript 3.0 does not support typed arrays, <codeph>TypedList</codeph> is a way to create typed lists.
+	 It stores the <codeph>wrapList</codeph> constructor's argument internaly.
+	 So every method call to this class is forwarded to the <codeph>wrappedList</codeph> object.
+	 The methods that need to be checked for the type of the elements are previously validated before forward the call.
+	 If the type of an element requested to be added to this list is incompatible with the type of the list a <codeph>org.as3coreaddendum.errors.ClassCastError</codeph> is thrown.
+	 The calls that are forwarded to the <codeph>wrappedList</codeph> returns the return of the <codeph>wrappedList</codeph> call.
+	 <p><codeph>TypedList</codeph> does not allow <codeph>null</codeph> elements.</p>
+	 <p>You can also create unique and typed lists. See below the link "ListUtil.getUniqueTypedList()".</p>
+	 
+	 </apiDesc><example>
+	 
+	 <codeblock rev="3.0">
+	 import org.as3collections.IList;
+	 import org.as3collections.IListIterator;
+	 import org.as3collections.lists.ArrayList;
+	 import org.as3collections.lists.TypedList;
+	 import org.as3collections.utils.ListUtil;
+	 
+	 var l1:IList = new ArrayList([3, 5, 1, 7]);
+	 
+	 var list1:IList = new TypedList(l1, int); // you can use this way
+	 
+	 //var list1:IList = ListUtil.getTypedList(l1, int); // or you can use this way
+	 
+	 list1                          // [3,5,1,7]
+	 list1.size()                   // 4
+	 
+	 list1.add(8)                   // true
+	 list1                          // [3,5,1,7,8]
+	 list1.size()                   // 5
+	 
+	 list1.addAt(1, 4)              // true
+	 list1                          // [3,4,5,1,7,8]
+	 list1.size()                   // 6
+	 
+	 list1.remove("abc")            // false
+	 list1                          // [3,4,5,1,7,8]
+	 list1.size()                   // 6
+	 
+	 var it:IListIterator = list1.listIterator();
+	 var e:int;
+	 
+	 while (it.hasNext())
+	 {
+	 
+	     e = it.next()
+	     e                          // 3
+	 
+	     e = it.next()
+	     e:                         // 4
+	 
+	     e = it.next()
+	     e                          // 5
+	 
+	     if (e == 5)
+	     {
+	         it.add(0)
+	 
+	         list1                  // [3,4,5,0,1,7,8]
+	         list1.size()           // 7
+	     }
+	 
+	     e = it.next()
+	     e                          // 1
+	 
+	     if (e == 1)
+	     {
+	         it.add(3)
+	 
+	         list1                  // [3,4,5,0,1,3,7,8]
+	         list1.size()           // 8
+	     }
+	 
+	     e = it.next()
+	     e                          // 7
+	 
+	     e = it.next()
+	     e                          // 8
+	 
+	     if (e == 8)
+	     {
+	         it.add("ghi")          // ClassCastError: Invalid element type. element: ghi | type: String | expected type: int
+	     }
+	 }
+	 
+	 list1                          // [3,4,5,0,1,3,7,8]
+	 list1.size()                   // 8
+	 
+	 list1.add("def")               // ClassCastError: Invalid element type. element: def | type: String | expected type: int
+	 
+	 list1.setAt(0, 1)              // 3
+	 list1                          // [1,4,5,0,1,3,7,8]
+	 list1.size()                   // 8
+	 
+	 list1.setAt(0, [1,2])          // ClassCastError: Invalid element type. element: 1,2 | type: Array | expected type: int
+	 </codeblock>
+	 
+	 </example></apiClassifierDetail><related-links><link href="org.as3collections.utils.xml#ListUtil/getTypedList()"><linktext>ListUtil.getTypedList()</linktext></link><link href="org.as3collections.utils.xml#ListUtil/getUniqueTypedList()"><linktext>ListUtil.getUniqueTypedList()</linktext></link></related-links><apiConstructor id="org.as3collections.lists:TypedList:TypedList"><apiName>TypedList</apiName><shortdesc>
+		 Constructor, creates a new TypedList object.</shortdesc><prolog/><apiConstructorDetail><apiConstructorDef><apiAccess value="public"/><apiException><apiDesc> 	if the <codeph>wrapList</codeph> argument is <codeph>null</codeph>.
+		 </apiDesc><apiItemName>ArgumentError</apiItemName><apiOperationClassifier>ArgumentError</apiOperationClassifier></apiException><apiException><apiDesc> 	if the <codeph>type</codeph> argument is <codeph>null</codeph>.
+		 </apiDesc><apiItemName>ArgumentError</apiItemName><apiOperationClassifier>ArgumentError</apiOperationClassifier></apiException><apiException><apiDesc> 		if the types of one or more elements in the <codeph>wrapList</codeph> argument are incompatible with the <codeph>type</codeph> argument.
+		 </apiDesc><apiItemName>org.as3coreaddendum.errors:ClassCastError</apiItemName><apiOperationClassifier>org.as3coreaddendum.errors:ClassCastError</apiOperationClassifier></apiException><apiParam><apiItemName>wrapList</apiItemName><apiOperationClassifier>org.as3collections:IList</apiOperationClassifier><apiDesc>	the target list to wrap.
+		 </apiDesc></apiParam><apiParam><apiItemName>type</apiItemName><apiType value="any"/><apiDesc>		the type of the elements allowed by this list.
+		 </apiDesc></apiParam></apiConstructorDef><apiDesc>
+		 Constructor, creates a new <codeph>TypedList</codeph> object.
+		 
+		 </apiDesc></apiConstructorDetail></apiConstructor><apiOperation id="org.as3collections.lists:TypedList:addAllAt"><apiName>addAllAt</apiName><shortdesc>
+		 The collection is validated to be forwarded to wrappedList.addAllAt.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiException><apiDesc> 		if the types of one or more elements in the <codeph>collection</codeph> argument are incompatible with the type of this list.
+		 </apiDesc><apiItemName>org.as3coreaddendum.errors:ClassCastError</apiItemName><apiOperationClassifier>org.as3coreaddendum.errors:ClassCastError</apiOperationClassifier></apiException><apiReturn><apiDesc>the return of the call <codeph>wrappedList.addAllAt</codeph>.
+		 </apiDesc><apiType value="Boolean"/></apiReturn><apiParam><apiItemName>index</apiItemName><apiType value="int"/><apiDesc>	 </apiDesc></apiParam><apiParam><apiItemName>collection</apiItemName><apiOperationClassifier>org.as3collections:ICollection</apiOperationClassifier><apiDesc>	the collection to forward to <codeph>wrappedList.addAllAt</codeph>.
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 The collection is validated to be forwarded to <codeph>wrappedList.addAllAt</codeph>.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.lists:TypedList:addAt"><apiName>addAt</apiName><shortdesc>
+		 The element is validated to be forwarded to wrappedList.addAt.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiException><apiDesc> 		if the type of the element is incompatible with the type of this list.
+		 </apiDesc><apiItemName>org.as3coreaddendum.errors:ClassCastError</apiItemName><apiOperationClassifier>org.as3coreaddendum.errors:ClassCastError</apiOperationClassifier></apiException><apiReturn><apiDesc>the return of the call <codeph>wrappedList.addAt</codeph>.
+		 </apiDesc><apiType value="Boolean"/></apiReturn><apiParam><apiItemName>index</apiItemName><apiType value="int"/><apiDesc>	 </apiDesc></apiParam><apiParam><apiItemName>element</apiItemName><apiType value="any"/><apiDesc>	the element to forward to <codeph>wrappedList.addAt</codeph>.
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 The element is validated to be forwarded to <codeph>wrappedList.addAt</codeph>.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.lists:TypedList:clone"><apiName>clone</apiName><shortdesc>
+		 Creates and return a new TypedList object with a clone of the wrappedList object.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiReturn><apiDesc>a new <codeph>TypedList</codeph> object with a clone of the <codeph>wrappedList</codeph> object.
+ 		 </apiDesc><apiType value="any"/></apiReturn></apiOperationDef><apiDesc>
+		 Creates and return a new <codeph>TypedList</codeph> object with a clone of the <codeph>wrappedList</codeph> object.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.lists:TypedList:equals"><apiName>equals</apiName><shortdesc>
+		 This method first checks if other argument is a TypedList.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiReturn><apiDesc><codeph>true</codeph> if the arbitrary evaluation considers the objects equal.
+		 </apiDesc><apiType value="Boolean"/></apiReturn><apiParam><apiItemName>other</apiItemName><apiType value="any"/><apiDesc>	the object to be compared for equality.
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 This method first checks if <codeph>other</codeph> argument is a <codeph>TypedList</codeph>.
+		 If not it returns <codeph>false</codeph>.
+		 If <codeph>true</codeph> it checks the <codeph>type</codeph> property of both lists.
+		 If they are different it returns <codeph>false</codeph>.
+		 Otherwise it uses <codeph>CollectionUtil.equalConsideringOrder</codeph> method to perform equality, sending this list and <codeph>other</codeph> argument.
+		 
+		 </apiDesc></apiOperationDetail><related-links><link href="org.as3collections.utils.xml#CollectionUtil/equalConsideringOrder()"><linktext>CollectionUtil.equalConsideringOrder()</linktext></link></related-links></apiOperation><apiOperation id="org.as3collections.lists:TypedList:getAt"><apiName>getAt</apiName><shortdesc>
+		 Forwards the call to wrappedList.getAt.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiDesc>the return of the call <codeph>wrappedList.getAt</codeph>.
+		 </apiDesc><apiType value="any"/></apiReturn><apiParam><apiItemName>index</apiItemName><apiType value="int"/><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Forwards the call to <codeph>wrappedList.getAt</codeph>.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.lists:TypedList:indexOf"><apiName>indexOf</apiName><shortdesc>
+		 Forwards the call to wrappedList.indexOf.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiDesc>the return of the call <codeph>wrappedList.indexOf</codeph>.
+		 </apiDesc><apiType value="int"/></apiReturn><apiParam><apiItemName>element</apiItemName><apiType value="any"/><apiDesc>	 </apiDesc></apiParam><apiParam><apiItemName>fromIndex</apiItemName><apiType value="int"/><apiData>0</apiData><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Forwards the call to <codeph>wrappedList.indexOf</codeph>.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.lists:TypedList:lastIndexOf"><apiName>lastIndexOf</apiName><shortdesc>
+		 Forwards the call to wrappedList.lastIndexOf.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiDesc>the return of the call <codeph>wrappedList.lastIndexOf</codeph>.
+		 </apiDesc><apiType value="int"/></apiReturn><apiParam><apiItemName>element</apiItemName><apiType value="any"/><apiDesc>	 </apiDesc></apiParam><apiParam><apiItemName>fromIndex</apiItemName><apiType value="int"/><apiData>0x7fffffff</apiData><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Forwards the call to <codeph>wrappedList.lastIndexOf</codeph>.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.lists:TypedList:listIterator"><apiName>listIterator</apiName><shortdesc>
+		 Returns a list iterator of the elements in this list (in proper sequence), starting at the specified position in this list.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiDesc>a list iterator of the elements in this list (in proper sequence), starting at the specified position in this list.
+		 </apiDesc><apiOperationClassifier>org.as3collections:IListIterator</apiOperationClassifier></apiReturn><apiParam><apiItemName>index</apiItemName><apiType value="int"/><apiData>0</apiData><apiDesc>	index of first element to be returned from the list iterator (by a call to the <codeph>next</codeph> method) 
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Returns a list iterator of the elements in this list (in proper sequence), starting at the specified position in this list. The specified index indicates the first element that would be returned by an initial call to <codeph>next</codeph>. An initial call to <codeph>previous</codeph> would return the element with the specified index minus one. 
+		 <p>This implementation returns an <codeph>ListIterator</codeph> object.</p>
+		 
+		 </apiDesc></apiOperationDetail><related-links><link href="org.as3collections.iterators.xml#ListIterator"><linktext>ListIterator</linktext></link></related-links></apiOperation><apiOperation id="org.as3collections.lists:TypedList:removeAt"><apiName>removeAt</apiName><shortdesc>
+		 Forwards the call to wrappedList.removeAt.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiDesc>the return of the call <codeph>wrappedList.removeAt</codeph>.
+		 </apiDesc><apiType value="any"/></apiReturn><apiParam><apiItemName>index</apiItemName><apiType value="int"/><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Forwards the call to <codeph>wrappedList.removeAt</codeph>.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.lists:TypedList:removeRange"><apiName>removeRange</apiName><shortdesc>
+		 Forwards the call to wrappedList.removeRange.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiDesc>the return of the call <codeph>wrappedList.removeRange</codeph>.
+		 </apiDesc><apiOperationClassifier>org.as3collections:ICollection</apiOperationClassifier></apiReturn><apiParam><apiItemName>fromIndex</apiItemName><apiType value="int"/><apiDesc>	 </apiDesc></apiParam><apiParam><apiItemName>toIndex</apiItemName><apiType value="int"/><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Forwards the call to <codeph>wrappedList.removeRange</codeph>.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.lists:TypedList:reverse"><apiName>reverse</apiName><shortdesc>
+		 Forwards the call to wrappedList.reverse.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="void"/></apiReturn></apiOperationDef><apiDesc>
+		 Forwards the call to <codeph>wrappedList.reverse</codeph>.
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.lists:TypedList:setAt"><apiName>setAt</apiName><shortdesc>
+		 The element is validated to be forwarded to wrappedList.setAt.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiException><apiDesc> 		if the type of the element is incompatible with the type of this list.
+		 </apiDesc><apiItemName>org.as3coreaddendum.errors:ClassCastError</apiItemName><apiOperationClassifier>org.as3coreaddendum.errors:ClassCastError</apiOperationClassifier></apiException><apiReturn><apiDesc>the return of the call <codeph>wrappedList.setAt</codeph>.
+		 </apiDesc><apiType value="any"/></apiReturn><apiParam><apiItemName>index</apiItemName><apiType value="int"/><apiDesc>	 </apiDesc></apiParam><apiParam><apiItemName>element</apiItemName><apiType value="any"/><apiDesc>	the element to forward to <codeph>wrappedList.setAt</codeph>.
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 The element is validated to be forwarded to <codeph>wrappedList.setAt</codeph>.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.lists:TypedList:subList"><apiName>subList</apiName><shortdesc>
+		 Returns a new TypedList(wrappedList.subList(fromIndex, toIndex)).</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiException><apiDesc>		if <codeph>fromIndex</codeph> or <codeph>toIndex</codeph> is out of range <codeph>(index &lt; 0 || index &gt; size())</codeph>.
+		 </apiDesc><apiItemName>IndexOutOfBoundsError</apiItemName><apiOperationClassifier>org.as3collections.errors:IndexOutOfBoundsError</apiOperationClassifier></apiException><apiReturn><apiDesc>a new <codeph>TypedList(wrappedList.subList(fromIndex, toIndex))</codeph>.
+		 </apiDesc><apiOperationClassifier>org.as3collections:IList</apiOperationClassifier></apiReturn><apiParam><apiItemName>fromIndex</apiItemName><apiType value="int"/><apiDesc>	the index to start retrieving elements (inclusive).
+		 </apiDesc></apiParam><apiParam><apiItemName>toIndex</apiItemName><apiType value="int"/><apiDesc>	the index to stop retrieving elements (exclusive).
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Returns a new <codeph>TypedList(wrappedList.subList(fromIndex, toIndex))</codeph>. 
+		 <p>Modifications in the returned <codeph>TypedList</codeph> object does not affect this list.</p>
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiValue id="org.as3collections.lists:TypedList:modCount:get"><apiName>modCount</apiName><shortdesc>
+		 Returns the return of the call wrappedList.modCount.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="read"/><apiType value="int"/></apiValueDef><apiDesc>
+		 Returns the return of the call <codeph>wrappedList.modCount</codeph>.
+		 </apiDesc></apiValueDetail></apiValue></apiClassifier><apiClassifier id="org.as3collections.lists:ReadOnlyArrayList"><apiName>ReadOnlyArrayList</apiName><shortdesc>
+	 A list that does not allow modifications.</shortdesc><prolog><author>Flávio Silva
+	 </author><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiAccess value="public"/><apiStatic/><apiBaseClassifier>org.as3collections:AbstractList</apiBaseClassifier></apiClassifierDef><apiDesc>
+	 A list that does not allow modifications.
+	 It receives all the elements by its constructor and can no longer be changed.
+	 All methods that change this list will throw an <codeph>org.as3coreaddendum.errors.UnsupportedOperationError</codeph>.
+	 
+	 </apiDesc><example>
+	 
+	 <codeblock rev="3.0">
+	 import org.as3collections.IList;
+	 import org.as3collections.lists.ArrayList;
+	 import org.as3collections.lists.ReadOnlyArrayList;
+	 
+	 var list1:IList = new ArrayList([3, 5, 1, 7]);
+	 
+	 list1                       // [3,5,1,7]
+	 
+	 var list2:IList = new ReadOnlyArrayList(list1.toArray());
+	 
+	 list2                       // [3,5,1,7]
+	 
+	 list2.add(1)                // UnsupportedOperationError: ReadOnlyArrayList is a read-only list and doesn't allow modifications.
+	 list2.remove(1)             // UnsupportedOperationError: ReadOnlyArrayList is a read-only list and doesn't allow modifications.
+	 
+	 var list3:IList = list2.clone();
+	 
+	 list3                       // [3,5,1,7]
+	 
+	 list3.contains(2)           // false
+	 list3.contains(5)           // true
+	 list3.indexOf(5)            // 1
+	 list3.containsAll(list1)    // true
+	 list3.equals(list1)         // false
+	 list3.getAt(2)              // 1
+	 list3.subList(1, 3)         // [5,1]
+	 
+	 list3.addAll(list2)         // UnsupportedOperationError: ReadOnlyArrayList is a read-only list and doesn't allow modifications.
+	 list3.removeRange(1, 3)     // UnsupportedOperationError: ReadOnlyArrayList is a read-only list and doesn't allow modifications.
+	 
+	 var it:IIterator = list3.iterator();
+	 
+	 while (it.hasNext())
+	 {
+	     it.next()
+	 
+	     it.remove()             // UnsupportedOperationError: ReadOnlyArrayIterator is a read-only iterator and doesn't allow modifications in the collection.
+	 }
+	 
+	 var it2:IListIterator = list3.listIterator();
+	 
+	 while (it2.hasNext())
+	 {
+	     it2.next()
+	 
+	     it.add(1)               // UnsupportedOperationError: ReadOnlyListIterator is a read-only iterator and doesn't allow modifications in the list.
+	 }
+	 </codeblock>
+	 
+	 </example></apiClassifierDetail><apiConstructor id="org.as3collections.lists:ReadOnlyArrayList:ReadOnlyArrayList"><apiName>ReadOnlyArrayList</apiName><shortdesc>
+		 Constructor, creates a new ReadOnlyArrayList object.</shortdesc><prolog/><apiConstructorDetail><apiConstructorDef><apiAccess value="public"/><apiException><apiDesc> 	if the <codeph>source</codeph> argument is <codeph>null</codeph>.
+		 </apiDesc><apiItemName>ArgumentError</apiItemName><apiOperationClassifier>ArgumentError</apiOperationClassifier></apiException><apiParam><apiItemName>source</apiItemName><apiType value="Array"/><apiDesc>	an array to fill the list.
+		 </apiDesc></apiParam></apiConstructorDef><apiDesc>
+		 Constructor, creates a new <codeph>ReadOnlyArrayList</codeph> object.
+		 
+		 </apiDesc></apiConstructorDetail></apiConstructor><apiOperation id="org.as3collections.lists:ReadOnlyArrayList:addAllAt"><apiName>addAllAt</apiName><shortdesc>
+		 This implementation always throws an UnsupportedOperationError.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiException><apiDesc> 	<codeph>ReadOnlyArrayList</codeph> is a read-only list and doesn't allow modifications.
+		 </apiDesc><apiItemName>org.as3coreaddendum.errors:UnsupportedOperationError</apiItemName><apiOperationClassifier>org.as3coreaddendum.errors:UnsupportedOperationError</apiOperationClassifier></apiException><apiReturn><apiDesc></apiDesc><apiType value="Boolean"/></apiReturn><apiParam><apiItemName>index</apiItemName><apiType value="int"/><apiDesc>	 </apiDesc></apiParam><apiParam><apiItemName>collection</apiItemName><apiOperationClassifier>org.as3collections:ICollection</apiOperationClassifier><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 This implementation always throws an <codeph>UnsupportedOperationError</codeph>.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.lists:ReadOnlyArrayList:addAll"><apiName>addAll</apiName><shortdesc>
+		 This implementation always throws an UnsupportedOperationError.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiException><apiDesc> 	<codeph>ReadOnlyArrayList</codeph> is a read-only list and doesn't allow modifications.
+		 </apiDesc><apiItemName>org.as3coreaddendum.errors:UnsupportedOperationError</apiItemName><apiOperationClassifier>org.as3coreaddendum.errors:UnsupportedOperationError</apiOperationClassifier></apiException><apiReturn><apiDesc></apiDesc><apiType value="Boolean"/></apiReturn><apiParam><apiItemName>collection</apiItemName><apiOperationClassifier>org.as3collections:ICollection</apiOperationClassifier><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 This implementation always throws an <codeph>UnsupportedOperationError</codeph>.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.lists:ReadOnlyArrayList:addAt"><apiName>addAt</apiName><shortdesc>
+		 This implementation always throws an UnsupportedOperationError.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiException><apiDesc> 	<codeph>ReadOnlyArrayList</codeph> is a read-only list and doesn't allow modifications.
+		 </apiDesc><apiItemName>org.as3coreaddendum.errors:UnsupportedOperationError</apiItemName><apiOperationClassifier>org.as3coreaddendum.errors:UnsupportedOperationError</apiOperationClassifier></apiException><apiReturn><apiDesc></apiDesc><apiType value="Boolean"/></apiReturn><apiParam><apiItemName>index</apiItemName><apiType value="int"/><apiDesc>	 </apiDesc></apiParam><apiParam><apiItemName>element</apiItemName><apiType value="any"/><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 This implementation always throws an <codeph>UnsupportedOperationError</codeph>.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.lists:ReadOnlyArrayList:add"><apiName>add</apiName><shortdesc>
+		 This implementation always throws an UnsupportedOperationError.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiException><apiDesc> 	<codeph>ReadOnlyArrayList</codeph> is a read-only list and doesn't allow modifications.
+		 </apiDesc><apiItemName>org.as3coreaddendum.errors:UnsupportedOperationError</apiItemName><apiOperationClassifier>org.as3coreaddendum.errors:UnsupportedOperationError</apiOperationClassifier></apiException><apiReturn><apiDesc></apiDesc><apiType value="Boolean"/></apiReturn><apiParam><apiItemName>element</apiItemName><apiType value="any"/><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 This implementation always throws an <codeph>UnsupportedOperationError</codeph>.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.lists:ReadOnlyArrayList:clear"><apiName>clear</apiName><shortdesc>
+		 This implementation always throws an UnsupportedOperationError.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiException><apiDesc> 	<codeph>ReadOnlyArrayList</codeph> is a read-only list and doesn't allow modifications.
+		 </apiDesc><apiItemName>org.as3coreaddendum.errors:UnsupportedOperationError</apiItemName><apiOperationClassifier>org.as3coreaddendum.errors:UnsupportedOperationError</apiOperationClassifier></apiException><apiReturn><apiType value="void"/></apiReturn></apiOperationDef><apiDesc>
+		 This implementation always throws an <codeph>UnsupportedOperationError</codeph>.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.lists:ReadOnlyArrayList:clone"><apiName>clone</apiName><shortdesc>
+		 Creates and return a new ReadOnlyArrayList object containing all elements in this list (in the same order).</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiReturn><apiDesc>a new <codeph>ReadOnlyArrayList</codeph> object containing all elements in this list (in the same order).
+ 		 </apiDesc><apiType value="any"/></apiReturn></apiOperationDef><apiDesc>
+		 Creates and return a new <codeph>ReadOnlyArrayList</codeph> object containing all elements in this list (in the same order).
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.lists:ReadOnlyArrayList:iterator"><apiName>iterator</apiName><shortdesc>
+		 Returns an iterator over a set of elements.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiReturn><apiDesc>an iterator over a set of elements.
+		 </apiDesc><apiOperationClassifier>org.as3collections:IIterator</apiOperationClassifier></apiReturn></apiOperationDef><apiDesc>
+		 Returns an iterator over a set of elements.
+		 <p>This implementation returns a <codeph>ReadOnlyArrayIterator</codeph> object.</p>
+		 
+		 </apiDesc></apiOperationDetail><related-links><link href="org.as3collections.iterators.xml#ReadOnlyArrayIterator"><linktext>ReadOnlyArrayIterator</linktext></link></related-links></apiOperation><apiOperation id="org.as3collections.lists:ReadOnlyArrayList:listIterator"><apiName>listIterator</apiName><shortdesc>
+		 Returns a list iterator of the elements in this list (in proper sequence), starting at the specified position in this list.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiReturn><apiDesc>a list iterator of the elements in this list (in proper sequence), starting at the specified position in this list.
+		 </apiDesc><apiOperationClassifier>org.as3collections:IListIterator</apiOperationClassifier></apiReturn><apiParam><apiItemName>index</apiItemName><apiType value="int"/><apiData>0</apiData><apiDesc>	index of first element to be returned from the list iterator (by a call to the <codeph>next</codeph> method) 
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Returns a list iterator of the elements in this list (in proper sequence), starting at the specified position in this list. The specified index indicates the first element that would be returned by an initial call to <codeph>next</codeph>. An initial call to <codeph>previous</codeph> would return the element with the specified index minus one.
+		 <p>This implementation returns a <codeph>ReadOnlyListIterator</codeph> object.</p>
+		 
+		 </apiDesc></apiOperationDetail><related-links><link href="org.as3collections.iterators.xml#ReadOnlyListIterator"><linktext>ReadOnlyListIterator</linktext></link></related-links></apiOperation><apiOperation id="org.as3collections.lists:ReadOnlyArrayList:removeAll"><apiName>removeAll</apiName><shortdesc>
+		 This implementation always throws an UnsupportedOperationError.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiException><apiDesc> 	<codeph>ReadOnlyArrayList</codeph> is a read-only list and doesn't allow modifications.
+		 </apiDesc><apiItemName>org.as3coreaddendum.errors:UnsupportedOperationError</apiItemName><apiOperationClassifier>org.as3coreaddendum.errors:UnsupportedOperationError</apiOperationClassifier></apiException><apiReturn><apiDesc></apiDesc><apiType value="Boolean"/></apiReturn><apiParam><apiItemName>collection</apiItemName><apiOperationClassifier>org.as3collections:ICollection</apiOperationClassifier><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 This implementation always throws an <codeph>UnsupportedOperationError</codeph>.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.lists:ReadOnlyArrayList:removeAt"><apiName>removeAt</apiName><shortdesc>
+		 This implementation always throws an UnsupportedOperationError.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiException><apiDesc> 	<codeph>ReadOnlyArrayList</codeph> is a read-only list and doesn't allow modifications.
+		 </apiDesc><apiItemName>org.as3coreaddendum.errors:UnsupportedOperationError</apiItemName><apiOperationClassifier>org.as3coreaddendum.errors:UnsupportedOperationError</apiOperationClassifier></apiException><apiReturn><apiDesc>
+		 </apiDesc><apiType value="any"/></apiReturn><apiParam><apiItemName>index</apiItemName><apiType value="int"/><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 This implementation always throws an <codeph>UnsupportedOperationError</codeph>.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.lists:ReadOnlyArrayList:removeRange"><apiName>removeRange</apiName><shortdesc>
+		 This implementation always throws an UnsupportedOperationError.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiException><apiDesc> 	<codeph>ReadOnlyArrayList</codeph> is a read-only list and doesn't allow modifications.
+		 </apiDesc><apiItemName>org.as3coreaddendum.errors:UnsupportedOperationError</apiItemName><apiOperationClassifier>org.as3coreaddendum.errors:UnsupportedOperationError</apiOperationClassifier></apiException><apiReturn><apiDesc></apiDesc><apiOperationClassifier>org.as3collections:ICollection</apiOperationClassifier></apiReturn><apiParam><apiItemName>fromIndex</apiItemName><apiType value="int"/><apiDesc>	 </apiDesc></apiParam><apiParam><apiItemName>toIndex</apiItemName><apiType value="int"/><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 This implementation always throws an <codeph>UnsupportedOperationError</codeph>.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.lists:ReadOnlyArrayList:remove"><apiName>remove</apiName><shortdesc>
+		 This implementation always throws an UnsupportedOperationError.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiException><apiDesc> 	<codeph>ReadOnlyArrayList</codeph> is a read-only list and doesn't allow modifications.
+		 </apiDesc><apiItemName>org.as3coreaddendum.errors:UnsupportedOperationError</apiItemName><apiOperationClassifier>org.as3coreaddendum.errors:UnsupportedOperationError</apiOperationClassifier></apiException><apiReturn><apiDesc></apiDesc><apiType value="Boolean"/></apiReturn><apiParam><apiItemName>o</apiItemName><apiType value="any"/><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 This implementation always throws an <codeph>UnsupportedOperationError</codeph>.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.lists:ReadOnlyArrayList:retainAll"><apiName>retainAll</apiName><shortdesc>
+		 This implementation always throws an UnsupportedOperationError.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiException><apiDesc> 	<codeph>ReadOnlyArrayList</codeph> is a read-only list and doesn't allow modifications.
+		 </apiDesc><apiItemName>org.as3coreaddendum.errors:UnsupportedOperationError</apiItemName><apiOperationClassifier>org.as3coreaddendum.errors:UnsupportedOperationError</apiOperationClassifier></apiException><apiReturn><apiDesc></apiDesc><apiType value="Boolean"/></apiReturn><apiParam><apiItemName>collection</apiItemName><apiOperationClassifier>org.as3collections:ICollection</apiOperationClassifier><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 This implementation always throws an <codeph>UnsupportedOperationError</codeph>.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.lists:ReadOnlyArrayList:reverse"><apiName>reverse</apiName><shortdesc>
+		 This implementation always throws an UnsupportedOperationError.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiException><apiDesc> 	<codeph>ReadOnlyArrayList</codeph> is a read-only list and doesn't allow modifications.
+		 </apiDesc><apiItemName>org.as3coreaddendum.errors:UnsupportedOperationError</apiItemName><apiOperationClassifier>org.as3coreaddendum.errors:UnsupportedOperationError</apiOperationClassifier></apiException><apiReturn><apiDesc>
+		 </apiDesc><apiType value="void"/></apiReturn></apiOperationDef><apiDesc>
+		 This implementation always throws an <codeph>UnsupportedOperationError</codeph>.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.lists:ReadOnlyArrayList:setAt"><apiName>setAt</apiName><shortdesc>
+		 This implementation always throws an UnsupportedOperationError.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiException><apiDesc> 	<codeph>ReadOnlyArrayList</codeph> is a read-only list and doesn't allow modifications.
+		 </apiDesc><apiItemName>org.as3coreaddendum.errors:UnsupportedOperationError</apiItemName><apiOperationClassifier>org.as3coreaddendum.errors:UnsupportedOperationError</apiOperationClassifier></apiException><apiReturn><apiDesc>
+		 </apiDesc><apiType value="any"/></apiReturn><apiParam><apiItemName>index</apiItemName><apiType value="int"/><apiDesc>	 </apiDesc></apiParam><apiParam><apiItemName>element</apiItemName><apiType value="any"/><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 This implementation always throws an <codeph>UnsupportedOperationError</codeph>.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.lists:ReadOnlyArrayList:subList"><apiName>subList</apiName><shortdesc>
+		 Returns a new ReadOnlyArrayList that is a view of the portion of this ReadOnlyArrayList between the specified fromIndex, inclusive, and toIndex, exclusive.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiException><apiDesc>		if <codeph>fromIndex</codeph> or <codeph>toIndex</codeph> is out of range <codeph>(index &lt; 0 || index &gt; size())</codeph>.
+		 </apiDesc><apiItemName>IndexOutOfBoundsError</apiItemName><apiOperationClassifier>org.as3collections.errors:IndexOutOfBoundsError</apiOperationClassifier></apiException><apiReturn><apiDesc>a new <codeph>ReadOnlyArrayList</codeph> that is a view of the specified range within this list.
+		 </apiDesc><apiOperationClassifier>org.as3collections:IList</apiOperationClassifier></apiReturn><apiParam><apiItemName>fromIndex</apiItemName><apiType value="int"/><apiDesc>	the index to start retrieving elements (inclusive).
+		 </apiDesc></apiParam><apiParam><apiItemName>toIndex</apiItemName><apiType value="int"/><apiDesc>	the index to stop retrieving elements (exclusive).
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Returns a new <codeph>ReadOnlyArrayList</codeph> that is a view of the portion of this <codeph>ReadOnlyArrayList</codeph> between the specified <codeph>fromIndex</codeph>, inclusive, and <codeph>toIndex</codeph>, exclusive.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation></apiClassifier><apiClassifier id="org.as3collections.lists:UniqueSortedList"><apiName>UniqueSortedList</apiName><shortdesc>
+	 UniqueSortedList works as a wrapper for a ISortedList object.</shortdesc><prolog><author>Flávio Silva
+	 </author><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiAccess value="public"/><apiStatic/><apiBaseInterface>org.as3collections:ISortedList</apiBaseInterface><apiBaseClassifier>org.as3collections.lists:UniqueList</apiBaseClassifier></apiClassifierDef><apiDesc>
+	 <codeph>UniqueSortedList</codeph> works as a wrapper for a <codeph>ISortedList</codeph> object.
+	 It does not allow duplicated elements in the collection.
+	 It stores the <codeph>wrapList</codeph> constructor's argument in the <codeph>wrappedList</codeph> variable.
+	 So every method call to this class is forwarded to the <codeph>wrappedList</codeph> object.
+	 The methods that need to be checked for duplication are previously validated before forward the call.
+	 No error is thrown by the validation of duplication.
+	 The calls that are forwarded to the <codeph>wrappedList</codeph> returns the return of the <codeph>wrappedList</codeph> call.
+	 <p>You can also create unique and typed sorted lists.
+	 See below the link "ListUtil.getUniqueTypedSortedList()".</p>
+	 
+	 </apiDesc><example>
+	 
+	 <codeblock rev="3.0">
+	 import org.as3collections.ISortedList;
+	 import org.as3collections.IListIterator;
+	 import org.as3collections.lists.SortedArrayList;
+	 import org.as3collections.lists.UniqueSortedList;
+	 import org.as3collections.utils.ListUtil;
+	 
+	 var l1:ISortedList = new SortedArrayList([3, 5, 1, 7], null, Array.NUMERIC);
+	 
+	 var list1:ISortedList = new UniqueSortedList(l1); // you can use this way
+	 
+	 //var list1:ISortedList = ListUtil.getUniqueSortedList(l1); // or you can use this way
+	 
+	 list1                       // [1,3,5,7]
+	 list1.size()                // 4
+	 
+	 list1.addAt(1, 4)           // true
+	 list1                       // [1,3,4,5,7]
+	 list1.size()                // 5
+	 
+	 list1.addAt(2, 3)           // false
+	 list1                       // [1,3,4,5,7]
+	 list1.size()                // 5
+	 
+	 list1.add(5)                // false
+	 list1                       // [1,3,4,5,7]
+	 list1.size()                // 5
+	 </codeblock>
+	 
+	 </example></apiClassifierDetail><related-links><link href="org.as3collections.utils.xml#ListUtil/getUniqueSortedList()"><linktext>ListUtil.getUniqueSortedList()</linktext></link><link href="org.as3collections.utils.xml#ListUtil/getUniqueTypedSortedList()"><linktext>ListUtil.getUniqueTypedSortedList()</linktext></link></related-links><apiConstructor id="org.as3collections.lists:UniqueSortedList:UniqueSortedList"><apiName>UniqueSortedList</apiName><shortdesc>
+		 Constructor, creates a new TypedList object.</shortdesc><prolog/><apiConstructorDetail><apiConstructorDef><apiAccess value="public"/><apiException><apiDesc> 	if the <codeph>wrapList</codeph> argument is <codeph>null</codeph>.
+		 </apiDesc><apiItemName>ArgumentError</apiItemName><apiOperationClassifier>ArgumentError</apiOperationClassifier></apiException><apiException><apiDesc> 	if the <codeph>type</codeph> argument is <codeph>null</codeph>.
+		 </apiDesc><apiItemName>ArgumentError</apiItemName><apiOperationClassifier>ArgumentError</apiOperationClassifier></apiException><apiException><apiDesc> 		if the types of one or more elements in the <codeph>wrapList</codeph> argument are incompatible with the <codeph>type</codeph> argument.
+		 </apiDesc><apiItemName>org.as3coreaddendum.errors:ClassCastError</apiItemName><apiOperationClassifier>org.as3coreaddendum.errors:ClassCastError</apiOperationClassifier></apiException><apiParam><apiItemName>wrapList</apiItemName><apiOperationClassifier>org.as3collections:ISortedList</apiOperationClassifier><apiDesc>	the target list to wrap.
+		 </apiDesc></apiParam></apiConstructorDef><apiDesc>
+		 Constructor, creates a new <codeph>TypedList</codeph> object.
+		 
+		 </apiDesc></apiConstructorDetail></apiConstructor><apiOperation id="org.as3collections.lists:UniqueSortedList:clone"><apiName>clone</apiName><shortdesc>
+		 Creates and return a new UniqueSortedList object with the clone of the wrappedMap object.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiReturn><apiDesc>a new <codeph>UniqueSortedList</codeph> object with the clone of the <codeph>wrappedMap</codeph> object.
+ 		 </apiDesc><apiType value="any"/></apiReturn></apiOperationDef><apiDesc>
+		 Creates and return a new <codeph>UniqueSortedList</codeph> object with the clone of the <codeph>wrappedMap</codeph> object.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.lists:UniqueSortedList:equals"><apiName>equals</apiName><shortdesc>
+		 Performs an arbitrary, specific evaluation of equality between this object and the other object.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiReturn><apiDesc><codeph>true</codeph> if the arbitrary evaluation considers the objects equal.
+		 </apiDesc><apiType value="Boolean"/></apiReturn><apiParam><apiItemName>other</apiItemName><apiType value="any"/><apiDesc>	the object to be compared for equality.
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Performs an arbitrary, specific evaluation of equality between this object and the <codeph>other</codeph> object.
+		 <p>This implementation considers two differente objects equal if:</p>
+		 <p>
+		 <ul><li>object A and object B are instances of the same class (i.e. if they have <b>exactly</b> the same type)</li>
+		 <li>object A contains all elements of object B</li>
+		 <li>object B contains all elements of object A</li>
+		 <li>elements have exactly the same order</li>
+		 <li>object A and object B has the same type of comparator</li>
+		 <li>object A and object B has the same options</li>
+		 </ul></p>
+		 <p>This implementation takes care of the order of the elements in the list.
+		 So, for two lists are equal the order of elements returned by the iterator must be equal.</p>
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.lists:UniqueSortedList:sortOn"><apiName>sortOn</apiName><shortdesc>
+		 Forwards the call to wrappedList.sortOn.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiDesc>
+		 </apiDesc><apiType value="Array"/></apiReturn><apiParam><apiItemName>fieldName</apiItemName><apiType value="any"/><apiDesc>	 </apiDesc></apiParam><apiParam><apiItemName>options</apiItemName><apiType value="any"/><apiData>null</apiData><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Forwards the call to <codeph>wrappedList.sortOn</codeph>.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.lists:UniqueSortedList:sort"><apiName>sort</apiName><shortdesc>
+		 Forwards the call to wrappedList.sort.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiDesc>
+		 </apiDesc><apiType value="Array"/></apiReturn><apiParam><apiItemName>compare</apiItemName><apiType value="Function"/><apiData>null</apiData><apiDesc>	 </apiDesc></apiParam><apiParam><apiItemName>options</apiItemName><apiType value="uint"/><apiData>0</apiData><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Forwards the call to <codeph>wrappedList.sort</codeph>.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.lists:UniqueSortedList:subList"><apiName>subList</apiName><shortdesc>
+		 Forwards the call to wrappedList.subList.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiReturn><apiDesc>
+		 </apiDesc><apiOperationClassifier>org.as3collections:IList</apiOperationClassifier></apiReturn><apiParam><apiItemName>fromIndex</apiItemName><apiType value="int"/><apiDesc>	 </apiDesc></apiParam><apiParam><apiItemName>toIndex</apiItemName><apiType value="int"/><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Forwards the call to <codeph>wrappedList.subList</codeph>.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiValue id="org.as3collections.lists:UniqueSortedList:comparator:get"><apiName>comparator</apiName><shortdesc>
+		 Defines the wrappedList comparator object to be used automatically to sort.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="org.as3coreaddendum.system:IComparator"/></apiValueDef><apiDesc>
+		 Defines the <codeph>wrappedList</codeph> comparator object to be used automatically to sort.
+		 <p>If this value change the <codeph>wrappedList</codeph> is automatically reordered with the new value.</p>
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.as3collections.lists:UniqueSortedList:options:get"><apiName>options</apiName><shortdesc>
+		 Defines the wrappedList options to be used automatically to sort.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="uint"/></apiValueDef><apiDesc>
+		 Defines the <codeph>wrappedList</codeph> options to be used automatically to sort.
+		 <p>If this value change the list is automatically reordered with the new value.</p>
+		 </apiDesc></apiValueDetail></apiValue></apiClassifier><apiClassifier id="org.as3collections.lists:ArrayList"><apiName>ArrayList</apiName><shortdesc>
+	 Resizable-array implementation of the IList interface.</shortdesc><prolog><author>Flávio Silva
+	 </author><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiAccess value="public"/><apiStatic/><apiBaseClassifier>org.as3collections:AbstractList</apiBaseClassifier></apiClassifierDef><apiDesc>
+	 Resizable-array implementation of the <codeph>IList</codeph> interface.
+	 Implements all optional list operations, and permits all elements, including <codeph>null</codeph>.
+	 <p>Each <codeph>ArrayList</codeph> instance has a capacity.
+	 The capacity is the size of the array used to store the elements in the list.
+	 It is always at least as large as the list size.
+	 As elements are added to an <codeph>ArrayList</codeph> object, its capacity grows automatically.</p>
+	 <p>In addition to implementing the <codeph>IList</codeph> interface, this class provides the <codeph>ensureCapacity</codeph> method to arbitrarily manipulate the size of the array (this usage is not common) that is used internally to store the elements.
+	 Check the examples at the bottom of the page for further information about usage.</p>
+	 <p>It's possible to create unique lists, typed lists and even unique typed lists.
+	 You just send the <codeph>ArrayList</codeph> object to the wrappers <codeph>UniqueList</codeph> or <codeph>TypedList</codeph> or uses the <codeph>ListUtil.getUniqueList</codeph>, <codeph>ListUtil.getTypedList</codeph> or <codeph>ListUtil.getUniqueTypedList</codeph>.</p>
+	 <p>This documentation is partially based in the <i>Java Collections Framework</i> JavaDoc documentation.
+	 For further information see <xref href="http://download.oracle.com/javase/6/docs/technotes/guides/collections/index.html" scope="external">Java Collections Framework</xref></p>
+	 
+	 </apiDesc><example>
+	 
+	 <b>Example 1</b>
+	 <codeblock rev="3.0">
+	 import org.as3collections.IList;
+	 import org.as3collections.lists.ArrayList;
+	 
+	 var list1:IList = new ArrayList();
+	 
+	 list1                           // []
+	 
+	 list1.size()                    // 0
+	 list1.contains(null)            // false
+	 list1.contains("abc")           // false
+	 list1.isEmpty()                 // true
+	 list1.modCount                  // 0
+	 
+	 list1.clear()
+	 
+	 list1.modCount                  // 0
+	 list1.isEmpty()                 // true
+	 list1.size()                    // 0
+	 
+	 list1.add(null)                 // true
+	 list1                           // [null]
+	 list1.isEmpty()                 // false
+	 list1.size()                    // 1
+	 list1.modCount                  // 1
+	 list1.contains(null)            // true
+	 list1.contains("abc")           // false
+	 
+	 list1.add("abc")                // true
+	 list1                           // [null,abc]
+	 list1.size()                    // 2
+	 list1.modCount                  // 2
+	 list1.contains("abc")           // true
+	 
+	 list1.add(null)                 // true
+	 list1                           // [null,abc,null]
+	 list1.size()                    // 3
+	 list1.modCount                  // 3
+	 list1.indexOf(null)             // 0
+	 list1.lastIndexOf(null)         // 2
+	 
+	 list1.addAt(0, 123)             // true
+	 list1                           // [123,null,abc,null]
+	 list1.size()                    // 4
+	 list1.modCount                  // 4
+	 
+	 list1.addAt(4, "def")           // true
+	 list1                           // [123,null,abc,null,def]
+	 list1.size()                    // 5
+	 
+	 list1.addAt(4, "abc")           // true
+	 list1                           // [123,null,abc,null,abc,def]
+	 list1.size()                    // 6
+	 list1.modCount                  // 6
+	 
+	 list1.getAt(0)                  // 123
+	 list1.getAt(2)                  // abc
+	 list1.getAt(5)                  // def
+	 
+	 list1.removeAt(0)               // 123
+	 list1                           // [null,abc,null,abc,def]
+	 list1.size()                    // 5
+	 list1.modCount                  // 7
+	 
+	 list1.removeAt(4)               // def
+	 list1                           // [null,abc,null,abc]
+	 list1.size()                    // 4
+	 list1.modCount                  // 8
+	 
+	 list1.removeAt(0)               // null
+	 list1                           // [abc,null,abc]
+	 list1.size()                    // 3
+	 list1.modCount                  // 9
+	 
+	 var list2:IList = list1.clone();
+	 
+	 list2                           // [abc,null,abc]
+	 
+	 list1.containsAll(list1)        // true
+	 list1.containsAll(list2)        // true
+	 list2.containsAll(list1)        // true
+	 list1.equals(list2)             // true
+	 
+	 list2.remove("abc")             // true
+	 list2.remove("abc")             // true
+	 list2.add(null)                 // true
+	 list2                           // [null,null]
+	 
+	 list1.containsAll(list2)        // true
+	 list2.containsAll(list1)        // false
+	 list1.equals(list2)             // false
+	 
+	 list1                           // [abc,null,abc]
+	 list1.size()                    // 3
+	 list1.setAt(2, "ghi")           // abc
+	 list1                           // [abc,null,ghi]
+	 list1.size()                    // 3
+	 list1.modCount                  // 9
+	 
+	 list1.clear()
+	 
+	 list1.modCount                  // 10
+	 list1.isEmpty()                 // true
+	 list1.size()                    // 0
+	 </codeblock>
+	 
+	 <b>Example 2</b>
+	 <codeblock rev="3.0">
+	 import org.as3collections.IList;
+	 import org.as3collections.lists.ArrayList;
+	 
+	 var arr:Array = [1, 2, 3, 4];
+	 var list1:IList = new ArrayList(arr);
+	 
+	 list1                                 // [1,2,3,4]
+	 list1.size()                          // 4
+	 list1.isEmpty()                       // false
+	 list1.modCount                        // 0
+	 
+	 var list2:IList = new ArrayList([9, 10, 11, 12]);
+	 
+	 list2                                 // [9,10,11,12]
+	 list2.size()                          // 4
+	 list2.isEmpty()                       // false
+	 list2.modCount                        // 0
+	 
+	 list1.addAll(list2)                   // true
+	 list1                                 // [1,2,3,4,9,10,11,12]
+	 list1.size()                          // 8
+	 list1.modCount                        // 4
+	 
+	 var list3:IList = new ArrayList([5, 6, 7, 8]);
+	 
+	 list3                                 // [5,6,7,8]
+	 list3.size()                          // 4
+	 list3.isEmpty()                       // false
+	 list3.modCount                        // 0
+	 
+	 list1.addAllAt(4, list3)              // true
+	 list1                                 // [1,2,3,4,5,6,7,8,9,10,11,12]
+	 list1.size()                          // 12
+	 list1.modCount                        // 8
+	 
+	 list1.containsAll(list3)              // true
+	 list3.containsAll(list1)              // false
+	 
+	 list1.removeAll(list3)                // true
+	 list1                                 // [1,2,3,4,9,10,11,12]
+	 list1.size()                          // 8
+	 list1.modCount                        // 12
+	 
+	 list1.removeAll(list3)                // false
+	 list1                                 // [1,2,3,4,9,10,11,12]
+	 list1.size()                          // 8
+	 list1.modCount                        // 12
+	 
+	 list1.retainAll(list2)                // true
+	 list1                                 // [9,10,11,12]
+	 list1.size()                          // 4
+	 list1.modCount                        // 16
+	 
+	 list1.subList(0, 1)                   // [9]
+	 list1.subList(0, 2)                   // [9,10]
+	 list1.subList(0, 4)                   // [9,10,11,12]
+	 list1.subList(0, list1.size())        // [9,10,11,12]
+	 
+	 list1.removeRange(1, 3)               // [10,11]
+	 list1                                 // [9,12]
+	 list1.size()                          // 2
+	 list1.modCount                        // 17
+	 
+	 list1.remove(9)                       // true
+	 list1                                 // [12]
+	 list1.size()                          // 1
+	 list1.modCount                        // 18
+	 
+	 list1.retainAll(list3)                // true
+	 list1                                 // []
+	 list1.size()                          // 0
+	 list1.modCount                        // 19
+	 </codeblock>
+	 
+	 <b>Example 3</b>
+	 <codeblock rev="3.0">
+	 import org.as3collections.IList;
+	 import org.as3collections.lists.ArrayList;
+	 
+	 var list1:ArrayList = new ArrayList();
+	 
+	 list1                     // []
+	 list1.addAt(3, 4)         // IndexOutOfBoundsError: The 'index' argument is out of bounds: 3 (min: 0, max: 0)
+	 
+	 list1.ensureCapacity(5)
+	 
+	 list1                     // [undefined,undefined,undefined,undefined,undefined]
+	 list1.modCount            // 1
+	 list1.isEmpty()           // false
+	 list1.size()              // 5
+	 
+	 list1.addAt(3, 4)         // true
+	 list1                     // [undefined,undefined,undefined,4,undefined,undefined]
+	 list1.modCount            // 2
+	 list1.size()              // 6
+	 
+	 list1.getAt(1)            // undefined
+	 
+	 list1.ensureCapacity(3)
+	 
+	 list1                     // [undefined,undefined,undefined,4,undefined,undefined]
+	 list1.modCount            // 2
+	 list1.size()              // 6
+	 
+	 list1.setAt(2, 3)         // undefined
+	 list1                     // [undefined,undefined,3,4,undefined,undefined]
+	 list1.modCount            // 2
+	 list1.size()              // 6
+	 
+	 list1.remove(undefined)   // true
+	 list1.remove(undefined)   // true
+	 list1                     // [3,4,undefined,undefined]
+	 list1.modCount            // 4
+	 list1.size()              // 4
+	 </codeblock>
+	 
+	 <b>Example 4 - Using equality (org.as3coreaddendum.system.IEquatable)</b>
+	 
+	 <codeblock rev="3.0">
+	 package test
+	 {
+	     import org.as3coreaddendum.system.IEquatable;
+	 
+	     public class TestEquatableObject implements IEquatable
+	     {
+	         private var _id:String;
+	 		
+	         public function get id(): String { return _id; }
+	 
+	         public function set id(value:String): void { _id = value; }
+	 
+	         public function TestEquatableObject(id:String)
+	         {
+	             _id = id;
+	         }
+	 
+	         public function equals(other:: Boolean
+	         {
+	             return other is TestEquatableObject &amp;&amp; _id == (other as TestEquatableObject).id;
+	         }
+	 
+	         public function toString(): String
+	         {
+	             return "[TestEquatableObject " + _id + "]";
+	         }
+	     }
+	 }
+	 </codeblock>
+	 
+	 <codeblock rev="3.0">
+	 import test.TestEquatableObject;
+	 
+	 import org.as3collections.IList;
+	 import org.as3collections.lists.ArrayList;
+	 import org.as3collections.lists.UniqueList;
+	 
+	 var list1:ArrayList = new ArrayList();
+	 
+	 list1                               // []
+	 
+	 var o1:TestEquatableObject = new TestEquatableObject("o1");
+	 var o2:TestEquatableObject = new TestEquatableObject("o2");
+	 var o3:TestEquatableObject = new TestEquatableObject("o3");
+	 var o4:TestEquatableObject = new TestEquatableObject("o4");
+	 
+	 list1.contains(o1)                  // false
+	 list1.add(o1)                       // true
+	 list1                               // [[TestEquatableObject o1]]
+	 list1.contains(o1)                  // true
+	 
+	 var o5:TestEquatableObject = new TestIndexablePriority("o1"); // -&gt; Attention to the id, which is "o1"
+	 
+	 list1.contains(o5)                  // true -&gt; without equality would return false, because o1 and o5 are different objects.
+	 
+	 list1.add(o5)                       // true
+	 list1                               // [[TestEquatableObject o1],[TestEquatableObject o1]]
+	 
+	 o1.equals(o5)                       // true
+	 o1.equals("abc")                    // false
+	 
+	 var list2:ArrayList = new ArrayList();
+	 
+	 list2.equals(list1)                 // false
+	 list2.add(o5)                       // true
+	 list1                               // [[TestEquatableObject o1],[TestEquatableObject o1]]
+	 list2                               // [[TestEquatableObject o1]]
+	 list2.equals(list1)                 // false
+	 
+	 list2.add(o5)                       // true
+	 list1                               // [[TestEquatableObject o1],[TestEquatableObject o1]]
+	 list2                               // [[TestEquatableObject o1],[TestEquatableObject o1]]
+	 list2.equals(list1)                 // true
+	 
+	 list2.remove(o1)                    // true -&gt; equality used
+	 list2                               // [[TestEquatableObject o1]]
+	 
+	 var uniqueList:UniqueList = new UniqueList(new ArrayList());
+	 
+	 uniqueList.contains(o1)             // false
+	 uniqueList.add(o1)                  // true
+	 uniqueList                          // [[TestEquatableObject o1]]
+	 uniqueList.contains(o1)             // true
+	 
+	 uniqueList.add(o5)                  // false
+	 uniqueList.contains(o5)             // true -&gt; by equality the object o5 is in the list because its 'id' is the same of the object o1.
+	 uniqueList                          // [[TestEquatableObject o1]]
+	 </codeblock>
+	 
+	 </example></apiClassifierDetail><related-links><link href="org.as3collections.xml#AbstractList"><linktext>AbstractList</linktext></link><link href="org.as3collections.lists.xml#TypedList"><linktext>TypedList</linktext></link><link href="org.as3collections.lists.xml#UniqueList"><linktext>UniqueList</linktext></link><link href="org.as3collections.lists.xml#SortedArrayList"><linktext>SortedArrayList</linktext></link><link href="org.as3collections.utils.xml#ListUtil/getUniqueList()"><linktext>ListUtil.getUniqueList()</linktext></link><link href="org.as3collections.utils.xml#ListUtil/getTypedList()"><linktext>ListUtil.getTypedList()</linktext></link><link href="org.as3collections.utils.xml#ListUtil/getUniqueTypedList()"><linktext>ListUtil.getUniqueTypedList()</linktext></link></related-links><apiConstructor id="org.as3collections.lists:ArrayList:ArrayList"><apiName>ArrayList</apiName><shortdesc>
+		 Constructor, creates a new ArrayList object.</shortdesc><prolog/><apiConstructorDetail><apiConstructorDef><apiAccess value="public"/><apiParam><apiItemName>source</apiItemName><apiType value="Array"/><apiData>null</apiData><apiDesc>	an array to fill the list.
+		 </apiDesc></apiParam></apiConstructorDef><apiDesc>
+		 Constructor, creates a new <codeph>ArrayList</codeph> object.
+		 
+		 </apiDesc></apiConstructorDetail></apiConstructor><apiOperation id="org.as3collections.lists:ArrayList:addAt"><apiName>addAt</apiName><shortdesc>
+		 Inserts the specified element at the specified position in this list.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiException><apiDesc>		if the index is out of range <codeph>(index &lt; 0 || index &gt; size())</codeph>. 
+		 </apiDesc><apiItemName>IndexOutOfBoundsError</apiItemName><apiOperationClassifier>org.as3collections.errors:IndexOutOfBoundsError</apiOperationClassifier></apiException><apiReturn><apiDesc><codeph>true</codeph> if this list changed as a result of the call.
+		 </apiDesc><apiType value="Boolean"/></apiReturn><apiParam><apiItemName>index</apiItemName><apiType value="int"/><apiDesc>		index at which the specified element is to be inserted.
+		 </apiDesc></apiParam><apiParam><apiItemName>element</apiItemName><apiType value="any"/><apiDesc>	the element to be added.
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Inserts the specified element at the specified position in this list.
+		 Shifts the element currently at that position (if any) and any subsequent elements to the right (adds one to their indices).
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.lists:ArrayList:clear"><apiName>clear</apiName><shortdesc>
+		 Removes all of the elements from this list.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiReturn><apiType value="void"/></apiReturn></apiOperationDef><apiDesc>
+		 Removes all of the elements from this list.
+		 The list will be empty after this method returns.
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.lists:ArrayList:clone"><apiName>clone</apiName><shortdesc>
+		 Creates and return a new ArrayList object containing all elements in this list (in the same order).</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiReturn><apiDesc>a new <codeph>ArrayList</codeph> object containing all elements in this list (in the same order).
+ 		 </apiDesc><apiType value="any"/></apiReturn></apiOperationDef><apiDesc>
+		 Creates and return a new <codeph>ArrayList</codeph> object containing all elements in this list (in the same order).
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.lists:ArrayList:ensureCapacity"><apiName>ensureCapacity</apiName><shortdesc>
+		 Increases the capacity of this ArrayList instance, if necessary, to ensure that it can hold at least the number of elements specified by the minCapacity argument.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="void"/></apiReturn><apiParam><apiItemName>minCapacity</apiItemName><apiType value="int"/></apiParam></apiOperationDef><apiDesc>
+		 Increases the capacity of this <codeph>ArrayList</codeph> instance, if necessary, to ensure that it can hold at least the number of elements specified by the <codeph>minCapacity</codeph> argument.
+		 <p>This implementation uses <codeph>Array.length = minCapacity</codeph> of the internal array object.</p>
+ 		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.lists:ArrayList:iterator"><apiName>iterator</apiName><shortdesc>
+		 Returns an iterator over a set of elements.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiReturn><apiDesc>an iterator over a set of elements.
+		 </apiDesc><apiOperationClassifier>org.as3collections:IIterator</apiOperationClassifier></apiReturn></apiOperationDef><apiDesc>
+		 Returns an iterator over a set of elements.
+		 <p>This implementation returns an <codeph>ArrayIterator</codeph> object.</p>
+		 
+		 </apiDesc></apiOperationDetail><related-links><link href="org.as3collections.iterators.xml#ArrayIterator"><linktext>ArrayIterator</linktext></link></related-links></apiOperation><apiOperation id="org.as3collections.lists:ArrayList:listIterator"><apiName>listIterator</apiName><shortdesc>
+		 Returns a list iterator of the elements in this list (in proper sequence), starting at the specified position in this list.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiReturn><apiDesc>a list iterator of the elements in this list (in proper sequence), starting at the specified position in this list.
+		 </apiDesc><apiOperationClassifier>org.as3collections:IListIterator</apiOperationClassifier></apiReturn><apiParam><apiItemName>index</apiItemName><apiType value="int"/><apiData>0</apiData><apiDesc>	index of first element to be returned from the list iterator (by a call to the <codeph>next</codeph> method) 
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Returns a list iterator of the elements in this list (in proper sequence), starting at the specified position in this list.
+		 The specified index indicates the first element that would be returned by an initial call to <codeph>next</codeph>.
+		 An initial call to <codeph>previous</codeph> would return the element with the specified index minus one. 
+		 <p>This implementation returns an <codeph>ListIterator</codeph> object.</p>
+		 
+		 </apiDesc></apiOperationDetail><related-links><link href="org.as3collections.iterators.xml#ListIterator"><linktext>ListIterator</linktext></link></related-links></apiOperation><apiOperation id="org.as3collections.lists:ArrayList:removeAt"><apiName>removeAt</apiName><shortdesc>
+		 Removes the element at the specified position in this list.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiException><apiDesc>		if the index is out of range <codeph>(index &lt; 0 || index &gt;= size())</codeph>.
+		 </apiDesc><apiItemName>IndexOutOfBoundsError</apiItemName><apiOperationClassifier>org.as3collections.errors:IndexOutOfBoundsError</apiOperationClassifier></apiException><apiReturn><apiDesc>the element previously at the specified position.
+		 </apiDesc><apiType value="any"/></apiReturn><apiParam><apiItemName>index</apiItemName><apiType value="int"/><apiDesc>	the index of the element to be removed.
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Removes the element at the specified position in this list.
+		 Shifts any subsequent elements to the left (subtracts one from their indices).
+		 Returns the element that was removed from the list. 
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.lists:ArrayList:removeRange"><apiName>removeRange</apiName><shortdesc>
+		 Removes all of the elements whose index is between fromIndex, inclusive, and toIndex, exclusive.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiException><apiDesc>		if <codeph>fromIndex</codeph> or <codeph>toIndex</codeph> is out of range <codeph>(index &lt; 0 || index &gt; size())</codeph>.
+		 </apiDesc><apiItemName>IndexOutOfBoundsError</apiItemName><apiOperationClassifier>org.as3collections.errors:IndexOutOfBoundsError</apiOperationClassifier></apiException><apiReturn><apiDesc>a new <codeph>ArrayList</codeph> object containing all the removed elements.
+		 </apiDesc><apiOperationClassifier>org.as3collections:ICollection</apiOperationClassifier></apiReturn><apiParam><apiItemName>fromIndex</apiItemName><apiType value="int"/><apiDesc>	the index to start removing elements (inclusive).
+		 </apiDesc></apiParam><apiParam><apiItemName>toIndex</apiItemName><apiType value="int"/><apiDesc>	the index to stop removing elements (exclusive).
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Removes all of the elements whose index is between <codeph>fromIndex</codeph>, inclusive, and <codeph>toIndex</codeph>, exclusive.
+		 Shifts any subsequent elements to the left (subtracts their indices).
+		 <p>If <codeph>toIndex == fromIndex</codeph>, this operation has no effect.</p>
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.lists:ArrayList:setAt"><apiName>setAt</apiName><shortdesc>
+		 Replaces the element at the specified position in this list with the specified element.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiException><apiDesc>		if the index is out of range <codeph>(index &lt; 0 || index &gt;= size())</codeph>.
+		 </apiDesc><apiItemName>IndexOutOfBoundsError</apiItemName><apiOperationClassifier>org.as3collections.errors:IndexOutOfBoundsError</apiOperationClassifier></apiException><apiReturn><apiDesc>the element previously at the specified position.
+		 </apiDesc><apiType value="any"/></apiReturn><apiParam><apiItemName>index</apiItemName><apiType value="int"/><apiDesc>		index of the element to replace.
+		 </apiDesc></apiParam><apiParam><apiItemName>element</apiItemName><apiType value="any"/><apiDesc>	element to be stored at the specified position.
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Replaces the element at the specified position in this list with the specified element.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.lists:ArrayList:subList"><apiName>subList</apiName><shortdesc>
+		 Returns a new ArrayList that is a view of the portion of this ArrayList between the specified fromIndex, inclusive, and toIndex, exclusive.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiException><apiDesc>		if <codeph>fromIndex</codeph> or <codeph>toIndex</codeph> is out of range <codeph>(index &lt; 0 || index &gt; size())</codeph>.
+		 </apiDesc><apiItemName>IndexOutOfBoundsError</apiItemName><apiOperationClassifier>org.as3collections.errors:IndexOutOfBoundsError</apiOperationClassifier></apiException><apiReturn><apiDesc>a new <codeph>ArrayList</codeph> that is a view of the specified range within this list.
+		 </apiDesc><apiOperationClassifier>org.as3collections:IList</apiOperationClassifier></apiReturn><apiParam><apiItemName>fromIndex</apiItemName><apiType value="int"/><apiDesc>	the index to start retrieving elements (inclusive).
+		 </apiDesc></apiParam><apiParam><apiItemName>toIndex</apiItemName><apiType value="int"/><apiDesc>	the index to stop retrieving elements (exclusive).
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Returns a new <codeph>ArrayList</codeph> that is a view of the portion of this <codeph>ArrayList</codeph> between the specified <codeph>fromIndex</codeph>, inclusive, and <codeph>toIndex</codeph>, exclusive.
+		 This method uses native <codeph>Array.slice</codeph> method.
+		 <p>Modifications in the returned <codeph>ArrayList</codeph> object doesn't affect this list.</p>
+		 <p>This list is not modified.</p>
+		 
+		 </apiDesc></apiOperationDetail></apiOperation></apiClassifier><apiClassifier id="org.as3collections.lists:TypedSortedList"><apiName>TypedSortedList</apiName><shortdesc>
+	 TypedSortedList works as a wrapper for a ISortedList object.</shortdesc><prolog><author>Flávio Silva
+	 </author><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiAccess value="public"/><apiStatic/><apiBaseInterface>org.as3collections:ISortedList</apiBaseInterface><apiBaseClassifier>org.as3collections.lists:TypedList</apiBaseClassifier></apiClassifierDef><apiDesc>
+	 <codeph>TypedSortedList</codeph> works as a wrapper for a <codeph>ISortedList</codeph> object.
+	 Since ActionScript 3.0 does not support typed arrays, <codeph>TypedSortedList</codeph> is a way to create typed lists.
+	 It stores the <codeph>wrapList</codeph> constructor's argument internaly.
+	 So every method call to this class is forwarded to the <codeph>wrappedList</codeph> object.
+	 The methods that need to be checked for the type of the elements are previously validated before forward the call.
+	 If the type of an element requested to be added to this list is incompatible with the type of the list a <codeph>org.as3coreaddendum.errors.ClassCastError</codeph> is thrown.
+	 The calls that are forwarded to the <codeph>wrappedList</codeph> returns the return of the <codeph>wrappedList</codeph> call.
+	 <p><codeph>TypedSortedList</codeph> does not allow <codeph>null</codeph> elements.</p>
+	 <p>You can also create unique and typed sorted lists.
+	 See below the link "ListUtil.getUniqueTypedSortedList()".</p>
+	 
+	 </apiDesc><example>
+	 
+	 <codeblock rev="3.0">
+	 import org.as3collections.ISortedList;
+	 import org.as3collections.IListIterator;
+	 import org.as3collections.lists.SortedArrayList;
+	 import org.as3collections.lists.TypedSortedList;
+	 import org.as3collections.utils.ListUtil;
+	 
+	 var l1:ISortedList = new SortedArrayList([3, 5, 7], null, Array.NUMERIC);
+	 
+	 var list1:ISortedList = new TypedSortedList(l1, int); // you can use this way
+	 
+	 //var list1:ISortedList = ListUtil.getTypedSortedList(l1, int); // or you can use this way
+	 
+	 list1                          // [3,5,7]
+	 list1.size()                   // 3
+	 
+	 list1.add(8)                   // true
+	 list1                          // [3,5,7,8]
+	 list1.size()                   // 4
+	 
+	 list1.remove("abc")            // false
+	 list1                          // [3,4,5,7,8]
+	 list1.size()                   // 5
+	 
+	 var it:IListIterator = list1.listIterator();
+	 var e:int;
+	 
+	 while (it.hasNext())
+	 {
+	 
+	     e = it.next()
+	     e                          // 3
+	 
+	     e = it.next()
+	     e:                         // 4
+	 
+	     e = it.next()
+	     e                          // 5
+	 
+	     if (e == 5)
+	     {
+	         it.add("ghi")          // ClassCastError: Invalid element type. element: ghi | type: String | expected type: int
+	     }
+	 }
+	 
+	 list1.setAt(0, [1,2])          // ClassCastError: Invalid element type. element: 1,2 | type: Array | expected type: int
+	 </codeblock>
+	 
+	 </example></apiClassifierDetail><related-links><link href="org.as3collections.utils.xml#ListUtil/getTypedSortedList()"><linktext>ListUtil.getTypedSortedList()</linktext></link><link href="org.as3collections.utils.xml#ListUtil/getUniqueTypedSortedList()"><linktext>ListUtil.getUniqueTypedSortedList()</linktext></link></related-links><apiConstructor id="org.as3collections.lists:TypedSortedList:TypedSortedList"><apiName>TypedSortedList</apiName><shortdesc>
+		 Constructor, creates a new TypedList object.</shortdesc><prolog/><apiConstructorDetail><apiConstructorDef><apiAccess value="public"/><apiException><apiDesc> 	if the <codeph>wrapList</codeph> argument is <codeph>null</codeph>.
+		 </apiDesc><apiItemName>ArgumentError</apiItemName><apiOperationClassifier>ArgumentError</apiOperationClassifier></apiException><apiException><apiDesc> 	if the <codeph>type</codeph> argument is <codeph>null</codeph>.
+		 </apiDesc><apiItemName>ArgumentError</apiItemName><apiOperationClassifier>ArgumentError</apiOperationClassifier></apiException><apiException><apiDesc> 		if the types of one or more elements in the <codeph>wrapList</codeph> argument are incompatible with the <codeph>type</codeph> argument.
+		 </apiDesc><apiItemName>org.as3coreaddendum.errors:ClassCastError</apiItemName><apiOperationClassifier>org.as3coreaddendum.errors:ClassCastError</apiOperationClassifier></apiException><apiParam><apiItemName>wrapList</apiItemName><apiOperationClassifier>org.as3collections:ISortedList</apiOperationClassifier><apiDesc>	the target list to wrap.
+		 </apiDesc></apiParam><apiParam><apiItemName>type</apiItemName><apiType value="any"/><apiDesc>		the type of the elements allowed by this list.
+		 </apiDesc></apiParam></apiConstructorDef><apiDesc>
+		 Constructor, creates a new <codeph>TypedList</codeph> object.
+		 
+		 </apiDesc></apiConstructorDetail></apiConstructor><apiOperation id="org.as3collections.lists:TypedSortedList:clone"><apiName>clone</apiName><shortdesc>
+		 Creates and return a new TypedSortedList object with the clone of the wrappedMap object.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiReturn><apiDesc>a new <codeph>TypedSortedList</codeph> object with the clone of the <codeph>wrappedMap</codeph> object.
+ 		 </apiDesc><apiType value="any"/></apiReturn></apiOperationDef><apiDesc>
+		 Creates and return a new <codeph>TypedSortedList</codeph> object with the clone of the <codeph>wrappedMap</codeph> object.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.lists:TypedSortedList:equals"><apiName>equals</apiName><shortdesc>
+		 Performs an arbitrary, specific evaluation of equality between this object and the other object.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiReturn><apiDesc><codeph>true</codeph> if the arbitrary evaluation considers the objects equal.
+		 </apiDesc><apiType value="Boolean"/></apiReturn><apiParam><apiItemName>other</apiItemName><apiType value="any"/><apiDesc>	the object to be compared for equality.
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Performs an arbitrary, specific evaluation of equality between this object and the <codeph>other</codeph> object.
+		 <p>This implementation considers two differente objects equal if:</p>
+		 <p>
+		 <ul><li>object A and object B are instances of the same class (i.e. if they have <b>exactly</b> the same type)</li>
+		 <li>object A contains all elements of object B</li>
+		 <li>object B contains all elements of object A</li>
+		 <li>elements have exactly the same order</li>
+		 <li>object A and object B has the same type of comparator</li>
+		 <li>object A and object B has the same options</li>
+		 </ul></p>
+		 <p>This implementation takes care of the order of the elements in the list.
+		 So, for two lists are equal the order of elements returned by the iterator must be equal.</p>
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.lists:TypedSortedList:sortOn"><apiName>sortOn</apiName><shortdesc>
+		 Forwards the call to wrappedList.sortOn.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiDesc>
+		 </apiDesc><apiType value="Array"/></apiReturn><apiParam><apiItemName>fieldName</apiItemName><apiType value="any"/><apiDesc>	 </apiDesc></apiParam><apiParam><apiItemName>options</apiItemName><apiType value="any"/><apiData>null</apiData><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Forwards the call to <codeph>wrappedList.sortOn</codeph>.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.lists:TypedSortedList:sort"><apiName>sort</apiName><shortdesc>
+		 Forwards the call to wrappedList.sort.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiDesc>
+		 </apiDesc><apiType value="Array"/></apiReturn><apiParam><apiItemName>compare</apiItemName><apiType value="Function"/><apiData>null</apiData><apiDesc>	 </apiDesc></apiParam><apiParam><apiItemName>options</apiItemName><apiType value="uint"/><apiData>0</apiData><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Forwards the call to <codeph>wrappedList.sort</codeph>.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.lists:TypedSortedList:subList"><apiName>subList</apiName><shortdesc>
+		 Forwards the call to wrappedList.subList.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiReturn><apiDesc>
+		 </apiDesc><apiOperationClassifier>org.as3collections:IList</apiOperationClassifier></apiReturn><apiParam><apiItemName>fromIndex</apiItemName><apiType value="int"/><apiDesc>	 </apiDesc></apiParam><apiParam><apiItemName>toIndex</apiItemName><apiType value="int"/><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Forwards the call to <codeph>wrappedList.subList</codeph>.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiValue id="org.as3collections.lists:TypedSortedList:comparator:get"><apiName>comparator</apiName><shortdesc>
+		 Defines the wrappedList comparator object to be used automatically to sort.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="org.as3coreaddendum.system:IComparator"/></apiValueDef><apiDesc>
+		 Defines the <codeph>wrappedList</codeph> comparator object to be used automatically to sort.
+		 <p>If this value change the <codeph>wrappedList</codeph> is automatically reordered with the new value.</p>
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.as3collections.lists:TypedSortedList:options:get"><apiName>options</apiName><shortdesc>
+		 Defines the wrappedList options to be used automatically to sort.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="uint"/></apiValueDef><apiDesc>
+		 Defines the <codeph>wrappedList</codeph> options to be used automatically to sort.
+		 <p>If this value change the list is automatically reordered with the new value.</p>
+		 </apiDesc></apiValueDetail></apiValue></apiClassifier><apiClassifier id="org.as3collections.lists:SortedArrayList"><apiName>SortedArrayList</apiName><shortdesc>
+	 A list that provides a total ordering on its elements.</shortdesc><prolog><author>Flávio Silva
+	 </author><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiAccess value="public"/><apiStatic/><apiBaseInterface>org.as3collections:ISortedList</apiBaseInterface><apiBaseClassifier>org.as3collections.lists:ArrayList</apiBaseClassifier></apiClassifierDef><apiDesc>
+	 A list that provides a <i>total ordering</i> on its elements.
+	 The list is ordered according to the <i>natural ordering</i> of its elements, by a <i>IComparator</i> typically provided at sorted list creation time, or by the arguments provided to the <codeph>sort</codeph> or <codeph>sortOn</codeph> methods.
+	 <p>For each change that occurs the list is automatically reordered using <codeph>comparator</codeph> and <codeph>options</codeph>.
+	 If none was provided the default behavior of <codeph>sort</codeph> method is used.</p>
+	 <p>The user of this list may change their order at any time using the setters <codeph>comparator</codeph> and <codeph>options</codeph>, or by calling <codeph>sort</codeph> or <codeph>sortOn</codeph> methods and imposing other arguments to change the sort behaviour.</p>
+	 <p>It's possible to create unique sorted lists, typed sorted lists and even unique typed sorted lists.
+	 You just sends the <codeph>SortedArrayList</codeph> object to the wrappers <codeph>UniqueSortedList</codeph> or <codeph>TypedSortedList</codeph> or uses the <codeph>ListUtil.getUniqueSortedList</codeph>, <codeph>ListUtil.getTypedSortedList</codeph> or <codeph>ListUtil.getUniqueTypedSortedList</codeph>.</p>
+	 <p>This documentation is partially based in the <i>Java Collections Framework</i> JavaDoc documentation.
+	 For further information see <xref href="http://download.oracle.com/javase/6/docs/technotes/guides/collections/index.html" scope="external">Java Collections Framework</xref></p>
+	 
+	 </apiDesc><example>
+	 
+	 <b>Example 1</b>
+	 
+	 <codeblock rev="3.0">
+	 import org.as3collections.ISortedList;
+	 import org.as3collections.lists.SortedArrayList;
+	 
+	 var list1:ISortedList = new SortedArrayList([3, 5, 1, 7], null, Array.NUMERIC | Array.DESCENDING);
+	 
+	 list1                       // [7,5,3,1]
+	 list1.size()                // 4
+	 
+	 list1.addAt(3, 8)           // true
+	 list1                       // [8,7,5,3,1]
+	 list1.size()                // 5
+	 
+	 list1.add(4)                // true
+	 list1                       // [8,7,5,4,3,1]
+	 list1.size()                // 6
+	 
+	 list1.add(5)                // true
+	 list1                       // [8,7,5,5,4,3,1]
+	 list1.size()                // 7
+	 
+	 list1.sort(null, Array.NUMERIC)
+	 list1                       // [1,3,4,5,5,7,8]
+	 
+	 list1.add(2)                // true
+	 list1                       // [8,7,5,5,4,3,2,1]
+	 list1.size()                // 8
+	 
+	 list1.reverse()
+	 list1                       // [1,2,3,4,5,5,7,8]
+	 
+	 list1.add(6)                // true
+	 list1                       // [1,2,3,4,5,5,6,7,8]
+	 
+	 list1.add(9)                // true
+	 list1                       // [1,2,3,4,5,5,6,7,8,9]
+	 
+	 list1.reverse()
+	 list1                       // [9,8,7,6,5,5,4,3,2,1]
+	 
+	 list1.add(10)               // true
+	 list1                       // [10,9,8,7,6,5,5,4,3,2,1]
+	 
+	 list1.add(-1)               // true
+	 list1                       // [10,9,8,7,6,5,5,4,3,2,1,-1]
+	 
+	 //list1.add("c")            // TypeError: Error #1034: Falha de coerção de tipo: não é possível converter "c" em Number.
+	 </codeblock>
+	 
+	 <b>Example 2</b>
+	 
+	 <codeblock rev="3.0">
+	 import org.as3collections.ISortedList;
+	 import org.as3collections.lists.SortedArrayList;
+	 import org.as3coreaddendum.system.comparators.AlphabeticComparator;
+	 
+	 var comparator:AlphabeticComparator = new AlphabeticComparator(false);
+	 var arr:Array = ["c", "a", "d", "b"];
+	 var list1:ISortedList = new SortedArrayList(arr, comparator);
+	 
+	 list1                              // [a,b,c,f]
+	 list1.size()                       // 4
+	 
+	 list1.addAt(1, "x")                // true
+	 list1                              // [a,b,c,f,x]
+	 list1.size()                       // 5
+	 
+	 list1.add("d")                     // true
+	 list1                              // [a,b,c,d,f,x]
+	 list1.size()                       // 6
+	 
+	 list1.add("d")                     // true
+	 list1                              // [a,b,c,d,d,f,x]
+	 list1.size()                       // 7
+	 
+	 list1.sort()
+	 list1                              // [a,b,c,d,d,f,x]
+	 
+	 list1.add(2)                       // true
+	 list1                              // [2,a,b,c,d,d,f,x]
+	 list1.size()                       // 8
+	 </codeblock>
+	 
+	 <b>Example 3</b>
+	 
+	 <codeblock rev="3.0">
+	 import org.as3collections.ISortedList;
+	 import org.as3collections.lists.SortedArrayList;
+	 
+	 var arr:Array = [5, 1, 100, 10, 99];
+	 var list1:ISortedList = new SortedArrayList(arr); // default behavior of the sort method
+	 
+	 list1                       // [1,10,100,5,99]
+	 list1.size()                // 5
+	 
+	 list1.add(50)               // true
+	 list1                       // [1,10,100,5,50,99]
+	 list1.size()                // 6
+	 
+	 list1.sort(null, Array.NUMERIC)
+	 list1                       // [1,5,10,50,99,100]
+	 
+	 list1.add(200)              // true
+	 list1                       // [1,10,100,200,5,50,99]
+	 list1.size()                // 7
+	 </codeblock>
+	 
+	 <b>Example 4 - Unique Sorted List</b>
+	 
+	 <codeblock rev="3.0">
+	 import org.as3collections.ISortedList;
+	 import org.as3collections.lists.SortedArrayList;
+	 import org.as3collections.utils.ListUtil;
+	 
+	 var arr:Array = [5, 1, 100, 10, 99, 5];
+	 
+	 var l1:ISortedList = new SortedArrayList(arr, null, Array.NUMERIC | Array.DESCENDING);
+	 
+	 var list1:ISortedList = ListUtil.getUniqueSortedList(l1);  // return type is UniqueSortedList
+	 
+	 list1                 // [100,99,10,5,1]
+	 list1.size()          // 5
+	 
+	 list1.add(50)         // true
+	 list1                 // [100,99,50,10,5,1]
+	 list1.size()          // 6
+	 
+	 list1.add(10)         // false
+	 list1                 // [100,99,50,10,5,1]
+	 list1.size()          // 6
+	 </codeblock>
+	 
+	 <b>Example 5 - Typed Sorted List</b>
+	 
+	 <codeblock rev="3.0">
+	 import org.as3collections.ISortedList;
+	 import org.as3collections.lists.SortedArrayList;
+	 import org.as3collections.utils.ListUtil;
+	 
+	 var arr:Array = [5, 1, 100, 10, 99, 5];
+	 
+	 var l1:ISortedList = new SortedArrayList(arr, null, Array.NUMERIC | Array.DESCENDING);
+	 
+	 var list1:ISortedList = ListUtil.getTypedSortedList(l1);  // return type is TypedSortedList
+	 
+	 list1                 // [100,99,10,5,5,1]
+	 list1.size()          // 6
+	 
+	 list1.add(50)         // true
+	 list1                 // [100,99,50,10,5,5,1]
+	 list1.size()          // 7
+	 
+	 list1.add(10)         // true
+	 list1                 // [100,99,50,10,10,5,5,1]
+	 list1.size()          // 8
+	 
+	 list1.add("a")        // ClassCastError: Invalid element type. element: a | type: String | expected type: int
+	 </codeblock>
+	 
+	 <b>Example 6 - Unique Typed Sorted List</b>
+	 
+	 <codeblock rev="3.0">
+	 import org.as3collections.ISortedList;
+	 import org.as3collections.lists.SortedArrayList;
+	 import org.as3collections.utils.ListUtil;
+	 
+	 var arr:Array = [5, 1, 100, 10, 99, 5];
+	 
+	 var l1:ISortedList = new SortedArrayList(arr, null, Array.NUMERIC | Array.DESCENDING);
+	 
+	 var list1:ISortedList = ListUtil.getUniqueTypedSortedList(l1);  // return type is TypedSortedList
+	 
+	 list1                 // [100,99,10,5,1]
+	 list1.size()          // 5
+	 
+	 list1.add(50)         // true
+	 list1                 // [100,99,50,10,5,1]
+	 list1.size()          // 6
+	 
+	 list1.add(10)         // false
+	 list1                 // [100,99,50,10,5,1]
+	 list1.size()          // 6
+	 
+	 list1.add("a")        // ClassCastError: Invalid element type. element: a | type: String | expected type: int
+	 </codeblock>
+	 
+	 </example></apiClassifierDetail><related-links><link href="org.as3collections.xml#ISortedList"><linktext>ISortedList</linktext></link><link href="org.as3collections.lists.xml#ArrayList"><linktext>ArrayList</linktext></link><link href="org.as3collections.lists.xml#TypedSortedList"><linktext>TypedSortedList</linktext></link><link href="org.as3collections.lists.xml#UniqueSortedList"><linktext>UniqueSortedList</linktext></link><link href="org.as3collections.utils.xml#ListUtil/getUniqueSortedList()"><linktext>ListUtil.getUniqueSortedList()</linktext></link><link href="org.as3collections.utils.xml#ListUtil/getTypedSortedList()"><linktext>ListUtil.getTypedSortedList()</linktext></link><link href="org.as3collections.utils.xml#ListUtil/getUniqueTypedSortedList()"><linktext>ListUtil.getUniqueTypedSortedList()</linktext></link></related-links><apiConstructor id="org.as3collections.lists:SortedArrayList:SortedArrayList"><apiName>SortedArrayList</apiName><shortdesc>
+		 Constructor, creates a new SortedArrayList object.</shortdesc><prolog/><apiConstructorDetail><apiConstructorDef><apiAccess value="public"/><apiParam><apiItemName>source</apiItemName><apiType value="Array"/><apiData>null</apiData><apiDesc>		an array to fill the list.
+		 </apiDesc></apiParam><apiParam><apiItemName>comparator</apiItemName><apiType value="org.as3coreaddendum.system:IComparator"/><apiData>null</apiData><apiDesc>	the comparator object to be used internally to sort.
+		 </apiDesc></apiParam><apiParam><apiItemName>options</apiItemName><apiType value="uint"/><apiData>0</apiData><apiDesc>	the options to be used internally to sort.
+		 </apiDesc></apiParam></apiConstructorDef><apiDesc>
+		 Constructor, creates a new <codeph>SortedArrayList</codeph> object.
+		 
+		 </apiDesc></apiConstructorDetail></apiConstructor><apiOperation id="org.as3collections.lists:SortedArrayList:addAt"><apiName>addAt</apiName><shortdesc>
+		 Inserts the specified element at the specified position in this list.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiException><apiDesc>		if the index is out of range <codeph>(index &lt; 0 || index &gt; size())</codeph>. 
+		 </apiDesc><apiItemName>IndexOutOfBoundsError</apiItemName><apiOperationClassifier>org.as3collections.errors:IndexOutOfBoundsError</apiOperationClassifier></apiException><apiReturn><apiDesc><codeph>true</codeph> if this list changed as a result of the call.
+		 </apiDesc><apiType value="Boolean"/></apiReturn><apiParam><apiItemName>index</apiItemName><apiType value="int"/><apiDesc>		index at which the specified element is to be inserted.
+		 </apiDesc></apiParam><apiParam><apiItemName>element</apiItemName><apiType value="any"/><apiDesc>	the element to be added.
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Inserts the specified element at the specified position in this list.
+		 Shifts the element currently at that position (if any) and any subsequent elements to the right (adds one to their indices).
+		 <p>Before returning, the list is reordered, so there's no guarantee that the element remains in the inserted position.</p>
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.lists:SortedArrayList:clone"><apiName>clone</apiName><shortdesc>
+		 Creates and return a new SortedArrayList object containing all elements in this list (in the same order).</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiReturn><apiDesc>a new <codeph>SortedArrayList</codeph> object containing all elements in this list (in the same order).
+ 		 </apiDesc><apiType value="any"/></apiReturn></apiOperationDef><apiDesc>
+		 Creates and return a new <codeph>SortedArrayList</codeph> object containing all elements in this list (in the same order).
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.lists:SortedArrayList:equals"><apiName>equals</apiName><shortdesc>
+		 Performs an arbitrary, specific evaluation of equality between this object and the other object.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiReturn><apiDesc><codeph>true</codeph> if the arbitrary evaluation considers the objects equal.
+		 </apiDesc><apiType value="Boolean"/></apiReturn><apiParam><apiItemName>other</apiItemName><apiType value="any"/><apiDesc>	the object to be compared for equality.
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Performs an arbitrary, specific evaluation of equality between this object and the <codeph>other</codeph> object.
+		 <p>This implementation considers two differente objects equal if:</p>
+		 <p>
+		 <ul><li>object A and object B are instances of the same class (i.e. if they have <b>exactly</b> the same type)</li>
+		 <li>object A contains all elements of object B</li>
+		 <li>object B contains all elements of object A</li>
+		 <li>elements have exactly the same order</li>
+		 <li>object A and object B has the same type of comparator</li>
+		 <li>object A and object B has the same options</li>
+		 </ul></p>
+		 <p>This implementation takes care of the order of the elements in the list.
+		 So, for two lists are equal the order of elements returned by the iterator object must be equal.</p>
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.lists:SortedArrayList:reverse"><apiName>reverse</apiName><shortdesc>
+		 Reverses the list.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiReturn><apiType value="void"/></apiReturn></apiOperationDef><apiDesc>
+		 Reverses the list.
+		 When this method is called, the list is reversed and an internal status <i>reversed</i> (<codeph>true</codeph>/<codeph>false</codeph>) is stored.
+		 When the list is automatically ordered by any change, if status is <i>reversed</i> = <codeph>true</codeph>, the list remains reversed.
+		 Thus, after any change it will remain sorted and reversed as it was before the change.
+		 A second call to <codeph>reverse</codeph> will reverse the list again and change the status to <i>reversed</i> = <codeph>false</codeph>.
+		 The default value is <codeph>false</codeph>.
+		 This condition is not used in the user call to <codeph>sort</codeph> or <codeph>sortOn</codeph> methods (i.e. even if status is <i>reversed</i> = <codeph>true</codeph> it will not be used automatically).
+		 So if is desirable to reverse the list after directly call <codeph>sort</codeph> or <codeph>sortOn</codeph> methods, <codeph>reverse</codeph> method should be explicitly called after that.
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.lists:SortedArrayList:setAt"><apiName>setAt</apiName><shortdesc>
+		 Replaces the element at the specified position in this list with the specified element.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiException><apiDesc>		if the index is out of range <codeph>(index &lt; 0 || index &gt;= size())</codeph>.
+		 </apiDesc><apiItemName>IndexOutOfBoundsError</apiItemName><apiOperationClassifier>org.as3collections.errors:IndexOutOfBoundsError</apiOperationClassifier></apiException><apiReturn><apiDesc>the element previously at the specified position.
+		 </apiDesc><apiType value="any"/></apiReturn><apiParam><apiItemName>index</apiItemName><apiType value="int"/><apiDesc>		index of the element to replace.
+		 </apiDesc></apiParam><apiParam><apiItemName>element</apiItemName><apiType value="any"/><apiDesc>	element to be stored at the specified position.
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Replaces the element at the specified position in this list with the specified element.
+		 <p>Before returning, the list is reordered.</p>
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.lists:SortedArrayList:sortOn"><apiName>sortOn</apiName><shortdesc>
+		 
+		 Sorts the elements in an array according to one or more fields in the array.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiDesc>
+		 </apiDesc><apiType value="Array"/></apiReturn><apiParam><apiItemName>fieldName</apiItemName><apiType value="any"/><apiDesc>	 </apiDesc></apiParam><apiParam><apiItemName>options</apiItemName><apiType value="any"/><apiData>null</apiData><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 
+		 Sorts the elements in an array according to one or more fields in the array.
+		 <p>Consult <codeph>Array.sortOn</codeph> in the ActionScript 3.0 Language Reference in the link below for more info.</p>
+		 
+		 </apiDesc></apiOperationDetail><related-links><link href="http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/Array.html#sortOn()"><linktext>http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/Array.html#sortOn()</linktext></link></related-links></apiOperation><apiOperation id="org.as3collections.lists:SortedArrayList:sort"><apiName>sort</apiName><shortdesc>
+		 Sorts the objects within this class.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiDesc>
+		 </apiDesc><apiType value="Array"/></apiReturn><apiParam><apiItemName>compare</apiItemName><apiType value="Function"/><apiData>null</apiData><apiDesc>	 </apiDesc></apiParam><apiParam><apiItemName>options</apiItemName><apiType value="uint"/><apiData>0</apiData><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Sorts the objects within this class.
+		 
+		 </apiDesc></apiOperationDetail><related-links><link href="http://as3coreaddendum.org/en-us/documentation/asdoc/org/as3coreaddendum/system/ISortable.html"><linktext>org.as3coreaddendum.system.ISortable</linktext></link></related-links></apiOperation><apiOperation id="org.as3collections.lists:SortedArrayList:subList"><apiName>subList</apiName><shortdesc>
+		 Returns a new SortedArrayList that is a view of the portion of this SortedArrayList between the specified fromIndex, inclusive, and toIndex, exclusive.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiException><apiDesc>		if <codeph>fromIndex</codeph> or <codeph>toIndex</codeph> is out of range <codeph>(index &lt; 0 || index &gt; size())</codeph>.
+		 </apiDesc><apiItemName>IndexOutOfBoundsError</apiItemName><apiOperationClassifier>org.as3collections.errors:IndexOutOfBoundsError</apiOperationClassifier></apiException><apiReturn><apiDesc>a new <codeph>SortedArrayList</codeph> that is a view of the specified range within this list.
+		 </apiDesc><apiOperationClassifier>org.as3collections:IList</apiOperationClassifier></apiReturn><apiParam><apiItemName>fromIndex</apiItemName><apiType value="int"/><apiDesc>	the index to start retrieving elements (inclusive).
+		 </apiDesc></apiParam><apiParam><apiItemName>toIndex</apiItemName><apiType value="int"/><apiDesc>	the index to stop retrieving elements (exclusive).
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Returns a new <codeph>SortedArrayList</codeph> that is a view of the portion of this <codeph>SortedArrayList</codeph> between the specified <codeph>fromIndex</codeph>, inclusive, and <codeph>toIndex</codeph>, exclusive.
+		 <p>Modifications in the returned <codeph>SortedArrayList</codeph> object doesn't affect this list.</p>
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiValue id="org.as3collections.lists:SortedArrayList:comparator:get"><apiName>comparator</apiName><shortdesc>
+		 Defines the comparator object to be used automatically to sort.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="org.as3coreaddendum.system:IComparator"/></apiValueDef><apiDesc>
+		 Defines the comparator object to be used automatically to sort.
+		 <p>If this value change the list is automatically reordered with the new value.</p>
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.as3collections.lists:SortedArrayList:options:get"><apiName>options</apiName><shortdesc>
+		 Defines the options to be used automatically to sort.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="uint"/></apiValueDef><apiDesc>
+		 Defines the options to be used automatically to sort.
+		 <p>If this value change the list is automatically reordered with the new value.</p>
+		 </apiDesc></apiValueDetail></apiValue></apiClassifier></apiPackage>

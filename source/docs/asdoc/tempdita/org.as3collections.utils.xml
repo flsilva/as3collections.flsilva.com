@@ -1,0 +1,456 @@
+<?xml version="1.0" encoding="UTF-8"?><apiPackage id="org.as3collections.utils"><apiName>org.as3collections.utils</apiName><apiDetail/><apiClassifier id="org.as3collections.utils:ListUtil"><apiName>ListUtil</apiName><shortdesc>
+	 A utility class to work with implementations of the IList interface.</shortdesc><prolog><author>Flávio Silva
+	 </author><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiAccess value="public"/><apiStatic/><apiBaseClassifier>Object</apiBaseClassifier></apiClassifierDef><apiDesc>
+	 A utility class to work with implementations of the <codeph>IList</codeph> interface.
+	 
+	 </apiDesc></apiClassifierDetail><apiConstructor id="org.as3collections.utils:ListUtil:ListUtil"><apiName>ListUtil</apiName><shortdesc>
+		 ListUtil is a static class and shouldn't be instantiated.</shortdesc><prolog/><apiConstructorDetail><apiConstructorDef><apiAccess value="public"/><apiException><apiDesc>	<codeph>ListUtil</codeph> is a static class and shouldn't be instantiated.
+		 </apiDesc><apiItemName>IllegalOperationError</apiItemName><apiOperationClassifier>IllegalOperationError</apiOperationClassifier></apiException></apiConstructorDef><apiDesc>
+		 <codeph>ListUtil</codeph> is a static class and shouldn't be instantiated.
+		 
+		 </apiDesc></apiConstructorDetail></apiConstructor><apiOperation id="org.as3collections.utils:ListUtil:getTypedList"><apiName>getTypedList</apiName><shortdesc>
+		 Returns a new TypedList with the wrapList argument wrapped.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiStatic/><apiException><apiDesc> 	if the <codeph>wrapList</codeph> argument is <codeph>null</codeph>.
+		 </apiDesc><apiItemName>ArgumentError</apiItemName><apiOperationClassifier>ArgumentError</apiOperationClassifier></apiException><apiException><apiDesc> 	if the <codeph>type</codeph> argument is <codeph>null</codeph>.
+		 </apiDesc><apiItemName>ArgumentError</apiItemName><apiOperationClassifier>ArgumentError</apiOperationClassifier></apiException><apiException><apiDesc> 		if the types of one or more elements in the <codeph>wrapList</codeph> argument are incompatible with the <codeph>type</codeph> argument.
+		 </apiDesc><apiItemName>org.as3coreaddendum.errors:ClassCastError</apiItemName><apiOperationClassifier>org.as3coreaddendum.errors:ClassCastError</apiOperationClassifier></apiException><apiReturn><apiDesc>a new <codeph>TypedList</codeph> with the <codeph>wrapList</codeph> argument wrapped.
+		 </apiDesc><apiOperationClassifier>org.as3collections.lists:TypedList</apiOperationClassifier></apiReturn><apiParam><apiItemName>wrapList</apiItemName><apiOperationClassifier>org.as3collections:IList</apiOperationClassifier><apiDesc>	the target list to be wrapped by the <codeph>TypedList</codeph>.
+		 </apiDesc></apiParam><apiParam><apiItemName>type</apiItemName><apiType value="any"/><apiDesc>		the type of the elements allowed by the returned <codeph>TypedList</codeph>.
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Returns a new <codeph>TypedList</codeph> with the <codeph>wrapList</codeph> argument wrapped.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.utils:ListUtil:getTypedSortedList"><apiName>getTypedSortedList</apiName><shortdesc>
+		 Returns a new TypedSortedList with the wrapList argument wrapped.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiStatic/><apiException><apiDesc> 	if the <codeph>wrapList</codeph> argument is <codeph>null</codeph>.
+		 </apiDesc><apiItemName>ArgumentError</apiItemName><apiOperationClassifier>ArgumentError</apiOperationClassifier></apiException><apiException><apiDesc> 	if the <codeph>type</codeph> argument is <codeph>null</codeph>.
+		 </apiDesc><apiItemName>ArgumentError</apiItemName><apiOperationClassifier>ArgumentError</apiOperationClassifier></apiException><apiException><apiDesc> 		if the types of one or more elements in the <codeph>wrapList</codeph> argument are incompatible with the <codeph>type</codeph> argument.
+		 </apiDesc><apiItemName>org.as3coreaddendum.errors:ClassCastError</apiItemName><apiOperationClassifier>org.as3coreaddendum.errors:ClassCastError</apiOperationClassifier></apiException><apiReturn><apiDesc>a new <codeph>TypedSortedList</codeph> with the <codeph>wrapList</codeph> argument wrapped.
+		 </apiDesc><apiOperationClassifier>org.as3collections.lists:TypedSortedList</apiOperationClassifier></apiReturn><apiParam><apiItemName>wrapList</apiItemName><apiOperationClassifier>org.as3collections:ISortedList</apiOperationClassifier><apiDesc>	the target list to be wrapped by the <codeph>TypedSortedList</codeph>.
+		 </apiDesc></apiParam><apiParam><apiItemName>type</apiItemName><apiType value="any"/><apiDesc>		the type of the elements allowed by the returned <codeph>TypedSortedList</codeph>.
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Returns a new <codeph>TypedSortedList</codeph> with the <codeph>wrapList</codeph> argument wrapped.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.utils:ListUtil:getUniqueList"><apiName>getUniqueList</apiName><shortdesc>
+		 Returns a new UniqueList with the wrapList argument wrapped.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiStatic/><apiException><apiDesc> 	if the <codeph>wrapList</codeph> argument is <codeph>null</codeph>.
+		 </apiDesc><apiItemName>ArgumentError</apiItemName><apiOperationClassifier>ArgumentError</apiOperationClassifier></apiException><apiReturn><apiDesc>a new <codeph>UniqueList</codeph> with the <codeph>wrapList</codeph> argument wrapped.
+		 </apiDesc><apiOperationClassifier>org.as3collections.lists:UniqueList</apiOperationClassifier></apiReturn><apiParam><apiItemName>wrapList</apiItemName><apiOperationClassifier>org.as3collections:IList</apiOperationClassifier><apiDesc>	the target list to be wrapped by the <codeph>UniqueList</codeph>.
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Returns a new <codeph>UniqueList</codeph> with the <codeph>wrapList</codeph> argument wrapped.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.utils:ListUtil:getUniqueSortedList"><apiName>getUniqueSortedList</apiName><shortdesc>
+		 Returns a new UniqueSortedList with the wrapList argument wrapped.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiStatic/><apiException><apiDesc> 	if the <codeph>wrapList</codeph> argument is <codeph>null</codeph>.
+		 </apiDesc><apiItemName>ArgumentError</apiItemName><apiOperationClassifier>ArgumentError</apiOperationClassifier></apiException><apiReturn><apiDesc>a new <codeph>UniqueSortedList</codeph> with the <codeph>wrapList</codeph> argument wrapped.
+		 </apiDesc><apiOperationClassifier>org.as3collections.lists:UniqueSortedList</apiOperationClassifier></apiReturn><apiParam><apiItemName>wrapList</apiItemName><apiOperationClassifier>org.as3collections:ISortedList</apiOperationClassifier><apiDesc>	the target list to be wrapped by the <codeph>UniqueSortedList</codeph>.
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Returns a new <codeph>UniqueSortedList</codeph> with the <codeph>wrapList</codeph> argument wrapped.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.utils:ListUtil:getUniqueTypedList"><apiName>getUniqueTypedList</apiName><shortdesc>
+		 Returns a new TypedList that wraps a new UniqueList that wraps the wrapList argument.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiStatic/><apiException><apiDesc> 	if the <codeph>wrapList</codeph> argument is <codeph>null</codeph>.
+		 </apiDesc><apiItemName>ArgumentError</apiItemName><apiOperationClassifier>ArgumentError</apiOperationClassifier></apiException><apiException><apiDesc> 	if the <codeph>type</codeph> argument is <codeph>null</codeph>.
+		 </apiDesc><apiItemName>ArgumentError</apiItemName><apiOperationClassifier>ArgumentError</apiOperationClassifier></apiException><apiException><apiDesc> 		if the types of one or more elements in the <codeph>wrapList</codeph> argument are incompatible with the <codeph>type</codeph> argument.
+		 </apiDesc><apiItemName>org.as3coreaddendum.errors:ClassCastError</apiItemName><apiOperationClassifier>org.as3coreaddendum.errors:ClassCastError</apiOperationClassifier></apiException><apiReturn><apiDesc>a new <codeph>TypedList</codeph> that wraps a new <codeph>UniqueList</codeph> that wraps the <codeph>wrapList</codeph> argument.
+		 </apiDesc><apiOperationClassifier>org.as3collections.lists:TypedList</apiOperationClassifier></apiReturn><apiParam><apiItemName>wrapList</apiItemName><apiOperationClassifier>org.as3collections:IList</apiOperationClassifier><apiDesc>	the target list to be wrapped.
+		 </apiDesc></apiParam><apiParam><apiItemName>type</apiItemName><apiType value="any"/><apiDesc>		the type of the elements allowed by the returned <codeph>TypedList</codeph>.
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Returns a new <codeph>TypedList</codeph> that wraps a new <codeph>UniqueList</codeph> that wraps the <codeph>wrapList</codeph> argument.
+		 <p>The result will be a unique and typed array list, despite of the return type <codeph>TypedList</codeph>.</p>
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.utils:ListUtil:getUniqueTypedSortedList"><apiName>getUniqueTypedSortedList</apiName><shortdesc>
+		 Returns a new TypedSortedList that wraps a new UniqueSortedList that wraps the wrapList argument.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiStatic/><apiException><apiDesc> 	if the <codeph>wrapList</codeph> argument is <codeph>null</codeph>.
+		 </apiDesc><apiItemName>ArgumentError</apiItemName><apiOperationClassifier>ArgumentError</apiOperationClassifier></apiException><apiException><apiDesc> 	if the <codeph>type</codeph> argument is <codeph>null</codeph>.
+		 </apiDesc><apiItemName>ArgumentError</apiItemName><apiOperationClassifier>ArgumentError</apiOperationClassifier></apiException><apiException><apiDesc> 		if the types of one or more elements in the <codeph>wrapList</codeph> argument are incompatible with the <codeph>type</codeph> argument.
+		 </apiDesc><apiItemName>org.as3coreaddendum.errors:ClassCastError</apiItemName><apiOperationClassifier>org.as3coreaddendum.errors:ClassCastError</apiOperationClassifier></apiException><apiReturn><apiDesc>a new <codeph>TypedSortedList</codeph> that wraps a new <codeph>UniqueSortedList</codeph> that wraps the <codeph>wrapList</codeph> argument.
+		 </apiDesc><apiOperationClassifier>org.as3collections.lists:TypedSortedList</apiOperationClassifier></apiReturn><apiParam><apiItemName>wrapList</apiItemName><apiOperationClassifier>org.as3collections:ISortedList</apiOperationClassifier><apiDesc>	the target list to be wrapped.
+		 </apiDesc></apiParam><apiParam><apiItemName>type</apiItemName><apiType value="any"/><apiDesc>		the type of the elements allowed by the returned <codeph>TypedSortedList</codeph>.
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Returns a new <codeph>TypedSortedList</codeph> that wraps a new <codeph>UniqueSortedList</codeph> that wraps the <codeph>wrapList</codeph> argument.
+		 <p>The result will be a unique and typed sorted list, despite of the return type <codeph>TypedSortedList</codeph>.</p>
+		 
+		 </apiDesc></apiOperationDetail></apiOperation></apiClassifier><apiClassifier id="org.as3collections.utils:QueueUtil"><apiName>QueueUtil</apiName><shortdesc>
+	 A utility class to work with implementations of the IQueue interface.</shortdesc><prolog><author>Flávio Silva
+	 </author><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiAccess value="public"/><apiStatic/><apiBaseClassifier>Object</apiBaseClassifier></apiClassifierDef><apiDesc>
+	 A utility class to work with implementations of the <codeph>IQueue</codeph> interface.
+	 
+	 </apiDesc></apiClassifierDetail><apiConstructor id="org.as3collections.utils:QueueUtil:QueueUtil"><apiName>QueueUtil</apiName><shortdesc>
+		 QueueUtil is a static class and shouldn't be instantiated.</shortdesc><prolog/><apiConstructorDetail><apiConstructorDef><apiAccess value="public"/><apiException><apiDesc>	<codeph>QueueUtil</codeph> is a static class and shouldn't be instantiated.
+		 </apiDesc><apiItemName>IllegalOperationError</apiItemName><apiOperationClassifier>IllegalOperationError</apiOperationClassifier></apiException></apiConstructorDef><apiDesc>
+		 <codeph>QueueUtil</codeph> is a static class and shouldn't be instantiated.
+		 
+		 </apiDesc></apiConstructorDetail></apiConstructor><apiOperation id="org.as3collections.utils:QueueUtil:getTypedQueue"><apiName>getTypedQueue</apiName><shortdesc>
+		 Returns a new TypedQueue with the wrapList argument wrapped.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiStatic/><apiException><apiDesc> 	if the <codeph>queue</codeph> argument is <codeph>null</codeph>.
+		 </apiDesc><apiItemName>ArgumentError</apiItemName><apiOperationClassifier>ArgumentError</apiOperationClassifier></apiException><apiException><apiDesc> 	if the <codeph>type</codeph> argument is <codeph>null</codeph>.
+		 </apiDesc><apiItemName>ArgumentError</apiItemName><apiOperationClassifier>ArgumentError</apiOperationClassifier></apiException><apiException><apiDesc> 		if the types of one or more elements in the <codeph>wrapQueue</codeph> argument are incompatible with the <codeph>type</codeph> argument.
+		 </apiDesc><apiItemName>org.as3coreaddendum.errors:ClassCastError</apiItemName><apiOperationClassifier>org.as3coreaddendum.errors:ClassCastError</apiOperationClassifier></apiException><apiReturn><apiDesc>a new <codeph>TypedQueue</codeph> with the <codeph>queue</codeph> argument wrapped.
+		 </apiDesc><apiOperationClassifier>org.as3collections.queues:TypedQueue</apiOperationClassifier></apiReturn><apiParam><apiItemName>wrapQueue</apiItemName><apiOperationClassifier>org.as3collections:IQueue</apiOperationClassifier><apiDesc>	the target queue to be wrapped by the <codeph>TypedQueue</codeph>.
+		 </apiDesc></apiParam><apiParam><apiItemName>type</apiItemName><apiType value="any"/><apiDesc>		the type of the elements allowed by the returned <codeph>TypedQueue</codeph>.
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Returns a new <codeph>TypedQueue</codeph> with the <codeph>wrapList</codeph> argument wrapped.
+		 
+		 </apiDesc><example>
+		 
+		 <codeblock rev="3.0">
+		 import org.as3collections.IQueue;
+		 import org.as3collections.queues.LinearQueue;
+		 import org.as3collections.queues.TypedQueue;
+		 import org.as3collections.utils.QueueUtil;
+		 
+		 var q1:IQueue = new LinearQueue([1, 5, 3, 7]);
+		 
+		 var queue1:IQueue = QueueUtil.getTypedQueue(q1);
+		 
+		 queue1                      // [1,5,3,7]
+		 queue1.size():              // 4
+		 queue1.isEmpty()            // false
+		 
+		 queue1.poll()               // 1
+		 queue1                      // [5,3,7]
+		 
+		 queue1.offer(2)             // true
+		 queue1                      // [5,3,7,2]
+		 
+		 queue1.offer(5)             // true
+		 queue1                      // [5,3,7,2,5]
+		 
+		 queue1.offer("a")           // false
+		 queue1                      // [5,3,7,2,5]
+		 
+		 queue1.add("a")             // ClassCastError: Invalid element type. element: a | type: String | expected type: int
+		 </codeblock>
+		 
+		 </example></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.utils:QueueUtil:getUniqueQueue"><apiName>getUniqueQueue</apiName><shortdesc>
+		 Returns a new UniqueQueue with the wrapQueue argument wrapped.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiStatic/><apiException><apiDesc> 	if the <codeph>queue</codeph> argument is <codeph>null</codeph>.
+		 </apiDesc><apiItemName>ArgumentError</apiItemName><apiOperationClassifier>ArgumentError</apiOperationClassifier></apiException><apiReturn><apiDesc>a new <codeph>UniqueQueue</codeph> with the <codeph>queue</codeph> argument wrapped.
+		 </apiDesc><apiOperationClassifier>org.as3collections.queues:UniqueQueue</apiOperationClassifier></apiReturn><apiParam><apiItemName>wrapQueue</apiItemName><apiOperationClassifier>org.as3collections:IQueue</apiOperationClassifier><apiDesc>	the target queue to be wrapped by the <codeph>UniqueQueue</codeph>.
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Returns a new <codeph>UniqueQueue</codeph> with the <codeph>wrapQueue</codeph> argument wrapped.
+		 
+		 </apiDesc><example>
+		 
+		 <codeblock rev="3.0">
+		 import org.as3collections.IQueue;
+		 import org.as3collections.queues.LinearQueue;
+		 import org.as3collections.queues.UniqueQueue;
+		 import org.as3collections.utils.QueueUtil;
+		 
+		 var q1:IQueue = new LinearQueue([1, 5, 3, 7]);
+		 
+		 var queue1:IQueue = new UniqueQueue(q1); // you can use this way
+		 
+		 //var queue1:IQueue = QueueUtil.getUniqueQueue(q1); // or you can use this way
+		 
+		 queue1                      // [1,5,3,7]
+		 queue1.size()               // 4
+		 queue1.isEmpty()            // false
+		 
+		 queue1.poll()               // 1
+		 queue1                      // [5,3,7]
+		 
+		 queue1.offer(2)             // true
+		 queue1                      // [5,3,7,2]
+		 
+		 queue1.offer(5)             // false
+		 queue1                      // [5,3,7,2]
+		 
+		 queue1.add(5)               // Error: UniqueQueue is a unique queue and does not allow duplicated elements. Requested element: 5
+		 </codeblock>
+		 
+		 </example></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.utils:QueueUtil:getUniqueTypedQueue"><apiName>getUniqueTypedQueue</apiName><shortdesc>
+		 Returns a new TypedQueue that wraps a new UniqueQueue that wraps the wrapQueue argument.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiStatic/><apiException><apiDesc> 	if the <codeph>queue</codeph> argument is <codeph>null</codeph>.
+		 </apiDesc><apiItemName>ArgumentError</apiItemName><apiOperationClassifier>ArgumentError</apiOperationClassifier></apiException><apiException><apiDesc> 	if the <codeph>type</codeph> argument is <codeph>null</codeph>.
+		 </apiDesc><apiItemName>ArgumentError</apiItemName><apiOperationClassifier>ArgumentError</apiOperationClassifier></apiException><apiException><apiDesc> 		if the types of one or more elements in the <codeph>wrapQueue</codeph> argument are incompatible with the <codeph>type</codeph> argument.
+		 </apiDesc><apiItemName>org.as3coreaddendum.errors:ClassCastError</apiItemName><apiOperationClassifier>org.as3coreaddendum.errors:ClassCastError</apiOperationClassifier></apiException><apiReturn><apiDesc>a new <codeph>TypedQueue</codeph> with the <codeph>queue</codeph> argument wrapped.
+		 </apiDesc><apiOperationClassifier>org.as3collections.queues:TypedQueue</apiOperationClassifier></apiReturn><apiParam><apiItemName>wrapQueue</apiItemName><apiOperationClassifier>org.as3collections:IQueue</apiOperationClassifier><apiDesc>	the target queue to be wrapped.
+		 </apiDesc></apiParam><apiParam><apiItemName>type</apiItemName><apiType value="any"/><apiDesc>		the type of the elements allowed by the returned <codeph>TypedQueue</codeph>.
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Returns a new <codeph>TypedQueue</codeph> that wraps a new <codeph>UniqueQueue</codeph> that wraps the <codeph>wrapQueue</codeph> argument.
+		 <p>The result will be a unique and typed array queue, despite of the return type <codeph>TypedQueue</codeph>.</p>
+		 
+		 </apiDesc><example>
+		 
+		 <codeblock rev="3.0">
+		 import org.as3collections.IQueue;
+		 import org.as3collections.queues.Queue;
+		 import org.as3collections.queues.TypedQueue;
+		 import org.as3collections.utils.QueueUtil;
+		 
+		 var q1:IQueue = new LinearQueue([1, 5, 3, 7]);
+		 
+		 var queue1:IQueue = QueueUtil.getUniqueTypedQueue(q1, int);
+		 
+		 queue1                  // [1,5,3,7]
+		 queue1.size()           // 4
+		 queue1.isEmpty()        // false
+		 
+		 queue1.poll()           // 1
+		 queue1                  // [5,3,7]
+		 
+		 queue1.offer(2)         // true
+		 queue1                  // [5,3,7,2]
+		 
+		 queue1.offer(5)         // false
+		 queue1                  // [5,3,7,2]
+		 
+		 queue1.add(5)           // Error: UniqueQueue is a unique queue and does not allow duplicated elements. Requested element: 5
+		 
+		 queue1.offer("a")       // false
+		 queue1                  // [5,3,7,2]
+		 
+		 queue1.add("a")         // ClassCastError: Invalid element type. element: a | type: String | expected type: int
+		 </codeblock>
+		 
+		 </example></apiOperationDetail></apiOperation></apiClassifier><apiClassifier id="org.as3collections.utils:MapUtil"><apiName>MapUtil</apiName><shortdesc>
+	 A utility class to work with implementations of the IMap interface.</shortdesc><prolog><author>Flávio Silva
+	 </author><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiAccess value="public"/><apiStatic/><apiBaseClassifier>Object</apiBaseClassifier></apiClassifierDef><apiDesc>
+	 A utility class to work with implementations of the <codeph>IMap</codeph> interface.
+	 
+	 </apiDesc></apiClassifierDetail><apiConstructor id="org.as3collections.utils:MapUtil:MapUtil"><apiName>MapUtil</apiName><shortdesc>
+		 MapUtil is a static class and shouldn't be instantiated.</shortdesc><prolog/><apiConstructorDetail><apiConstructorDef><apiAccess value="public"/><apiException><apiDesc>	<codeph>MapUtil</codeph> is a static class and shouldn't be instantiated.
+		 </apiDesc><apiItemName>IllegalOperationError</apiItemName><apiOperationClassifier>IllegalOperationError</apiOperationClassifier></apiException></apiConstructorDef><apiDesc>
+		 <codeph>MapUtil</codeph> is a static class and shouldn't be instantiated.
+		 
+		 </apiDesc></apiConstructorDetail></apiConstructor><apiOperation id="org.as3collections.utils:MapUtil:equalConsideringOrder"><apiName>equalConsideringOrder</apiName><shortdesc>
+		 Performs an arbitrary, specific evaluation of equality between this object and the other object.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiStatic/><apiReturn><apiDesc><codeph>true</codeph> if the arbitrary evaluation considers the objects equal.
+		 </apiDesc><apiType value="Boolean"/></apiReturn><apiParam><apiItemName>map1</apiItemName><apiOperationClassifier>org.as3collections:IMap</apiOperationClassifier><apiDesc>	the first map.
+		 </apiDesc></apiParam><apiParam><apiItemName>map2</apiItemName><apiOperationClassifier>org.as3collections:IMap</apiOperationClassifier><apiDesc>	the second map.
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Performs an arbitrary, specific evaluation of equality between this object and the <codeph>other</codeph> object.
+		 If one of the maps or both maps are <codeph>null</codeph> it will be returned <codeph>false</codeph>.
+		 <p>Two different objects are considered equal if:</p>
+		 <p>
+		 <ul><li>object A and object B are instances of the same class (i.e. if they have <b>exactly</b> the same type)</li>
+		 <li>object A contains all mappings of object B</li>
+		 <li>object B contains all mappings of object A</li>
+		 <li>mappings have exactly the same order</li>
+		 </ul></p>
+		 <p>This implementation <b>takes care</b> of the order of the mappings in the maps.
+		 So, for two maps are equal the order of entries returned by the iterator object must be equal.</p>
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.utils:MapUtil:equalNotConsideringOrder"><apiName>equalNotConsideringOrder</apiName><shortdesc>
+		 Performs an arbitrary, specific evaluation of equality between this object and the other object.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiStatic/><apiReturn><apiDesc><codeph>true</codeph> if the arbitrary evaluation considers the objects equal.
+		 </apiDesc><apiType value="Boolean"/></apiReturn><apiParam><apiItemName>map1</apiItemName><apiOperationClassifier>org.as3collections:IMap</apiOperationClassifier><apiDesc>	the first map.
+		 </apiDesc></apiParam><apiParam><apiItemName>map2</apiItemName><apiOperationClassifier>org.as3collections:IMap</apiOperationClassifier><apiDesc>	the second map.
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Performs an arbitrary, specific evaluation of equality between this object and the <codeph>other</codeph> object.
+		 If one of the maps or both maps are <codeph>null</codeph> it will be returned <codeph>false</codeph>.
+		 <p>Two different objects are considered equal if:</p>
+		 <p>
+		 <ul><li>object A and object B are instances of the same class (i.e. if they have <b>exactly</b> the same type)</li>
+		 <li>object A contains all mappings of object B</li>
+		 <li>object B contains all mappings of object A</li>
+		 </ul></p>
+		 <p>This implementation <b>does not takes care</b> of the order of the mappings in the map.</p>
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.utils:MapUtil:feedMapWithXmlList"><apiName>feedMapWithXmlList</apiName><shortdesc>
+		 Feeds argument map with argument list.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiStatic/><apiReturn><apiType value="void"/></apiReturn><apiParam><apiItemName>map</apiItemName><apiOperationClassifier>org.as3collections:IMap</apiOperationClassifier><apiDesc>			the map to be fed.
+		 </apiDesc></apiParam><apiParam><apiItemName>list</apiItemName><apiType value="XMLList"/><apiDesc>			the list to retrieve entries.
+		 </apiDesc></apiParam><apiParam><apiItemName>typeCoercion</apiItemName><apiType value="Boolean"/><apiData>true</apiData><apiDesc>	if <codeph>true</codeph> performs a type coercion to Boolean if some String is "true" or "false", or a type coercion to Number if some String is a Number <codeph>(i.e. !isNaN(Number(string)) == true)</codeph>.
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Feeds argument <codeph>map</codeph> with argument <codeph>list</codeph>.
+		 <p>The name of the nodes become keys and the values of the nodes become values of the <codeph>IMap</codeph> object.</p>
+		 
+		 </apiDesc><example>
+		 
+		 <codeblock rev="3.0">
+		 import org.as3collections.maps.HashMap;
+		 import org.as3collections.utils.MapUtil;
+		 
+		 var map:IMap = new HashMap();
+		 var xml:XML = &lt;index&gt;&lt;key1&gt;value1&lt;/key1&gt;&lt;key2&gt;value2&lt;/key2&gt;&lt;/index&gt;;
+		 
+		 MapUtil.feedMapFromXmlList(map, xml.children());
+		 
+		 trace(map); // [key1=value1,key2=value2]
+		 </codeblock>
+		 
+		 </example></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.utils:MapUtil:getTypedListMap"><apiName>getTypedListMap</apiName><shortdesc>
+		 Returns a new TypedListMap with the wrapMap argument wrapped.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiStatic/><apiException><apiDesc> 	if the <codeph>wrapMap</codeph> argument is <codeph>null</codeph>.
+		 </apiDesc><apiItemName>ArgumentError</apiItemName><apiOperationClassifier>ArgumentError</apiOperationClassifier></apiException><apiException><apiDesc> 	if the <codeph>typeKeys</codeph> argument is <codeph>null</codeph>.
+		 </apiDesc><apiItemName>ArgumentError</apiItemName><apiOperationClassifier>ArgumentError</apiOperationClassifier></apiException><apiException><apiDesc> 	if the <codeph>typeValues</codeph> argument is <codeph>null</codeph>.
+		 </apiDesc><apiItemName>ArgumentError</apiItemName><apiOperationClassifier>ArgumentError</apiOperationClassifier></apiException><apiException><apiDesc> 		if the types of one or more keys or values in the <codeph>wrapMap</codeph> argument are incompatible with the <codeph>typeKeys</codeph> or <codeph>typeValues</codeph> argument.
+		 </apiDesc><apiItemName>org.as3coreaddendum.errors:ClassCastError</apiItemName><apiOperationClassifier>org.as3coreaddendum.errors:ClassCastError</apiOperationClassifier></apiException><apiReturn><apiDesc>a new <codeph>TypedListMap</codeph> with the <codeph>wrapMap</codeph> argument wrapped.
+		 </apiDesc><apiOperationClassifier>org.as3collections.maps:TypedListMap</apiOperationClassifier></apiReturn><apiParam><apiItemName>wrapMap</apiItemName><apiOperationClassifier>org.as3collections:IListMap</apiOperationClassifier><apiDesc>	the target map to be wrapped by the <codeph>TypedListMap</codeph>.
+		 </apiDesc></apiParam><apiParam><apiItemName>typeKeys</apiItemName><apiType value="any"/><apiDesc>the type of the keys allowed by the returned <codeph>TypedListMap</codeph>.
+		 </apiDesc></apiParam><apiParam><apiItemName>typeValues</apiItemName><apiType value="any"/><apiDesc>the type of the values allowed by the returned <codeph>TypedListMap</codeph>.
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Returns a new <codeph>TypedListMap</codeph> with the <codeph>wrapMap</codeph> argument wrapped.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.utils:MapUtil:getTypedMap"><apiName>getTypedMap</apiName><shortdesc>
+		 Returns a new TypedMap with the wrapMap argument wrapped.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiStatic/><apiException><apiDesc> 	if the <codeph>wrapMap</codeph> argument is <codeph>null</codeph>.
+		 </apiDesc><apiItemName>ArgumentError</apiItemName><apiOperationClassifier>ArgumentError</apiOperationClassifier></apiException><apiException><apiDesc> 	if the <codeph>typeKeys</codeph> argument is <codeph>null</codeph>.
+		 </apiDesc><apiItemName>ArgumentError</apiItemName><apiOperationClassifier>ArgumentError</apiOperationClassifier></apiException><apiException><apiDesc> 	if the <codeph>typeValues</codeph> argument is <codeph>null</codeph>.
+		 </apiDesc><apiItemName>ArgumentError</apiItemName><apiOperationClassifier>ArgumentError</apiOperationClassifier></apiException><apiException><apiDesc> 		if the types of one or more keys or values in the <codeph>wrapMap</codeph> argument are incompatible with the <codeph>typeKeys</codeph> or <codeph>typeValues</codeph> argument.
+		 </apiDesc><apiItemName>org.as3coreaddendum.errors:ClassCastError</apiItemName><apiOperationClassifier>org.as3coreaddendum.errors:ClassCastError</apiOperationClassifier></apiException><apiReturn><apiDesc>a new <codeph>TypedMap</codeph> with the <codeph>wrapMap</codeph> argument wrapped.
+		 </apiDesc><apiOperationClassifier>org.as3collections.maps:TypedMap</apiOperationClassifier></apiReturn><apiParam><apiItemName>wrapMap</apiItemName><apiOperationClassifier>org.as3collections:IMap</apiOperationClassifier><apiDesc>	the target map to be wrapped by the <codeph>TypedMap</codeph>.
+		 </apiDesc></apiParam><apiParam><apiItemName>typeKeys</apiItemName><apiType value="any"/><apiDesc>the type of the keys allowed by the returned <codeph>TypedMap</codeph>.
+		 </apiDesc></apiParam><apiParam><apiItemName>typeValues</apiItemName><apiType value="any"/><apiDesc>the type of the values allowed by the returned <codeph>TypedMap</codeph>.
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Returns a new <codeph>TypedMap</codeph> with the <codeph>wrapMap</codeph> argument wrapped.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.utils:MapUtil:getTypedSortedMap"><apiName>getTypedSortedMap</apiName><shortdesc>
+		 Returns a new TypedSortedMap with the wrapMap argument wrapped.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiStatic/><apiException><apiDesc> 	if the <codeph>wrapMap</codeph> argument is <codeph>null</codeph>.
+		 </apiDesc><apiItemName>ArgumentError</apiItemName><apiOperationClassifier>ArgumentError</apiOperationClassifier></apiException><apiException><apiDesc> 	if the <codeph>typeKeys</codeph> argument is <codeph>null</codeph>.
+		 </apiDesc><apiItemName>ArgumentError</apiItemName><apiOperationClassifier>ArgumentError</apiOperationClassifier></apiException><apiException><apiDesc> 	if the <codeph>typeValues</codeph> argument is <codeph>null</codeph>.
+		 </apiDesc><apiItemName>ArgumentError</apiItemName><apiOperationClassifier>ArgumentError</apiOperationClassifier></apiException><apiException><apiDesc> 		if the types of one or more keys or values in the <codeph>wrapMap</codeph> argument are incompatible with the <codeph>typeKeys</codeph> or <codeph>typeValues</codeph> argument.
+		 </apiDesc><apiItemName>org.as3coreaddendum.errors:ClassCastError</apiItemName><apiOperationClassifier>org.as3coreaddendum.errors:ClassCastError</apiOperationClassifier></apiException><apiReturn><apiDesc>a new <codeph>TypedSortedMap</codeph> with the <codeph>wrapMap</codeph> argument wrapped.
+		 </apiDesc><apiOperationClassifier>org.as3collections.maps:TypedSortedMap</apiOperationClassifier></apiReturn><apiParam><apiItemName>wrapMap</apiItemName><apiOperationClassifier>org.as3collections:ISortedMap</apiOperationClassifier><apiDesc>	the target map to be wrapped by the <codeph>TypedSortedMap</codeph>.
+		 </apiDesc></apiParam><apiParam><apiItemName>typeKeys</apiItemName><apiType value="any"/><apiDesc>the type of the keys allowed by the returned <codeph>TypedSortedMap</codeph>.
+		 </apiDesc></apiParam><apiParam><apiItemName>typeValues</apiItemName><apiType value="any"/><apiDesc>the type of the values allowed by the returned <codeph>TypedSortedMap</codeph>.
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Returns a new <codeph>TypedSortedMap</codeph> with the <codeph>wrapMap</codeph> argument wrapped.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.utils:MapUtil:toString"><apiName>toString</apiName><shortdesc>
+		 Returns the string representation of the map argument.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiStatic/><apiReturn><apiDesc>the string representation of the target map.
+ 		 </apiDesc><apiType value="String"/></apiReturn><apiParam><apiItemName>map</apiItemName><apiOperationClassifier>org.as3collections:IMap</apiOperationClassifier><apiDesc>the target map.
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Returns the string representation of the <codeph>map</codeph> argument.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation></apiClassifier><apiClassifier id="org.as3collections.utils:CollectionUtil"><apiName>CollectionUtil</apiName><shortdesc>
+	 A utility class to work with implementations of the ICollection interface.</shortdesc><prolog><author>Flávio Silva
+	 </author><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiAccess value="public"/><apiStatic/><apiBaseClassifier>Object</apiBaseClassifier></apiClassifierDef><apiDesc>
+	 A utility class to work with implementations of the <codeph>ICollection</codeph> interface.
+	 <p><codeph>CollectionUtil</codeph> handles <codeph>null</codeph> input collections quietly in almost all methods. When not, it's documented in the method.
+	 That is to say that a <codeph>null</codeph> input will not thrown an error in almost all methods.</p>
+	 
+	 </apiDesc></apiClassifierDetail><apiConstructor id="org.as3collections.utils:CollectionUtil:CollectionUtil"><apiName>CollectionUtil</apiName><shortdesc>
+		 CollectionUtil is a static class and shouldn't be instantiated.</shortdesc><prolog/><apiConstructorDetail><apiConstructorDef><apiAccess value="public"/><apiException><apiDesc>	<codeph>CollectionUtil</codeph> is a static class and shouldn't be instantiated.
+		 </apiDesc><apiItemName>IllegalOperationError</apiItemName><apiOperationClassifier>IllegalOperationError</apiOperationClassifier></apiException></apiConstructorDef><apiDesc>
+		 <codeph>CollectionUtil</codeph> is a static class and shouldn't be instantiated.
+		 
+		 </apiDesc></apiConstructorDetail></apiConstructor><apiOperation id="org.as3collections.utils:CollectionUtil:containsDuplication"><apiName>containsDuplication</apiName><shortdesc/><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiStatic/><apiReturn><apiType value="Boolean"/></apiReturn><apiParam><apiItemName>collection</apiItemName><apiOperationClassifier>org.as3collections:ICollection</apiOperationClassifier></apiParam></apiOperationDef></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.utils:CollectionUtil:containsOnlyType"><apiName>containsOnlyType</apiName><shortdesc>
+		 Returns true if the collection contains only elements of the type argument.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiStatic/><apiReturn><apiDesc><codeph>true</codeph> if the collection contains only elements of the <codeph>type</codeph> argument. If the collection is <codeph>null</codeph> or empty returns <codeph>false</codeph>.
+		 </apiDesc><apiType value="Boolean"/></apiReturn><apiParam><apiItemName>collection</apiItemName><apiOperationClassifier>org.as3collections:ICollection</apiOperationClassifier><apiDesc>	the collection to check. May be <codeph>null</codeph>.
+		 </apiDesc></apiParam><apiParam><apiItemName>type</apiItemName><apiType value="any"/><apiDesc>	the type of the elements.
+		 </apiDesc></apiParam><apiParam><apiItemName>strict</apiItemName><apiType value="Boolean"/><apiData>false</apiData><apiDesc>		defines if the type of the elements should be strictly equal.
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Returns <codeph>true</codeph> if the collection contains only elements of the <codeph>type</codeph> argument.
+		 <p>This method uses <codeph>org.as3utils.ArrayUtil.containsOnlyType()</codeph></p>
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.utils:CollectionUtil:equalConsideringOrder"><apiName>equalConsideringOrder</apiName><shortdesc>
+		 Performs an arbitrary, specific evaluation of equality between the two arguments.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiStatic/><apiReturn><apiDesc><codeph>true</codeph> if the arbitrary evaluation considers the objects equal.
+		 </apiDesc><apiType value="Boolean"/></apiReturn><apiParam><apiItemName>collection1</apiItemName><apiOperationClassifier>org.as3collections:ICollection</apiOperationClassifier><apiDesc>	the first collection.
+		 </apiDesc></apiParam><apiParam><apiItemName>collection2</apiItemName><apiOperationClassifier>org.as3collections:ICollection</apiOperationClassifier><apiDesc>	the second collection.
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Performs an arbitrary, specific evaluation of equality between the two arguments.
+		 If one of the collections or both collections are <codeph>null</codeph> it will be returned <codeph>false</codeph>.
+		 <p>Two different objects are considered equal if:</p>
+		 <p>
+		 <ul><li>object A and object B are instances of the same class (i.e. if they have <b>exactly</b> the same type)</li>
+		 <li>object A contains all elements of object B</li>
+		 <li>object B contains all elements of object A</li>
+		 <li>elements have exactly the same order</li>
+		 </ul></p>
+		 <p>This implementation <b>takes care</b> of the order of the elements in the collections.
+		 So, for two collections are equal the order of elements returned by the iterator object must be equal.</p>
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.utils:CollectionUtil:equalNotConsideringOrder"><apiName>equalNotConsideringOrder</apiName><shortdesc>
+		 Performs an arbitrary, specific evaluation of equality between this object and the other object.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiStatic/><apiReturn><apiDesc><codeph>true</codeph> if the arbitrary evaluation considers the objects equal.
+		 </apiDesc><apiType value="Boolean"/></apiReturn><apiParam><apiItemName>collection1</apiItemName><apiOperationClassifier>org.as3collections:ICollection</apiOperationClassifier><apiDesc>	the first collection.
+		 </apiDesc></apiParam><apiParam><apiItemName>collection2</apiItemName><apiOperationClassifier>org.as3collections:ICollection</apiOperationClassifier><apiDesc>	the second collection.
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Performs an arbitrary, specific evaluation of equality between this object and the <codeph>other</codeph> object.
+		 If one of the collections or both collections are <codeph>null</codeph> it will be returned <codeph>false</codeph>.
+		 <p>Two different objects are considered equal if:</p>
+		 <p>
+		 <ul><li>object A and object B are instances of the same class (i.e. if they have <b>exactly</b> the same type)</li>
+		 <li>object A contains all elements of object B</li>
+		 <li>object B contains all elements of object A</li>
+		 </ul></p>
+		 <p>This implementation <b>does not takes care</b> of the order of the elements in the collections.</p>
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.utils:CollectionUtil:filterByType"><apiName>filterByType</apiName><shortdesc>
+		 Returns the collection object containing only objects of the type of the type argument.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiStatic/><apiReturn><apiDesc>the collection object containing only objects of the type of the <codeph>type</codeph> argument.
+		 </apiDesc><apiOperationClassifier>org.as3collections:ICollection</apiOperationClassifier></apiReturn><apiParam><apiItemName>collection</apiItemName><apiOperationClassifier>org.as3collections:ICollection</apiOperationClassifier><apiDesc>	the collection for filtering. May be <codeph>null</codeph>.
+		 </apiDesc></apiParam><apiParam><apiItemName>type</apiItemName><apiType value="Class"/><apiDesc>		the type of the objects that should remain in the collection.
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Returns the collection object containing only objects of the type of the <codeph>type</codeph> argument.
+		 <p>This method modifies the original collection. Be sure that it's not a ready-only collection.</p>
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.utils:CollectionUtil:getDuplicate"><apiName>getDuplicate</apiName><shortdesc/><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiStatic/><apiReturn><apiOperationClassifier>org.as3collections:ICollection</apiOperationClassifier></apiReturn><apiParam><apiItemName>collection</apiItemName><apiOperationClassifier>org.as3collections:ICollection</apiOperationClassifier></apiParam></apiOperationDef></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.utils:CollectionUtil:maxValueIndex"><apiName>maxValueIndex</apiName><shortdesc>
+		 Returns the index position of the largest number in the specified collection.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiStatic/><apiReturn><apiDesc>the index position of the largest number in the collection object. If the collection argument is <codeph>null</codeph> or empty then the return is -1.
+		 </apiDesc><apiType value="int"/></apiReturn><apiParam><apiItemName>collection</apiItemName><apiOperationClassifier>org.as3collections:ICollection</apiOperationClassifier><apiDesc>	the collection object to check. May be <codeph>null</codeph>.
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Returns the index position of the largest number in the specified collection.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.utils:CollectionUtil:maxValue"><apiName>maxValue</apiName><shortdesc>
+		 Returns the largest number in the specified collection.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiStatic/><apiReturn><apiDesc>the largest number in the collection object. If the collection argument is <codeph>null</codeph> or empty then the return is <codeph>NaN</codeph>.
+		 </apiDesc><apiType value="Number"/></apiReturn><apiParam><apiItemName>collection</apiItemName><apiOperationClassifier>org.as3collections:ICollection</apiOperationClassifier><apiDesc>	the collection object to check. May be <codeph>null</codeph>.
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Returns the largest number in the specified collection.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.utils:CollectionUtil:removeAllOccurances"><apiName>removeAllOccurances</apiName><shortdesc>
+		 Removes all occurances of a the given element argument from the given collection argument.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiStatic/><apiReturn><apiDesc></apiDesc><apiOperationClassifier>org.as3collections:ICollection</apiOperationClassifier></apiReturn><apiParam><apiItemName>collection</apiItemName><apiOperationClassifier>org.as3collections:ICollection</apiOperationClassifier><apiDesc>	 </apiDesc></apiParam><apiParam><apiItemName>element</apiItemName><apiType value="any"/><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Removes all occurances of a the given <codeph>element</codeph> argument from the given collection argument.
+		 <p>This method modifies the original collection. Be sure that it's not a ready-only collection.</p>
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.utils:CollectionUtil:removeDuplicate"><apiName>removeDuplicate</apiName><shortdesc>
+		 Removes duplicated objects.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiStatic/><apiReturn><apiDesc>the collection object without duplicated objects.
+		 </apiDesc><apiOperationClassifier>org.as3collections:ICollection</apiOperationClassifier></apiReturn><apiParam><apiItemName>collection</apiItemName><apiOperationClassifier>org.as3collections:ICollection</apiOperationClassifier><apiDesc>	the collection to remove duplicated objects.
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Removes duplicated objects.
+		 <p>This method modifies the original collection. Be sure that it's not a ready-only collection.</p>
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.utils:CollectionUtil:shuffle"><apiName>shuffle</apiName><shortdesc>
+		 Shuffles the position of the elements of the given collection.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiStatic/><apiReturn><apiDesc>the modified collection.
+		 </apiDesc><apiOperationClassifier>org.as3collections:ICollection</apiOperationClassifier></apiReturn><apiParam><apiItemName>collection</apiItemName><apiOperationClassifier>org.as3collections:ICollection</apiOperationClassifier><apiDesc>	the collection to shuffle. May be <codeph>null</codeph>.
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Shuffles the position of the elements of the given <codeph>collection</codeph>.
+		 <p>This method modifies the original collection. Be sure that it's not a ready-only collection.</p>
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.utils:CollectionUtil:sortAlphabeticallyByObjectProperty"><apiName>sortAlphabeticallyByObjectProperty</apiName><shortdesc>
+		 Sorts the collection of objects alphabetically through the object's property.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiStatic/><apiReturn><apiDesc>the sorted collection.
+		 </apiDesc><apiOperationClassifier>org.as3collections:ICollection</apiOperationClassifier></apiReturn><apiParam><apiItemName>collection</apiItemName><apiOperationClassifier>org.as3collections:ICollection</apiOperationClassifier><apiDesc>		the collection to sort.
+		 </apiDesc></apiParam><apiParam><apiItemName>property</apiItemName><apiType value="String"/><apiDesc>		the name of the property to be recovered and compared between the objects.
+		 </apiDesc></apiParam><apiParam><apiItemName>comparison</apiItemName><apiType value="org.as3coreaddendum.system.comparators:AlphabeticalComparison"/><apiDesc>	indicates which type of comparison will be used.
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Sorts the collection of objects alphabetically through the object's <codeph>property</codeph>.
+		 <p>This method uses the <codeph>org.as3coreaddendum.utils.ArrayUtil.sortAlphabeticallyByObjectProperty</codeph> method.</p>
+		 <p>This method modifies the original collection. Be sure that it's not a ready-only collection.</p>
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.utils:CollectionUtil:sortAlphabetically"><apiName>sortAlphabetically</apiName><shortdesc>
+		 Sorts the collection of String objects alphabetically.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiStatic/><apiReturn><apiDesc>the sorted collection.
+		 </apiDesc><apiOperationClassifier>org.as3collections:ICollection</apiOperationClassifier></apiReturn><apiParam><apiItemName>collection</apiItemName><apiOperationClassifier>org.as3collections:ICollection</apiOperationClassifier><apiDesc>		the collection to sort.
+		 </apiDesc></apiParam><apiParam><apiItemName>comparison</apiItemName><apiType value="org.as3coreaddendum.system.comparators:AlphabeticalComparison"/><apiDesc>	indicates which type of comparison will be used.
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Sorts the collection of <codeph>String</codeph> objects alphabetically.
+		 <p>This method uses the <codeph>org.as3coreaddendum.utils.ArrayUtil.sortAlphabetically</codeph> method.</p>
+		 <p>This method modifies the original collection. Be sure that it's not a ready-only collection.</p>
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.utils:CollectionUtil:sortAscendingByObjectProperty"><apiName>sortAscendingByObjectProperty</apiName><shortdesc>
+		 Sorts the collection of objects ascending through the object's property (must be a numeric value).</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiStatic/><apiReturn><apiDesc>the sorted collection.
+		 </apiDesc><apiOperationClassifier>org.as3collections:ICollection</apiOperationClassifier></apiReturn><apiParam><apiItemName>collection</apiItemName><apiOperationClassifier>org.as3collections:ICollection</apiOperationClassifier><apiDesc>	the collection to sort.
+		 </apiDesc></apiParam><apiParam><apiItemName>property</apiItemName><apiType value="String"/><apiDesc>	the name of the property to be recovered and compared between the objects.
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Sorts the collection of objects ascending through the object's property (must be a numeric value).
+		 <p>This method uses the <codeph>org.as3coreaddendum.utils.ArrayUtil.sortAscendingByObjectProperty</codeph> method.</p>
+		 <p>This method modifies the original collection. Be sure that it's not a ready-only collection.</p>
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.utils:CollectionUtil:sortAscending"><apiName>sortAscending</apiName><shortdesc>
+		 Sorts the collection of Number objects ascending.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiStatic/><apiReturn><apiDesc>the sorted collection.
+		 </apiDesc><apiOperationClassifier>org.as3collections:ICollection</apiOperationClassifier></apiReturn><apiParam><apiItemName>collection</apiItemName><apiOperationClassifier>org.as3collections:ICollection</apiOperationClassifier><apiDesc>	the collection to sort.
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Sorts the collection of <codeph>Number</codeph> objects ascending.
+		 <p>This method uses the <codeph>org.as3coreaddendum.utils.ArrayUtil.sortAscending</codeph> method.</p>
+		 <p>This method modifies the original collection. Be sure that it's not a ready-only collection.</p>
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.utils:CollectionUtil:sortDescendingByObjectProperty"><apiName>sortDescendingByObjectProperty</apiName><shortdesc>
+		 Sorts the array of objects descending through the object's property (must be a numeric value).</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiStatic/><apiReturn><apiDesc>the sorted collection.
+		 </apiDesc><apiOperationClassifier>org.as3collections:ICollection</apiOperationClassifier></apiReturn><apiParam><apiItemName>collection</apiItemName><apiOperationClassifier>org.as3collections:ICollection</apiOperationClassifier><apiDesc>	the collection to sort. 	
+		 </apiDesc></apiParam><apiParam><apiItemName>property</apiItemName><apiType value="String"/><apiDesc>	the name of the property to be recovered and compared between the objects. 	
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Sorts the array of objects descending through the object's property (must be a numeric value).
+		 <p>This method uses the <codeph>org.as3coreaddendum.utils.ArrayUtil.sortDescendingByObjectProperty</codeph> method.</p>
+		 <p>This method modifies the original collection. Be sure that it's not a ready-only collection.</p>
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.utils:CollectionUtil:sortDescending"><apiName>sortDescending</apiName><shortdesc>
+		 Sorts the array of Number objects descending.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiStatic/><apiReturn><apiDesc>the sorted collection.
+		 </apiDesc><apiOperationClassifier>org.as3collections:ICollection</apiOperationClassifier></apiReturn><apiParam><apiItemName>collection</apiItemName><apiOperationClassifier>org.as3collections:ICollection</apiOperationClassifier><apiDesc>	the collection to sort.
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Sorts the array of <codeph>Number</codeph> objects descending.
+		 <p>This method uses the <codeph>org.as3coreaddendum.utils.ArrayUtil.sortDescending</codeph> method.</p>
+		 <p>This method modifies the original collection. Be sure that it's not a ready-only collection.</p>
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.as3collections.utils:CollectionUtil:toString"><apiName>toString</apiName><shortdesc>
+		 Returns the string representation of the collection argument.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiStatic/><apiReturn><apiDesc>the string representation of the target collection.
+ 		 </apiDesc><apiType value="String"/></apiReturn><apiParam><apiItemName>collection</apiItemName><apiOperationClassifier>org.as3collections:ICollection</apiOperationClassifier><apiDesc>	the target collection.
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Returns the string representation of the <codeph>collection</codeph> argument.
+		 
+		 </apiDesc></apiOperationDetail></apiOperation></apiClassifier></apiPackage>

@@ -1,0 +1,7 @@
+tocTab[tocTab.length] = new Array("1.1.1.4:1", "", "queues", "EARoot/EA1/EA1/EA1/EA4/EA55.htm", "175.png", "18", "0", "", "Logical diagram0","{24D32521-DB8E-47e5-B503-DF582E6C945F}");
+tocTab[tocTab.length] = new Array("1.1.1.4:2", "", "AbstractQueue", "EARoot/EA1/EA1/EA1/EA4/EA57.htm", "5.png", "117", "0", "", "Class0","{14F56E76-573F-4f03-BDD7-AED421A2CE79}");
+tocTab[tocTab.length] = new Array("1.1.1.4:3", "", "LinearQueue", "EARoot/EA1/EA1/EA1/EA4/EA58.htm", "5.png", "132", "0", "", "Class0","{DB76AD2C-DFA3-47cd-A59B-82A2AE93FF90}");
+tocTab[tocTab.length] = new Array("1.1.1.4:4", "", "PriorityQueue", "EARoot/EA1/EA1/EA1/EA4/EA59.htm", "5.png", "131", "0", "", "Class0","{F3807091-E2D0-4f48-8AD8-F3765199382D}");
+tocTab[tocTab.length] = new Array("1.1.1.4:5", "", "SortedQueue", "EARoot/EA1/EA1/EA1/EA4/EA60.htm", "5.png", "285", "0", "", "Class0","{83668E6B-9876-483c-9209-88D90CA75DDC}");
+tocTab[tocTab.length] = new Array("1.1.1.4:6", "", "TypedQueue", "EARoot/EA1/EA1/EA1/EA4/EA61.htm", "5.png", "273", "0", "", "Class0","{7755162D-E3E9-4fa1-9CE0-8D0AD69A9DB2}");
+tocTab[tocTab.length] = new Array("1.1.1.4:7", "", "UniqueQueue", "EARoot/EA1/EA1/EA1/EA4/EA62.htm", "5.png", "299", "0", "", "Class0","{637D2E9C-5BED-4375-A84E-3A7944923D82}");

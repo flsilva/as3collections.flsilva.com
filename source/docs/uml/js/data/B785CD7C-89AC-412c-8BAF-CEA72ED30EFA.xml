@@ -1,0 +1,16 @@
+tocTab[tocTab.length] = new Array("1.1.2.3:1", "", "system", "EARoot/EA1/EA1/EA2/EA3/EA83.htm", "175.png", "39", "0", "", "Logical diagram0","{D482E575-7B5C-48db-9F0E-E0C99683A02E}");
+tocTab[tocTab.length] = new Array("1.1.2.3:2", "", "Enum", "EARoot/EA1/EA1/EA2/EA3/EA86.htm", "5.png", "330", "0", "", "Class0","{50796BBB-C8E4-4ce2-99CF-D2AEB5FE35D5}");
+tocTab[tocTab.length] = new Array("1.1.2.3:3", "", "«interface» ICloneable", "EARoot/EA1/EA1/EA2/EA3/EA87.htm", "8.png", "336", "0", "", "Interface0","{BF8BFC5C-F483-4242-812E-F3E9E6DB74F0}");
+tocTab[tocTab.length] = new Array("1.1.2.3:4", "", "«interface» IComparable", "EARoot/EA1/EA1/EA2/EA3/EA88.htm", "8.png", "339", "0", "", "Interface0","{E197AF87-4205-4236-A5E0-1939187BD01C}");
+tocTab[tocTab.length] = new Array("1.1.2.3:5", "", "«interface» IComparator", "EARoot/EA1/EA1/EA2/EA3/EA89.htm", "8.png", "333", "0", "", "Interface0","{7D836A94-9CB6-4b04-85B5-EA4E6C8E39CE}");
+tocTab[tocTab.length] = new Array("1.1.2.3:6", "", "«interface» IDisposable", "EARoot/EA1/EA1/EA2/EA3/EA90.htm", "8.png", "328", "0", "", "Interface0","{1DFCC156-18A1-4ae7-9B38-226F2C1D2FB3}");
+tocTab[tocTab.length] = new Array("1.1.2.3:7", "", "«interface» IEquatable", "EARoot/EA1/EA1/EA2/EA3/EA91.htm", "8.png", "331", "0", "", "Interface0","{5668A3CD-AF1A-49dd-9F6E-2D67C36C93CC}");
+tocTab[tocTab.length] = new Array("1.1.2.3:8", "", "«interface» IIndexable", "EARoot/EA1/EA1/EA2/EA3/EA92.htm", "8.png", "329", "0", "", "Interface0","{3AC4CF0C-E1C0-4e16-85F7-BBECCEF2F22D}");
+tocTab[tocTab.length] = new Array("1.1.2.3:9", "", "«interface» IInitializable", "EARoot/EA1/EA1/EA2/EA3/EA93.htm", "8.png", "332", "0", "", "Interface0","{688F21B3-CB09-445d-B652-0CF7B13E5B23}");
+tocTab[tocTab.length] = new Array("1.1.2.3:10", "", "«interface» IPriority", "EARoot/EA1/EA1/EA2/EA3/EA94.htm", "8.png", "334", "0", "", "Interface0","{8DD47745-A77B-4e96-9EA9-D87886FE790B}");
+tocTab[tocTab.length] = new Array("1.1.2.3:11", "", "«interface» ISerializable", "EARoot/EA1/EA1/EA2/EA3/EA95.htm", "8.png", "337", "0", "", "Interface0","{CC2BA852-ECDB-4f03-AFB6-70DF486F3418}");
+tocTab[tocTab.length] = new Array("1.1.2.3:12", "", "«interface» ISortable", "EARoot/EA1/EA1/EA2/EA3/EA96.htm", "8.png", "338", "0", "", "Interface0","{E16F92DC-BDE9-4507-A5EF-0C8B108FA734}");
+tocTab[tocTab.length] = new Array("1.1.2.3:13", "", "«interface» ITypeable", "EARoot/EA1/EA1/EA2/EA3/EA97.htm", "8.png", "340", "0", "", "Interface0","{F5751B37-9CA9-4e7e-9213-091E45C152DB}");
+tocTab[tocTab.length] = new Array("1.1.2.3:14", "", "NumericRounding", "EARoot/EA1/EA1/EA2/EA3/EA98.htm", "5.png", "335", "0", "", "Class0","{989370E6-ECA9-48b0-B2A8-1DA81C53ACB0}");
+tocTab[tocTab.length] = new Array("1.1.2.3:15", "", "StringCase", "EARoot/EA1/EA1/EA2/EA3/EA99.htm", "5.png", "327", "0", "", "Class0","{1978693F-7028-46c9-8E30-32AEF5FAA1D9}");
+tocTab[tocTab.length] = new Array("1.1.2.3.1", "1", "comparators", "EARoot/EA1/EA1/EA2/EA3/EA85.htm", "4.png", "", "", "{219A4612-5FBA-4c2c-B668-D5B49D9867DD}", "Package");
