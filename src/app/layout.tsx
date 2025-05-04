@@ -18,9 +18,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "AS3CoreAddendum",
+  title: "AS3Collections",
   description:
-    "AS3CoreAddendum is an architectural addendum to the core of the Actionscript 3.0 language, developed by Flavio Silva in 2011.",
+    "AS3Collections is a project based on the Java Collections Framework.",
 };
 
 export default function RootLayout({
