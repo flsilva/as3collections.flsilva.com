@@ -18,7 +18,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "AS3Collections",
+  title: "AS3Collections: data structures for AS3 apps",
   description:
     "AS3Collections is a project based on the Java Collections Framework.",
 };
